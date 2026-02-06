@@ -140,15 +140,15 @@ const styles = {
     transition: 'background 0.4s ease',
   },
   cardTitle: {
-    fontSize: 'clamp(1.375rem, 2.5vw, 1.75rem)',
+    fontSize: '2rem',  // REMOVED the duplicate clamp() fontSize
     fontWeight: 400,
     color: 'white',
     letterSpacing: '0.08em',
     marginBottom: '0.5rem',
     transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     textShadow: '0 3px 8px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.6)',
-    fontFamily: 'Caveat, cursive',  // Handwritten font for scrapbook feel
-    fontSize: '2rem',  // Larger for handwritten style
+    fontFamily: 'Caveat, cursive',
+    lineHeight: 1.2,
   },
   cardDescription: {
     color: 'white',
