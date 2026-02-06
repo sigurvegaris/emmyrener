@@ -140,7 +140,7 @@ const styles = {
     transition: 'background 0.4s ease',
   },
   cardTitle: {
-    fontSize: '2rem',  // REMOVED the duplicate clamp() fontSize
+    fontSize: '2rem',
     fontWeight: 400,
     color: 'white',
     letterSpacing: '0.08em',
