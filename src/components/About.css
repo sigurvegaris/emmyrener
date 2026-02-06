@@ -1,0 +1,165 @@
+.aboutSection {
+    position: relative;
+    background: #FAF7F2;
+    padding: 8rem 3rem;
+  }
+  
+  .aboutContainer {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  
+  /* Desktop layout */
+  .aboutGrid {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 6rem;
+    align-items: center;
+  }
+  
+  .aboutImageWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .aboutImage {
+    width: 100%;
+    max-width: 500px;
+    height: 600px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  }
+  
+  .aboutText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* Optional: tighter editorial copy width */
+  .aboutCopy {
+    max-width: 620px;
+    margin: 0 auto 1rem auto;
+  }
+  
+  .aboutEyebrow {
+    color: #8B7355;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  .aboutHeading {
+    color: #111;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+    font-family: "Cormorant Garamond", serif;
+  }
+  
+  .aboutParagraph {
+    color: #111;
+    font-size: 1.0625rem;
+    line-height: 2;
+    margin-bottom: 1.25rem;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  .aboutLink {
+    color: #8B7355;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(139, 115, 85, 0.9);
+    padding-bottom: 2px;
+    transition: opacity 0.25s ease, border-color 0.25s ease;
+  }
+  
+  .aboutLink:hover {
+    opacity: 0.85;
+    border-bottom-color: rgba(139, 115, 85, 0.55);
+  }
+  
+  .aboutCta {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(139, 115, 85, 0.2);
+  }
+  
+  .aboutCtaText {
+    color: #111;
+    font-size: 1.125rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    font-family: "Cormorant Garamond", serif;
+  }
+  
+  .aboutButton {
+    display: inline-block;
+    background: #8B7355;
+    color: #F7F4EF;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    padding: 1.125rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.14);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  
+  .aboutButton:hover {
+    background: #6d5940;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  }
+  
+  /* ✅ True mobile stacking */
+  @media (max-width: 980px) {
+    .aboutSection {
+      padding: 6rem 1.5rem;
+    }
+  
+    .aboutGrid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  
+    .aboutImage {
+      max-width: 560px;
+      height: 520px;
+    }
+  
+    .aboutText {
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .aboutSection {
+      padding: 5rem 1.25rem;
+    }
+  
+    .aboutImage {
+      height: 420px;
+      border-radius: 14px;
+    }
+  
+    .aboutParagraph {
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+  
+    .aboutButton {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  

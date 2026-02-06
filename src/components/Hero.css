@@ -1,0 +1,38 @@
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .hero-container {
+      flex-direction: column !important;
+    }
+    
+    .photo-section {
+      flex: 0 0 40% !important;
+    }
+    
+    .intro-panel {
+      flex: 0 0 60% !important;
+      padding: 2rem 1.5rem !important;
+    }
+    
+    .title {
+      font-size: 2rem !important;
+    }
+    
+    .introduction {
+      font-size: 0.875rem !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .intro-panel {
+      padding: 1.5rem 1rem !important;
+    }
+    
+    .cta-buttons {
+      gap: 0.75rem !important;
+    }
+    
+    .primary-button, .secondary-button {
+      padding: 0.875rem 1.5rem !important;
+      font-size: 0.875rem !important;
+    }
+  }

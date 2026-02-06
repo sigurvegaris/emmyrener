@@ -1,0 +1,43 @@
+/* Desktop - hide mobile menu button */
+@media (min-width: 769px) {
+    .mobile-menu-button {
+      display: none !important;
+    }
+  }
+  
+  /* Mobile/Tablet - show hamburger, hide desktop nav */
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none !important;
+    }
+    
+    .mobile-menu-button {
+      display: block !important;
+    }
+    
+    nav {
+      padding: 1.5rem 1.5rem !important;
+    }
+  }
+  
+  /* Mobile menu animation */
+  .mobile-menu {
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mobile menu link hover effect */
+  .mobile-menu a:hover {
+    color: #B7A99A !important;
+    padding-left: 0.5rem;
+  }
