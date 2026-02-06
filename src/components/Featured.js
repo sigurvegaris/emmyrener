@@ -5,7 +5,6 @@ import './Featured.css';
 function Featured() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // REORDERED: Marais → Wine → Café → Walk (a Paris day)
   const featuredSpots = [
     {
       image: '/videos/left2.jpg',
@@ -31,24 +30,24 @@ function Featured() {
 
   return (
     <section id="featured" style={styles.section}>
-<div style={styles.grid} className="featured-grid">
-          {featuredSpots.map((spot, index) => (
-            <Link
-              key={index}
-              to="/guides"
-              style={styles.cardLink}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div style={styles.card}>
-                <div 
-                  style={{
-                    ...styles.cardImage,
-                    backgroundImage: `url(${spot.image})`,
-                    transform: hoveredIndex === index ? 'scale(1.03)' : 'scale(1)',
-                  }}
-                />
-            <div 
+      <div style={styles.grid} className="featured-grid">
+        {featuredSpots.map((spot, index) => (
+          <Link
+            key={index}
+            to="/guides"
+            style={styles.cardLink}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <div style={styles.card}>
+              <div 
+                style={{
+                  ...styles.cardImage,
+                  backgroundImage: `url(${spot.image})`,
+                  transform: hoveredIndex === index ? 'scale(1.03)' : 'scale(1)',
+                }}
+              />
+              <div 
                 style={{
                   ...styles.cardOverlay,
                   background: hoveredIndex === index 
@@ -56,7 +55,6 @@ function Featured() {
                     : 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 60%, transparent 100%)',
                 }}
               >
-                {/* Caption strip - scrapbook style */}
                 <div style={styles.captionStrip}>
                   <h3 
                     style={{
@@ -69,7 +67,6 @@ function Featured() {
                   <p style={styles.cardDescription}>{spot.description}</p>
                 </div>
                 
-                {/* Explore button */}
                 <div 
                   style={{
                     ...styles.exploreButton,
@@ -77,13 +74,13 @@ function Featured() {
                     transform: hoveredIndex === index ? 'translateY(0)' : 'translateY(10px)',
                   }}
                 >
-                    Explore Guides →
-                  </div>
+                  Explore Guides →
                 </div>
               </div>
-            </Link>
-          ))}
-        </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
@@ -91,20 +88,7 @@ function Featured() {
 const styles = {
   section: {
     backgroundColor: '#F7F4EF',
-    padding: '6rem 4rem',  // Increased side padding from 3rem
-  },
-  container: {
-    maxWidth: '1400px',
-    margin: '0 auto',
-  },
-  sectionTitle: {
-    color: '#111111',
-    fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-    fontWeight: 300,
-    letterSpacing: '0.08em',  // Increased from 0.05em - magazine tracking
-    textAlign: 'center',
-    marginBottom: '5rem',
-    fontFamily: 'Cormorant Garamond, serif',
+    padding: '6rem 4rem',
   },
   grid: {
     display: 'grid',
@@ -128,7 +112,7 @@ const styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-    filter: 'saturate(0.95) contrast(1.05)',  // Slight vintage photo feel
+    filter: 'saturate(0.95) contrast(1.05)',
   },
   cardOverlay: {
     position: 'absolute',
@@ -139,26 +123,32 @@ const styles = {
     padding: '2rem',
     transition: 'background 0.4s ease',
   },
+  captionStrip: {
+    backgroundColor: 'rgba(247, 244, 239, 0.95)',
+    padding: '1.25rem 1.5rem',
+    borderRadius: '2px',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+    marginBottom: '1rem',
+    border: '1px solid rgba(229, 224, 216, 0.5)',
+  },
   cardTitle: {
     fontSize: '2rem',
-    fontWeight: 400,
-    color: 'white',
-    letterSpacing: '0.08em',
-    marginBottom: '0.5rem',
+    fontWeight: 500,
+    color: '#111111',
+    letterSpacing: '0.02em',
+    marginBottom: '0.375rem',
     transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    textShadow: '0 3px 8px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.6)',
     fontFamily: 'Caveat, cursive',
     lineHeight: 1.2,
   },
   cardDescription: {
-    color: 'white',
-    fontSize: '0.9375rem',
-    fontWeight: 300,
-    letterSpacing: '0.05em',
-    opacity: 0.95,
-    textShadow: '0 2px 6px rgba(0,0,0,0.7)',
+    color: '#8B7355',
+    fontSize: '0.875rem',
+    fontWeight: 400,
+    letterSpacing: '0.03em',
     fontFamily: 'Cormorant Garamond, serif',
-    fontStyle: 'italic',  // Adds personal note feel
+    fontStyle: 'italic',
+    lineHeight: 1.4,
   },
   cardLink: {
     textDecoration: 'none',
