@@ -4,30 +4,21 @@ function Reviews() {
   const [expandedReview, setExpandedReview] = React.useState(null);
   
   const reviews = [
+
+    {
+      quote: " “Taking Emmy’s advice on our itinerary was the best decision we made for our Paris vacation!! As an American coming to Paris, I wanted to find the hidden gems you dream about and instead of worrying about our itinerary,, we got to be fully present and enjoy every moment. There were so many spots I found on her guide that I wouldn’t have found anywhere else and they were true gems.  I couldn’t recommend her more highly!",
+      author: "Olivia",
+      location: "South Dakota"
+    },
     {
       quote: "We followed Emmy's Paris guide for three days and every single place was unforgettable. It felt like we had a local friend planning our trip.",
       author: "Sarah",
       location: "New York"
     },
     {
-      quote: "These were genuinely the best meals of our entire trip. We would never have found these spots without Emmy's recommendations.",
-      author: "Alex",
-      location: "Toronto"
-    },
-    {
       quote: "Emmy's recommendations felt exactly like having a local friend show us around Paris. Nothing felt touristy, everything felt special.",
       author: "Maria",
       location: "Los Angeles"
-    },
-    {
-      quote: "Working with Emmy on our itinerary was the best decision we made for our France vacation!! She put so much thought and care into understanding exactly what we wanted and made it all happen effortlessly. Our trip was smooth, stress-free, and truly a vacation my husband and I will reminisce about for many years to come. Instead of worrying about logistics, we got to be fully present and enjoy every moment. And beyond her incredible planning skills, she's just a joy to work with. Emmy was warm, bubbly, and so fun throughout the entire process. I couldn't recommend her more highly!",
-      author: "Jennifer",
-      location: "Chicago"
-    },
-    {
-      quote: "I'm so glad I found Emmy's guide before our trip. Every restaurant was incredible and the walking routes she suggested were perfect. Worth every penny.",
-      author: "James",
-      location: "London"
     },
     {
       quote: "We used Emmy's Paris guide for our honeymoon and it was perfect. The wine bars, the hidden cafés, the Sunday walk — everything was exactly what we wanted.",
@@ -171,7 +162,7 @@ const styles = {
   },
   bottomRow: {
     display: 'grid',
-    justifyContent: 'center',
+    gridTemplateColumns: 'repeat(3, 1fr)',
     gap: '3rem',
   },
   reviewCard: {

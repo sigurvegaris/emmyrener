@@ -43,7 +43,7 @@ function Navigation() {
     <>
       <nav style={{
         ...styles.nav,
-        backgroundColor: mobileMenuOpen ? 'rgba(17, 17, 17, 0.95)' : 'rgba(17, 17, 17, 0.4)',
+        backgroundColor: mobileMenuOpen ? 'rgba(17, 17, 17, 0.95)' : 'rgba(247, 244, 239, 0.95)',
       }}>
         <div style={styles.container}>
           {/* Logo */}
@@ -51,13 +51,48 @@ function Navigation() {
             EMMY RENER
           </Link>
 
-          {/* Desktop Navigation */}
-          <div style={styles.desktopNav}>
-            <Link to="/" style={styles.navLink}>Home</Link>
-            <Link to="/about" style={styles.navLink}>About Me</Link>
-            <Link to="/guides" style={styles.navLink}>Guides</Link>
-            <Link to="/recommendations" style={styles.navLink}>Recommendations</Link>
-            <Link to="/contact" style={styles.navLink}>Contact</Link>
+{/* Desktop Navigation */}
+<div style={styles.desktopNav}>
+            <Link 
+              to="/" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/about" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              About Me
+            </Link>
+            <Link 
+              to="/guides" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              Guides
+            </Link>
+            <Link 
+              to="/recommendations" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              Recommendations
+            </Link>
+            <Link 
+              to="/contact" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              Contact
+            </Link>
           </div>
 
           {/* Hamburger/X Button - ANIMATES */}
@@ -102,10 +137,11 @@ const styles = {
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 10001,  // Higher to stay above menu
+    zIndex: 10001,
     padding: '1.5rem 2rem',
+    backgroundColor: 'rgba(247, 244, 239, 0.95)',  // Cream color with slight transparency
     backdropFilter: 'blur(8px)',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    borderBottom: '1px solid rgba(183, 169, 154, 0.3)',  // Subtle taupe border
     transition: 'background-color 0.3s ease',
   },
   container: {
@@ -116,24 +152,24 @@ const styles = {
     margin: '0 auto',
   },
   logo: {
-    color: '#FFFFFF',
+    color: '#111111',  // Changed from white to dark
     fontSize: '1.125rem',
     fontWeight: 600,
     letterSpacing: '0.15em',
     textDecoration: 'none',
-    textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+    textShadow: 'none',  // Remove shadow
   },
   desktopNav: {
     display: 'flex',
     gap: '2.5rem',
   },
   navLink: {
-    color: '#FFFFFF',
+    color: '#111111',  // Changed from white to dark
     textDecoration: 'none',
     fontSize: '0.9375rem',
     fontWeight: 500,
     letterSpacing: '0.05em',
-    textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+    textShadow: 'none',  // Remove shadow
   },
 
   mobileMenuButton: {
@@ -154,7 +190,7 @@ const styles = {
   hamburgerLine: {
     width: '100%',
     height: '3px',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#111111',  // Changed from white to dark
     borderRadius: '2px',
     transition: 'all 0.3s ease',
   },

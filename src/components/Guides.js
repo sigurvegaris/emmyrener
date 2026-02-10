@@ -117,15 +117,19 @@ function Guides() {
                 style={styles.phoneImage}
               />
             </div>
-            <p style={styles.phoneCaption}>Designed to use while walking Paris</p>
+            <p style={styles.phoneCaption}></p>
           </div>
 
           {/* Right Column - Decision Stack */}
           <div style={styles.rightColumn}>
             
-            <h1 style={styles.headline}>
-              Never Waste a Meal in Paris Again
+          <h1 style={styles.headline}>
+              25 Best Bites in Paris
             </h1>
+                        {/* More guides coming soon */}
+                        <p style={styles.comingSoon}>
+              (More guides coming soon!)
+            </p>
 
             <p style={styles.trustLine}>
               I lived in Paris for two years. I tried hundreds of spots. These are the 25 I send to friends before they visit.
@@ -164,7 +168,6 @@ function Guides() {
             </a>
 
             <p style={styles.exclusivityCloser}>
-              I don't share most of these spots publicly. This is the exact list I send to friends.
             </p>
 
           </div>
@@ -441,7 +444,16 @@ const styles = {
     lineHeight: 1.05,
     letterSpacing: '0.01em',
     marginBottom: '1.25rem',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontFamily: 'Calligraffitti, cursive',
+  },
+  comingSoon: {
+    fontSize: '1.125rem',
+    fontWeight: 400,
+    color: '#8B7355',
+    fontStyle: 'italic',
+    marginBottom: '1.5rem',
+    fontFamily: 'Calligraffitti, cursive',
+    opacity: 0.85,
   },
   trustLine: {
     fontSize: '0.98rem',

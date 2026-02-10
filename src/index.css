@@ -1,3 +1,22 @@
+/* Import Calligraffitti font */
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+
+/* Apply Calligraffitti globally */
+body {
+  margin: 0;
+  font-family: 'Calligraffitti', cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: 'Calligraffitti', cursive;
+}
+
+/* Override all other font families */
+h1, h2, h3, h4, h5, h6, p, a, button, span, div {
+  font-family: 'Calligraffitti', cursive !important;
+}
 /* ===== MOBILE RESPONSIVENESS ===== */
 /* FORCE HIDE POLAROIDS on all small screens */
 @media (max-width: 1024px) {
@@ -107,36 +126,45 @@
   }
 }
 
-/* Reviews - Mobile - FORCE VERTICAL STACKING */
+/* Reviews - Mobile */
 @media (max-width: 900px) {
-  /* Top row - stack vertically */
-  div[style*="topRow"] {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 2.5rem !important;
-    align-items: center !important;
-    grid-template-columns: none !important;
-  }
-  
-  /* Bottom row - FORCE stack vertically */
+  /* Force all reviews into single column on mobile only */
+  div[style*="topRow"],
   div[style*="bottomRow"] {
     display: flex !important;
     flex-direction: column !important;
     gap: 2.5rem !important;
     align-items: center !important;
-    justify-content: center !important;
-    grid-template-columns: none !important;
+    grid-template-columns: 1fr !important;
   }
   
-  /* Make all review cards full width and centered */
+  /* Make all review cards full width on mobile */
   div[style*="reviewCard"] {
     max-width: 100% !important;
     width: 100% !important;
   }
   
-  /* Remove min-height */
+  /* Remove min-height that might cause issues */
   p[style*="quote"] {
     min-height: auto !important;
+  }
+  
+  /* Ensure gridWrapper doesn't have weird spacing */
+  div[style*="gridWrapper"] {
+    gap: 2.5rem !important;
+  }
+}
+
+/* Desktop - ensure grid layout is maintained */
+@media (min-width: 901px) {
+  div[style*="topRow"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  
+  div[style*="bottomRow"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 

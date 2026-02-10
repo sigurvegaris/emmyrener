@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 function Footer() {
   return (
     <footer style={styles.footer}>
+          {/* Dark overlay for better text readability */}
+    <div style={{
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',  // Dark tint - adjust 0.5 for darkness (0.3 = lighter, 0.7 = darker)
+      zIndex: 1,
+    }} />
       <div style={styles.container}>
         {/* Top section - Logo and tagline */}
         <div style={styles.topSection}>
@@ -20,16 +27,16 @@ function Footer() {
             <Link 
               to="/" 
               style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#F7F4EF'}
-              onMouseLeave={(e) => e.target.style.color = '#B7A99A'}
+              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
             >
               Home
             </Link>
             <Link 
               to="/about" 
               style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#F7F4EF'}
-              onMouseLeave={(e) => e.target.style.color = '#B7A99A'}
+              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
             >
               About Me
             </Link>
@@ -131,17 +138,24 @@ function Footer() {
 
 const styles = {
   footer: {
-    backgroundColor: '#111111',
-    color: '#F7F4EF',
-    padding: '5rem 3rem 3rem 3rem',
+    backgroundColor: '#F7F4EF',
+    backgroundImage: 'url(/videos/footer-image.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    padding: '2.5rem 2rem',  // Reduced from 4rem 3rem
+    borderTop: '1px solid #E5E0D8',
+    position: 'relative',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    position: 'relative',
+    zIndex: 2,
   },
   topSection: {
     textAlign: 'center',
-    marginBottom: '4rem',
+    marginBottom: '2rem',  // Reduced from 4rem
   },
   logo: {
     fontSize: '1.25rem',
@@ -149,38 +163,38 @@ const styles = {
     letterSpacing: '0.35em',
     textTransform: 'uppercase',
     marginBottom: '1rem',
-    color: '#F7F4EF',
+    color: '#FFFFFF',  // Changed from #F7F4EF to pure white
   },
   tagline: {
     fontSize: '1rem',
     fontWeight: 300,
     letterSpacing: '0.05em',
-    color: '#B7A99A',
+    color: '#FFFFFF',  // Changed to white
     fontStyle: 'italic',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontFamily: 'Calligraffitti, cursive',
   },
   linksSection: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '3rem',
-    marginBottom: '4rem',
+    gap: '2rem',  // Reduced from 3rem
+    marginBottom: '2rem',  // Reduced from 4rem
     textAlign: 'center',
   },
   linkColumn: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '0.75rem',  // Reduced from 1rem
   },
   columnTitle: {
     fontSize: '0.875rem',
     fontWeight: 600,
     letterSpacing: '0.15em',
     textTransform: 'uppercase',
-    color: '#F7F4EF',
+    color: '#FFFFFF',  // Changed to white
     marginBottom: '0.5rem',
   },
   link: {
-    color: '#B7A99A',
+    color: '#E5E0D8',  // Light beige
     fontSize: '0.9375rem',
     fontWeight: 300,
     textDecoration: 'none',
@@ -191,24 +205,24 @@ const styles = {
   divider: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: '3rem',
+    marginBottom: '1.5rem',  // Reduced from 3rem
   },
   bottomSection: {
     textAlign: 'center',
-    paddingTop: '2rem',
+    paddingTop: '1.5rem',  // Reduced from 2rem
     borderTop: '1px solid rgba(183, 169, 154, 0.2)',
   },
   copyright: {
     fontSize: '0.875rem',
     fontWeight: 300,
-    color: '#B7A99A',
+    color: '#FFFFFF',  // Changed to white
     marginBottom: '0.5rem',
   },
   subtext: {
     fontSize: '0.8125rem',
     fontWeight: 300,
-    color: '#B7A99A',
-    opacity: 0.7,
+    color: '#E5E0D8',  // Light beige
+    opacity: 0.9,
     fontStyle: 'italic',
   },
   logoColumn: {
@@ -220,7 +234,7 @@ const styles = {
   seoLine: {
     fontSize: '0.9375rem',
     fontWeight: 500,
-    color: '#F7F4EF',
+    color: '#FFFFFF',  // Changed to white
     marginBottom: '1rem',
     letterSpacing: '0.05em',
   },

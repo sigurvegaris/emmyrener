@@ -12,57 +12,29 @@ function Hero() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const showPolaroids = windowWidth > 1024;
 
   return (
     <section style={styles.hero}>
-      {/* Background Image */}
-      <div style={styles.backgroundImage} />
+      {/* Background Image - Responsive */}
+      <div style={{
+        ...styles.backgroundImage,
+        backgroundImage: windowWidth < 900 
+          ? 'url(/videos/scrapbookhero-mobile.png)'
+          : 'url(/videos/scrapbookhero-desktop.png)',
+        backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',  // Stretch to fill on mobile
+      }} />
       <div style={styles.overlay} />
 
-      {/* Scrapbook Polaroid Overlays - ONLY ON DESKTOP */}
-      {showPolaroids && (
-        <div style={styles.scrapbookLayer}>
-          {/* Top left corner */}
-          <div style={{...styles.polaroid, ...styles.polaroid1}}>
-            <div style={{
-              ...styles.polaroidImage,
-              backgroundImage: 'url(/videos/hero2.jpg)',
-              height: '280px'
-            }} />
-            <p style={styles.polaroidCaption}>where I go every Sunday ☀️</p>
-          </div>
-
-          {/* Bottom right corner */}
-          <div style={{...styles.polaroid, ...styles.polaroid2}}>
-            <div style={{
-              ...styles.polaroidImage,
-              backgroundImage: 'url(/videos/hero4.jpg)',
-              height: '260px'
-            }} />
-            <p style={styles.polaroidCaption}>my favorite corner</p>
-          </div>
-
-          {/* Washi tape accent */}
-          <div style={{...styles.washiTape, ...styles.washi1}}></div>
-
-          {/* Handwritten note */}
-          <div style={styles.handwrittenNote}>
-            (places I actually go)
-          </div>
-        </div>
-      )}
 
       {/* Centered Hero Content */}
       <div style={styles.content}>
-        <h1 style={styles.heading}>Your Paris, Curated</h1>
+        <h1 style={styles.heading}>Bonjour from Emmy in Paris</h1>
         
         <p style={styles.casualAside}>
-          not the guidebook version
         </p>
         
         <p style={styles.subheading}>
-          The spots I send to friends before they visit
+        these are the spots I tell my friends about before they visit
         </p>
         
         <Link to="/guides" style={styles.ctaButton}>
@@ -86,95 +58,20 @@ const styles = {
   backgroundImage: {
     position: 'absolute',
     inset: 0,
-    backgroundImage: 'url(/videos/hero1.jpg)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat',
     zIndex: 1,
+    filter: 'brightness(0.9)',
   },
+
   overlay: {
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 100%)',
+    background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 100%)',  // Reduced from 0.35-0.55
     zIndex: 2,
   },
   
-  scrapbookLayer: {
-    position: 'absolute',
-    inset: 0,
-    pointerEvents: 'none',
-    zIndex: 5,
-  },
   
-  polaroid: {
-    position: 'absolute',
-    backgroundColor: '#FFFFFF',
-    padding: '14px 14px 50px 14px',
-    boxShadow: '0 12px 30px rgba(0,0,0,0.35), 0 5px 12px rgba(0,0,0,0.25)',
-  },
-  
-  polaroid1: {
-    top: '12%',
-    left: '3%',
-    width: '300px',
-    transform: 'rotate(-7deg)',
-    zIndex: 3,
-  },
-  
-  polaroid2: {
-    bottom: '8%',
-    right: '5%',
-    width: '280px',
-    transform: 'rotate(6deg)',
-    zIndex: 3,
-  },
-  
-  polaroidImage: {
-    width: '100%',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundColor: '#E5E0D8',
-  },
-  
-  polaroidCaption: {
-    fontFamily: 'Caveat, cursive',
-    fontSize: '1.25rem',
-    color: '#111111',
-    textAlign: 'center',
-    marginTop: '12px',
-    marginBottom: 0,
-    lineHeight: 1.3,
-    letterSpacing: '0.01em',
-  },
-  
-  washiTape: {
-    position: 'absolute',
-    height: '28px',
-    backgroundColor: 'rgba(247, 244, 239, 0.25)',
-    border: '1px solid rgba(247, 244, 239, 0.4)',
-    boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
-  },
-  
-  washi1: {
-    top: '10%',
-    left: '1.5%',
-    width: '130px',
-    transform: 'rotate(-8deg)',
-  },
-  
-  handwrittenNote: {
-    position: 'absolute',
-    bottom: '15%',
-    left: '50%',
-    transform: 'translateX(-50%) rotate(-2deg)',
-    fontFamily: 'Caveat, cursive',
-    fontSize: '1.5rem',
-    color: '#F7F4EF',
-    textShadow: '0 3px 12px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.6)',
-    opacity: 0.95,
-    padding: '0.5rem 1rem',
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    borderRadius: '4px',
-  },
   
   content: {
     position: 'relative',
@@ -185,49 +82,50 @@ const styles = {
   },
   
   heading: {
-    color: 'white',
+    color: '#FFFFFF',
     fontSize: 'clamp(3.5rem, 8vw, 7rem)',
     fontWeight: 300,
     letterSpacing: '0.08em',
-    textShadow: '0 4px 16px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4)',
+    textShadow: '0 0 30px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.9), -2px -2px 4px rgba(0,0,0,0.9)',
     marginBottom: '0.75rem',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontFamily: 'Calligraffitti, cursive',
   },
   
   casualAside: {
-    fontFamily: 'Caveat, cursive',
+    fontFamily: 'Calligraffitti, cursive',
     fontSize: '1.75rem',
-    color: '#F7F4EF',
+    color: '#FFFFFF',
     marginBottom: '1.5rem',
-    textShadow: '0 3px 10px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.6)',
+    textShadow: '0 0 20px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,1), 0 3px 6px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.9)',
     opacity: 0.95,
   },
   
   subheading: {
-    color: 'white',
+    color: '#FFFFFF',
     fontSize: 'clamp(1.125rem, 2vw, 1.375rem)',
     fontWeight: 300,
     letterSpacing: '0.05em',
-    textShadow: '0 3px 10px rgba(0,0,0,0.7)',
+    textShadow: '0 0 20px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,1), 0 3px 6px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.9)',
     marginBottom: '3rem',
     lineHeight: 1.6,
   },
   
   ctaButton: {
     display: 'inline-block',
-    color: 'white',
+    color: '#FFFFFF',
     fontSize: '1.125rem',
     fontWeight: 400,
     letterSpacing: '0.08em',
     textDecoration: 'none',
     padding: '1.125rem 2.75rem',
-    border: '2px solid rgba(255, 255, 255, 0.85)',
+    border: '2px solid rgba(255, 255, 255, 0.95)',
     borderRadius: '4px',
     transition: 'all 0.3s ease',
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
-    backdropFilter: 'blur(6px)',
-    textShadow: '0 2px 6px rgba(0,0,0,0.4)',
-    fontFamily: 'Cormorant Garamond, serif',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backdropFilter: 'blur(8px)',
+    textShadow: '0 0 15px rgba(0,0,0,1), 0 2px 4px rgba(0,0,0,0.9)',
+    fontFamily: 'Calligraffitti, cursive',
+    boxShadow: '0 6px 20px rgba(0,0,0,0.5)',
   },
 };
 

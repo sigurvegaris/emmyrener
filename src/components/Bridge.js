@@ -70,20 +70,20 @@ const styles = {
   },
   mainText: {
     color: '#111111',
-    fontSize: '1.375rem',  // Reduced from 1.375rem
+    fontSize: '1.5rem',
     fontWeight: 400,
     letterSpacing: '0.02em',
-    lineHeight: 1.5,  // Tightened from 1.6
-    fontFamily: 'Cormorant Garamond, serif',
-    margin: '0 0 0.375rem 0',  // Reduced from 0.5rem
+    lineHeight: 1.5,
+    fontFamily: 'Calligraffitti, cursive',
+    margin: '0 0 0.375rem 0',
   },
   emphasisText: {
     color: '#8B7355',
-    fontSize: '1.375rem',  // Reduced from 1.375rem
-    fontWeight: 500,
+    fontSize: '1.5rem',
+    fontWeight: 400,
     letterSpacing: '0.02em',
-    lineHeight: 1.5,  // Tightened from 1.6
-    fontFamily: 'Caveat, cursive',
+    lineHeight: 1.5,
+    fontFamily: 'Calligraffitti, cursive',
     margin: 0,
   },
   signature: {
@@ -99,8 +99,8 @@ const styles = {
     opacity: 0.5,
   },
   signatureText: {
-    fontFamily: 'Caveat, cursive',
-    fontSize: '1.375rem',  // Reduced from 1.5rem
+    fontFamily: 'Calligraffitti, cursive',
+    fontSize: '1.75rem',
     color: '#8B7355',
     fontWeight: 400,
   },

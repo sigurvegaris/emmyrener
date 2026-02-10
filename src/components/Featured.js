@@ -32,7 +32,7 @@ function Featured() {
     <section id="featured" style={styles.section}>
       <div style={styles.grid} className="featured-grid">
         {featuredSpots.map((spot, index) => (
-          <Link
+            <Link
             key={index}
             to="/guides"
             style={styles.cardLink}
@@ -44,43 +44,29 @@ function Featured() {
                 style={{
                   ...styles.cardImage,
                   backgroundImage: `url(${spot.image})`,
-                  transform: hoveredIndex === index ? 'scale(1.03)' : 'scale(1)',
+                  transform: hoveredIndex === index ? 'scale(1.05)' : 'scale(1)',
                 }}
               />
-              <div 
-                style={{
-                  ...styles.cardOverlay,
-                  background: hoveredIndex === index 
-                    ? 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)'
-                    : 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 60%, transparent 100%)',
-                }}
-              >
-                <div style={styles.captionStrip}>
-                  <h3 
-                    style={{
-                      ...styles.cardTitle,
-                      transform: hoveredIndex === index ? 'translateY(-6px)' : 'translateY(0)',
-                    }}
-                  >
-                    {spot.title}
-                  </h3>
-                  <p style={styles.cardDescription}>{spot.description}</p>
-                </div>
-                
-                <div 
-                  style={{
-                    ...styles.exploreButton,
-                    opacity: hoveredIndex === index ? 1 : 0,
-                    transform: hoveredIndex === index ? 'translateY(0)' : 'translateY(10px)',
-                  }}
-                >
-                  Explore Guides →
-                </div>
-              </div>
             </div>
           </Link>
         ))}
       </div>
+        {/* My Guides Button */}
+        <div style={styles.guidesButtonContainer}>
+          <Link 
+            to="/guides"
+            style={styles.guidesButton}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = '#6d5940';
+              e.target.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = '#8B7355';
+              e.target.style.transform = 'translateY(0)';
+            }}
+          >
+          </Link>
+        </div>
     </section>
   );
 }
@@ -166,6 +152,7 @@ const styles = {
     paddingTop: '0.75rem',
     borderTop: '1px solid rgba(255,255,255,0.3)',
   },
+
 };
 
 export default Featured;
