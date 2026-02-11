@@ -28,11 +28,11 @@ function RecommendationsPage() {
     experiences: [
       {
         question: "Need help building your itinerary?",
-        description: "Meet Kiana KT, wellness concierge, who helps plan your days in Paris so everything flows effortlessly.",
+        description: "Meet Kiana, a New Yorker based in Paris (9 years!!!) that helps women plan their trips to Paris and hosts local group and solo tours.",
         buttonLabel: "Visit KT Wellness",
         href: "https://www.ktwellnessconcierge.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-        perk: "10% off with Emmy's code"
-      },
+        perk: "10% off with code: ",
+perkCode: "EMMY10"     },
       {
         question: "Want to walk around Paris like a local?",
         description: "Download Le Walk app and follow the exact neighborhoods Emmy always returns to.",
@@ -99,7 +99,7 @@ function RecommendationsPage() {
         <div style={styles.header}>
           <h1 style={styles.pageTitle}>Recommendations</h1>
           <p style={styles.pageSubtitle}>
-            A few favorite tools, places, and people I recommend to friends visiting Paris.
+          All my favorite experiences and things to do in Paris with links to do so!
           </p>
         </div>
 {/* Category Tabs */}
@@ -203,7 +203,18 @@ function RecommendationsPage() {
                         )}
                       </>
                     ) : (
-                      <p style={styles.perkText}>✨ Perk: {rec.perk}</p>
+                      <p style={styles.perkText}>
+                         {rec.perk}
+                        {rec.perkCode && (
+                          <span style={{
+                            fontWeight: 700,
+                            letterSpacing: '0.08em',
+                            fontSize: '0.875rem'
+                          }}>
+                            {rec.perkCode}
+                          </span>
+                        )}
+                      </p>
                     )}
                   </div>
                 )}
@@ -396,6 +407,11 @@ const styles = {
     color: '#8B7355',
     letterSpacing: '0.02em',
     margin: 0,
+  },
+  perkCode: {
+    fontWeight: 700,
+    letterSpacing: '0.08em',
+    fontSize: '0.875rem',
   },
   qrReveal: {
     marginTop: '0.75rem',

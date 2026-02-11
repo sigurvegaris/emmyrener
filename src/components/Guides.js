@@ -11,13 +11,8 @@ function Guides() {
   const testimonials = [
     {
       quote: "Working with Emmy on our itinerary was the best decision we made for our France vacation!! She put so much thought and care into understanding exactly what we wanted and made it all happen effortlessly. Our trip was smooth, stress-free, and truly a vacation my husband and I will reminisce about for many years to come. Instead of worrying about logistics, we got to be fully present and enjoy every moment. And beyond her incredible planning skills, she's just a joy to work with. Emmy was warm, bubbly, and so fun throughout the entire process. I couldn't recommend her more highly!",
-      author: "Jennifer",
-      location: "Chicago"
-    },
-    {
-      quote: "These were genuinely the best meals of our entire trip. We would never have found these spots without Emmy's recommendations.",
-      author: "Alex",
-      location: "Toronto"
+      author: "Olivia",
+      location: "South Dakota"
     },
     {
       quote: "Emmy's recommendations felt exactly like having a local friend show us around Paris. Nothing felt touristy, everything felt special.",
@@ -28,11 +23,6 @@ function Guides() {
       quote: "We followed Emmy's Paris guide for three days and every single place was unforgettable. It felt like we had a local friend planning our trip.",
       author: "Sarah",
       location: "New York"
-    },
-    {
-      quote: "I'm so glad I found Emmy's guide before our trip. Every restaurant was incredible and the walking routes she suggested were perfect. Worth every penny.",
-      author: "James",
-      location: "London"
     },
   ];
 
@@ -104,6 +94,16 @@ function Guides() {
   return (
     <section id="guides" style={styles.section}>
       <div style={styles.container}>
+                {/* INTRO SECTION - NEW */}
+                <div style={styles.introSection}>
+          <h1 style={styles.introHeading}>My Guides</h1>
+          <p style={styles.introParagraph}>
+            After living in Paris and trying hundreds of places, I have pulled together a list of my favorite spots in Paris. It is easy to be swept up in the spots you see on Instagram, or hear about on TikTok, but I pride myself in curating a true list of spots from a local who understands the Paris food scene and wants to bring you the best of the best. A lot of places on this guide you will have never seen me post about on my social media - because I genuinely don't want these places to reach the masses. Some of the best restaurants in Paris only have 16 seats! I hope you enjoy and I am entrusting you with this list of my favorites - so go spoil yourself rotten and order the dessert at breakfast, lunch, and dinner! Bon appetit!
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div style={styles.divider} />
         
         {/* HERO - Two Column Layout */}
         <div style={styles.canvas}>
@@ -383,7 +383,7 @@ function Guides() {
 const styles = {
   section: {
     backgroundColor: '#FFFFFF',
-    padding: '3rem 2rem',
+    padding: '5rem 2rem 3rem 2rem',  // Added more top padding
   },
   container: {
     maxWidth: '1200px',
@@ -773,6 +773,37 @@ const styles = {
     boxShadow: '0 8px 32px rgba(139, 115, 85, 0.4)',
     border: 'none',
     whiteSpace: 'nowrap',
+  },
+
+  introSection: {
+    maxWidth: '900px',
+    margin: '0 auto 4rem auto',
+    textAlign: 'center',
+    padding: '0 2rem',
+  },
+  introHeading: {
+    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+    fontWeight: 300,
+    color: '#111111',
+    letterSpacing: '0.05em',
+    marginBottom: '2rem',
+    fontFamily: 'Calligraffitti, cursive',
+  },
+  introParagraph: {
+    fontSize: '1.125rem',
+    fontWeight: 400,
+    color: '#111111',
+    lineHeight: 1.8,
+    letterSpacing: '0.01em',
+    fontFamily: 'Calligraffitti, cursive',
+    maxWidth: '800px',
+    margin: '0 auto',
+  },
+  divider: {
+    width: '100px',
+    height: '1px',
+    backgroundColor: '#E5E0D8',
+    margin: '4rem auto',
   },
 };
 

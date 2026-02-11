@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import GuidesPage from './pages/GuidesPage';
 import RecommendationsPage from './pages/RecommendationsPage';
+import CollabsPage from './pages/CollabsPage';
 import ContactPage from './pages/ContactPage';
 import './styles/global.css';
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/guides" element={<GuidesPage />} />
           <Route path="/recommendations" element={<RecommendationsPage />} />
+          <Route path="/collabs" element={<CollabsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>

@@ -32,6 +32,9 @@ function Navigation() {
         <Link to="/recommendations" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
           Recommendations
         </Link>
+        <Link to="/collabs" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
+          Collabs
+        </Link>
         <Link to="/contact" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
           Contact
         </Link>
@@ -84,6 +87,14 @@ function Navigation() {
               onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
             >
               Recommendations
+            </Link>
+            <Link 
+              to="/collabs" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              Collabs
             </Link>
             <Link 
               to="/contact" 

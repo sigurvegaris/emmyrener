@@ -139,11 +139,11 @@ function Footer() {
 const styles = {
   footer: {
     backgroundColor: '#F7F4EF',
-    backgroundImage: 'url(/videos/footer-image.png)',
+    backgroundImage: 'url(/videos/footer-image.png)',  // Desktop image
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    padding: '2.5rem 2rem',  // Reduced from 4rem 3rem
+    padding: '2.5rem 2rem',
     borderTop: '1px solid #E5E0D8',
     position: 'relative',
   },

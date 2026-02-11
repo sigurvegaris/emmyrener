@@ -1,21 +1,20 @@
-/* Import Calligraffitti font */
-@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+/* Import Lora */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
-/* Apply Calligraffitti globally */
+/* Apply Lora globally */
 body {
   margin: 0;
-  font-family: 'Calligraffitti', cursive;
+  font-family: 'Lora', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-  font-family: 'Calligraffitti', cursive;
+  font-family: 'Lora', serif;
 }
 
-/* Override all other font families */
 h1, h2, h3, h4, h5, h6, p, a, button, span, div {
-  font-family: 'Calligraffitti', cursive !important;
+  font-family: 'Lora', serif !important;
 }
 /* ===== MOBILE RESPONSIVENESS ===== */
 /* FORCE HIDE POLAROIDS on all small screens */
@@ -391,11 +390,12 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   }
 }
 
-/* Footer - Mobile */
+/* Footer - Mobile Image */
 @media (max-width: 768px) {
   footer {
-    padding: 3rem 1.5rem !important;
-  }
+    background-image: url('../public/videos/footer-image-mobile.png') !important;  }
+  
+  /* Remove this } that's here */
   
   footer > div {
     flex-direction: column !important;
@@ -411,8 +411,7 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   footer a {
     font-size: 0.875rem !important;
   }
-}
-
+} 
 /* Testimonials Carousel - Mobile */
 @media (max-width: 900px) {
   div[style*="carouselContainer"] {
