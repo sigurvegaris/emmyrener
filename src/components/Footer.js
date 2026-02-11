@@ -16,7 +16,7 @@ function Footer() {
         <div style={styles.topSection}>
           <h3 style={styles.logo}>EMMY RENER</h3>
           <p style={styles.tagline}>
-            Your Paris, curated with love
+            Your Paris, made with love
           </p>
         </div>
 

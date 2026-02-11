@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Hero() {
-  const [windowWidth, setWindowWidth] = React.useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1200
-  );
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
+    // Trigger animation on mount
+    setIsVisible(true);
+    
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -21,7 +23,10 @@ function Hero() {
         backgroundImage: windowWidth < 900 
           ? 'url(/videos/scrapbookhero-mobile.png)'
           : 'url(/videos/scrapbookhero-desktop.png)',
-        backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',  // Stretch to fill on mobile
+        backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'scale(1)' : 'scale(1.1)',
+        transition: 'opacity 1.2s ease-out, transform 1.2s ease-out',
       }} />
       <div style={styles.overlay} />
 
@@ -38,7 +43,7 @@ function Hero() {
         </p>
         
         <Link to="/guides" style={styles.ctaButton}>
-          come with me →
+          View my Guides →
         </Link>
       </div>
     </section>

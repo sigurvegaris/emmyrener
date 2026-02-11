@@ -43,7 +43,7 @@ function Reviews() {
         
         {/* Verified line */}
         <p style={styles.verifiedLine}>
-          Verified travelers from New York, Toronto, Los Angeles, London, Sydney
+          Verified travelers from South Dakota, New York, Los Angeles, Sydney
         </p>
 
         {/* Reviews grid - floating, no boxes */}

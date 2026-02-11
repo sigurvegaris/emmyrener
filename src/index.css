@@ -16,20 +16,158 @@ body {
 h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   font-family: 'Lora', serif !important;
 }
+
+/* ===== ANIMATIONS ===== */
+
+/* Image Fade In Animations */
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes imageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes imageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animations to all images */
+img {
+  animation: imageFadeIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Featured cards - staggered animation */
+.featured-grid > * {
+  animation: imageFadeIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.featured-grid > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.featured-grid > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.featured-grid > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.featured-grid > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Hero background - subtle zoom */
+section[style*="hero"] > div:first-child {
+  animation: imageZoomIn 1.2s ease-out;
+}
+
+/* Review cards - fade in from bottom */
+div[style*="reviewCard"] {
+  animation: imageFadeIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+div[style*="topRow"] > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+div[style*="topRow"] > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+div[style*="topRow"] > div:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+div[style*="bottomRow"] > div:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+div[style*="bottomRow"] > div:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+div[style*="bottomRow"] > div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+/* Phone mockup on Guides page - slide in from left */
+div[style*="phoneFrame"] {
+  animation: imageSlideIn 0.8s ease-out;
+}
+
+div[style*="phoneFrame"] img {
+  animation: imageZoomIn 1s ease-out 0.3s;
+  animation-fill-mode: both;
+}
+
+/* Footer background - fade in */
+footer {
+  animation: imageFadeIn 1s ease-out;
+}
+
+/* Smooth hover effects on images */
+img, div[style*="backgroundImage"] {
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+}
+
 /* ===== MOBILE RESPONSIVENESS ===== */
+
 /* FORCE HIDE POLAROIDS on all small screens */
 @media (max-width: 1024px) {
-  /* Target polaroids by their container */
   div[style*="scrapbookLayer"] {
     display: none !important;
   }
   
-  /* Target individual polaroid divs */
   div[style*="position: absolute"][style*="backgroundColor: #FFFFFF"] {
     display: none !important;
   }
   
-  /* Target by class if needed */
   [class*="polaroid"] {
     display: none !important;
   }
@@ -41,12 +179,10 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     padding: 1rem 1.5rem !important;
   }
   
-  /* Hide desktop nav */
   nav > div > div:nth-child(2) {
     display: none !important;
   }
   
-  /* Show hamburger */
   nav button {
     display: block !important;
   }
@@ -54,7 +190,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
 
 /* Hero - Mobile */
 @media (max-width: 768px) {
-  /* Force hide ALL polaroids and scrapbook elements */
   [style*="polaroid1"],
   [style*="polaroid2"],
   [style*="polaroid3"],
@@ -64,7 +199,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     display: none !important;
   }
   
-  /* Hero content adjustments */
   section[style*="hero"] > div[style*="content"] {
     padding: 0 1.5rem !important;
   }
@@ -83,7 +217,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     margin-bottom: 2rem !important;
   }
   
-  /* Hide handwritten note on mobile */
   div[style*="handwrittenNote"] {
     display: none !important;
   }
@@ -127,7 +260,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
 
 /* Reviews - Mobile */
 @media (max-width: 900px) {
-  /* Force all reviews into single column on mobile only */
   div[style*="topRow"],
   div[style*="bottomRow"] {
     display: flex !important;
@@ -137,18 +269,15 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     grid-template-columns: 1fr !important;
   }
   
-  /* Make all review cards full width on mobile */
   div[style*="reviewCard"] {
     max-width: 100% !important;
     width: 100% !important;
   }
   
-  /* Remove min-height that might cause issues */
   p[style*="quote"] {
     min-height: auto !important;
   }
   
-  /* Ensure gridWrapper doesn't have weird spacing */
   div[style*="gridWrapper"] {
     gap: 2.5rem !important;
   }
@@ -167,20 +296,8 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   }
 }
 
-/* Even more specific for very small screens */
-@media (max-width: 600px) {
-  div[style*="bottomRow"] {
-    flex-wrap: wrap !important;
-  }
-  
-  div[style*="reviewCard"] {
-    flex: 1 1 100% !important;
-  }
-}
-
 /* Guides Page - Mobile */
 @media (max-width: 900px) {
-  /* Hero section - stack vertically */
   section#guides > div > div[style*="canvas"] {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
@@ -188,17 +305,14 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     padding: 2rem 1rem !important;
   }
   
-  /* Hide phone mockup on mobile */
   section#guides div[style*="leftColumn"] {
     display: none !important;
   }
   
-  /* Right column takes full width */
   section#guides div[style*="rightColumn"] {
     padding-right: 0 !important;
   }
   
-  /* Adjust text sizes */
   section#guides h1 {
     font-size: 2.25rem !important;
     margin-bottom: 2rem !important;
@@ -219,7 +333,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     margin-bottom: 2rem !important;
   }
   
-  /* Price section */
   section#guides div[style*="priceSection"] {
     gap: 1rem !important;
     margin-bottom: 2rem !important;
@@ -233,13 +346,11 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     font-size: 2.75rem !important;
   }
   
-  /* Button */
   section#guides a[style*="primaryButton"] {
     padding: 1.25rem 2rem !important;
     font-size: 1rem !important;
   }
   
-  /* Sticky button on mobile */
   div[style*="stickyButtonContainer"] {
     bottom: 1rem !important;
     left: 1rem !important;
@@ -254,7 +365,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     font-size: 0.9375rem !important;
   }
   
-  /* What's Inside section */
   div[style*="whatsInsideSection"] {
     padding: 2rem 1.5rem !important;
   }
@@ -281,7 +391,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
 
 /* Recommendations - Mobile */
 @media (max-width: 768px) {
-  /* Header */
   section[style*="recommendations"] div[style*="header"] {
     margin-bottom: 2rem !important;
   }
@@ -294,7 +403,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     font-size: 0.9375rem !important;
   }
   
-  /* Tabs - VERTICAL STACK on mobile */
   div[style*="tabsWrapper"] {
     margin-bottom: 1.5rem !important;
   }
@@ -313,23 +421,19 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     text-align: center !important;
   }
   
-  /* Cards stack */
   div[style*="grid"]:not([style*="whatsInsideGrid"]):not([style*="mealTypesGrid"]) {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
   }
   
-  /* Card adjustments */
   div[style*="card"]:not([style*="mealCard"]) {
     padding: 1.5rem !important;
   }
   
-  /* Question text smaller on mobile */
   h3[style*="question"] {
     font-size: 1.125rem !important;
   }
   
-  /* Bottom CTA */
   div[style*="bottomCTA"] {
     padding: 2rem 1.5rem !important;
   }
@@ -338,7 +442,8 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
     font-size: 1.5rem !important;
   }
 }
-/* Show full labels by default */
+
+/* Tab labels - Mobile */
 .tab-short {
   display: none;
 }
@@ -347,7 +452,6 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   display: inline;
 }
 
-/* On mobile, show short labels */
 @media (max-width: 768px) {
   .tab-short {
     display: inline;
@@ -390,12 +494,11 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   }
 }
 
-/* Footer - Mobile Image */
+/* Footer - Mobile */
 @media (max-width: 768px) {
   footer {
-    background-image: url('../public/videos/footer-image-mobile.png') !important;  }
-  
-  /* Remove this } that's here */
+    padding: 3rem 1.5rem !important;
+  }
   
   footer > div {
     flex-direction: column !important;
@@ -411,7 +514,8 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
   footer a {
     font-size: 0.875rem !important;
   }
-} 
+}
+
 /* Testimonials Carousel - Mobile */
 @media (max-width: 900px) {
   div[style*="carouselContainer"] {
@@ -439,33 +543,19 @@ h1, h2, h3, h4, h5, h6, p, a, button, span, div {
 
 /* General mobile fixes */
 @media (max-width: 768px) {
-  /* Prevent horizontal scroll */
   body, html {
     overflow-x: hidden !important;
     max-width: 100vw !important;
   }
   
-  /* Section padding */
   section {
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
   }
   
-  /* Button adjustments */
   button:not([style*="arrowButton"]):not([style*="dot"]), 
   a[style*="Button"]:not([style*="arrowButton"]) {
     font-size: 1rem !important;
     padding: 1rem 2rem !important;
   }
-  /* Mobile Navigation - Show hamburger, hide desktop nav */
-@media (max-width: 900px) {
-  nav > div > div:nth-child(2) {
-    display: none !important;
-  }
-  
-  nav button {
-    display: block !important;
-  }
-}
-
 }
