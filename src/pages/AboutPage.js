@@ -56,7 +56,7 @@ function About() {
 
               <p className="aboutParagraph">
                 Follow{" "}
-                
+                <a
                   href="https://instagram.com/emmyrener"
                   target="_blank"
                   rel="noopener noreferrer"
