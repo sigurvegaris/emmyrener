@@ -1,12 +1,10 @@
 import React from 'react';
 
 function CategoryTabs({ activeTab, setActiveTab, isMobile }) {
-
-
   return (
     <div style={styles.wrapper}>
       <p style={styles.instructions}>
-        Tap a category to see more recommendations
+        Tap a category to see Emmy's recommendations
       </p>
       
       <div style={styles.grid}>
@@ -71,15 +69,16 @@ const styles = {
   },
   button: {
     height: '48px',
-    border: 'none',
+    border: '1px solid #e9dfd4',
     borderRadius: '12px',
     fontSize: '0.9375rem',
     fontWeight: 600,
     fontFamily: 'Lora, serif',
     cursor: 'pointer',
-    transition: 'background-color 0.2s ease',
+    transition: 'all 0.2s ease',
     WebkitTapHighlightColor: 'transparent',
     outline: 'none',
+    boxShadow: 'none',
   },
   fullWidthButton: {
     gridColumn: '1 / -1',
