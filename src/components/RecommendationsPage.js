@@ -3,14 +3,8 @@ import FeaturedPicks from './FeaturedPicks';
 
 const fadeInUp = `
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 `;
 
@@ -24,7 +18,11 @@ if (typeof document !== 'undefined') {
 function RecommendationsPage() {
   const [activeTab, setActiveTab] = useState('experiences');
   const [showQR, setShowQR] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // ✅ Safe default for SSR / build environments
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1024
+  );
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -105,7 +103,6 @@ function RecommendationsPage() {
   return (
     <section style={styles.section}>
       <div style={styles.container}>
-        
         {/* Page Header */}
         <div style={styles.header}>
           <h1 style={styles.pageTitle}>Recommendations</h1>
@@ -118,50 +115,78 @@ function RecommendationsPage() {
         <FeaturedPicks />
 
 {/* Category Tabs */}
-{/* Category Tabs */}
-<div style={{
-          ...styles.tabsOuterWrapper,
-          padding: isMobile ? '0 1.25rem' : '0 1.25rem',
-        }}>
-          <div style={{
-            ...styles.tabsScrollContainer,
-            display: 'flex',
-            gap: isMobile ? '0.5rem' : '0.625rem',
-            padding: isMobile ? '0.375rem' : '0.5rem',
-            justifyContent: isMobile ? 'space-between' : 'center',
-            margin: isMobile ? '0 0.5rem' : '0',  // ADD THIS LINE
-          }}>
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  ...styles.tab,
-                  ...(activeTab === tab.id ? styles.activeTab : styles.inactiveTab),
-                  flex: isMobile ? '1' : '0 0 auto',  // Equal width on mobile
-                  fontSize: isMobile ? '0.75rem' : '0.9375rem',
-                  padding: isMobile ? '0 0.5rem' : '0 1.5rem',
-                  height: isMobile ? '42px' : '46px',
-                }}
-                onMouseEnter={(e) => {
-                  if (activeTab !== tab.id) {
-                    e.target.style.backgroundColor = '#d4c4b0';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTab !== tab.id) {
-                    e.target.style.backgroundColor = '#e9e6e0';
-                  }
-                }}
-              >
-                {isMobile ? tab.shortLabel : tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
+<div
+  style={{
+    width: '100%',
+    maxWidth: '1100px',
+    margin: isMobile ? '1.25rem auto 1.75rem auto' : '2rem auto 2rem auto',
+    padding: isMobile ? '0 16px' : '0 20px',
+    boxSizing: 'border-box',
+  }}
+>
+  <div
+    style={{
+      display: 'flex',
+      gap: '10px',
+      padding: '8px',
+      borderRadius: '16px',
+
+      // softer container so it doesn't feel like a full-width bar
+      backgroundColor: 'rgba(233, 223, 212, 0.55)',
+      border: '1px solid rgba(0,0,0,0.06)',
+
+      // key: scroll instead of stretching
+      overflowX: 'auto',
+      overflowY: 'hidden',
+      WebkitOverflowScrolling: 'touch',
+      scrollbarWidth: 'none',
+
+      justifyContent: 'flex-start',
+    }}
+  >
+    {tabs.map(tab => (
+      <button
+        key={tab.id}
+        onClick={() => setActiveTab(tab.id)}
+        style={{
+          flex: '0 0 auto',           // 👈 shrink to content
+          width: 'auto',
+          minWidth: 'max-content',    // 👈 prevents squish
+          height: '42px',
+          padding: '0 16px',
+          border: 'none',
+          borderRadius: '14px',
+          fontSize: '0.95rem',
+          fontWeight: 600,
+          cursor: 'pointer',
+          transition: 'all 0.18s ease',
+          fontFamily: 'Lora, serif',
+          whiteSpace: 'nowrap',
+          WebkitTapHighlightColor: 'transparent',
+
+          backgroundColor: activeTab === tab.id ? '#8B7355' : 'rgba(255,255,255,0.75)',
+          color: activeTab === tab.id ? '#FFFFFF' : '#2b241c',
+          boxShadow: activeTab === tab.id
+            ? '0 6px 14px rgba(139,115,85,0.22)'
+            : '0 1px 3px rgba(0,0,0,0.06)',
+        }}
+        onTouchStart={(e) => { e.currentTarget.style.transform = 'scale(0.98)'; }}
+        onTouchEnd={(e) => { e.currentTarget.style.transform = 'scale(1)'; }}
+      >
+        {tab.shortLabel}
+      </button>
+    ))}
+  </div>
+
+  <style>{`
+    /* hide scrollbar */
+    div[style*="overflow-x: auto"]::-webkit-scrollbar { display: none; }
+  `}</style>
+</div>
+
 
         {/* Recommendations Grid */}
-        <div 
+        <div
           key={activeTab}
           style={{
             ...styles.grid,
@@ -169,35 +194,30 @@ function RecommendationsPage() {
           }}
         >
           {recommendations[activeTab].map((rec, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               style={{
                 ...styles.card,
                 animationDelay: `${0.1 + (index * 0.1)}s`
               }}
             >
-              
               <div style={styles.cardTop}>
                 <h3 style={styles.question}>{rec.question}</h3>
                 <p style={styles.description}>{rec.description}</p>
               </div>
-              
+
               <div style={styles.cardBottom}>
                 <a
                   href={rec.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={styles.button}
-                  onMouseEnter={(e) => {
-                    e.target.style.color = '#6d5940';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.color = '#8B7355';
-                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = '#6d5940'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = '#8B7355'; }}
                 >
                   {rec.buttonLabel} →
                 </a>
-                
+
                 {rec.perk && (
                   <div style={styles.perkSection}>
                     {rec.qrImage ? (
@@ -205,20 +225,16 @@ function RecommendationsPage() {
                         <button
                           onClick={() => setShowQR(showQR === index ? null : index)}
                           style={styles.perkButton}
-                          onMouseEnter={(e) => {
-                            e.target.style.color = '#6d5940';
-                          }}
-                          onMouseLeave={(e) => {
-                            e.target.style.color = '#8B7355';
-                          }}
+                          onMouseEnter={(e) => { e.currentTarget.style.color = '#6d5940'; }}
+                          onMouseLeave={(e) => { e.currentTarget.style.color = '#8B7355'; }}
                         >
                           Perk: {rec.perk} {showQR === index ? '↑' : '↓'}
                         </button>
                         {showQR === index && (
                           <div style={styles.qrReveal}>
-                            <img 
-                              src={rec.qrImage} 
-                              alt="QR Code for pharmacy discount" 
+                            <img
+                              src={rec.qrImage}
+                              alt="QR Code for pharmacy discount"
                               style={styles.qrImage}
                             />
                             <p style={styles.qrText}>Show this QR code at checkout for 10% off</p>
@@ -242,7 +258,6 @@ function RecommendationsPage() {
                   </div>
                 )}
               </div>
-              
             </div>
           ))}
         </div>
@@ -253,24 +268,23 @@ function RecommendationsPage() {
           <p style={styles.bottomText}>
             DM me on Instagram and I'll help you figure out what works for your trip.
           </p>
-          <a 
+          <a
             href="https://instagram.com/emmyrener"
             target="_blank"
             rel="noopener noreferrer"
             style={styles.instagramButton}
             onMouseEnter={(e) => {
-              e.target.style.backgroundColor = '#6d5940';
-              e.target.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.backgroundColor = '#6d5940';
+              e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
-              e.target.style.backgroundColor = '#8B7355';
-              e.target.style.transform = 'translateY(0)';
+              e.currentTarget.style.backgroundColor = '#8B7355';
+              e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
             Message @emmyrener
           </a>
         </div>
-
       </div>
     </section>
   );
@@ -279,14 +293,14 @@ function RecommendationsPage() {
 const styles = {
   section: {
     backgroundColor: '#FAF7F2',
-    padding: '2rem 2rem 4rem 2rem',
+    padding: '2rem 1rem 4rem 1rem',
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1100px',
     margin: '0 auto',
   },
-  
+
   header: {
     textAlign: 'center',
     marginBottom: '3rem',
@@ -307,47 +321,7 @@ const styles = {
     opacity: 0.75,
     lineHeight: 1.6,
   },
-  
-  tabsOuterWrapper: {
-    width: '100%',
-    maxWidth: '1100px',
-    margin: '2rem auto 2rem auto',
-    justifyContent: 'center',
-  },
-  
-  tabsScrollContainer: {
-    gap: '0.625rem',
-    backgroundColor: '#f5f3f0',
-    borderRadius: '14px',
-    scrollSnapType: 'x mandatory',
-  },
-  
-  tab: {
-    minWidth: 'fit-content',
-    border: 'none',
-    borderRadius: '12px',
-    fontWeight: 600,
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    fontFamily: 'Lora, serif',
-    letterSpacing: '0.01em',
-    WebkitTapHighlightColor: 'transparent',
-    outline: 'none',
-    textDecoration: 'none',
-    color: 'inherit',
-    whiteSpace: 'nowrap',
-  },
-  
-  activeTab: {
-    backgroundColor: '#8B7355',
-    color: '#FFFFFF',
-  },
-  
-  inactiveTab: {
-    backgroundColor: '#e9e6e0',
-    color: '#111111',
-  },
-  
+
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
@@ -355,7 +329,7 @@ const styles = {
     marginBottom: '3rem',
     justifyItems: 'center',
   },
-  
+
   card: {
     backgroundColor: '#FFFFFF',
     padding: '2rem',
@@ -368,17 +342,10 @@ const styles = {
     maxWidth: '420px',
     animation: 'fadeInUp 0.6s ease-out backwards',
   },
-  
-  cardTop: {
-    marginBottom: '1.5rem',
-  },
-  
-  cardBottom: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.75rem',
-  },
-  
+
+  cardTop: { marginBottom: '1.5rem' },
+  cardBottom: { display: 'flex', flexDirection: 'column', gap: '0.75rem' },
+
   question: {
     fontSize: '1.25rem',
     fontWeight: 600,
@@ -386,14 +353,14 @@ const styles = {
     lineHeight: 1.25,
     marginBottom: '1rem',
   },
-  
+
   description: {
     fontSize: '0.9375rem',
     fontWeight: 400,
     color: '#111111',
     lineHeight: 1.6,
   },
-  
+
   button: {
     display: 'inline-block',
     alignSelf: 'flex-start',
@@ -408,10 +375,8 @@ const styles = {
     cursor: 'pointer',
     border: 'none',
   },
-  
-  perkSection: {
-    marginTop: '0.5rem',
-  },
+
+  perkSection: { marginTop: '0.5rem' },
   perkButton: {
     backgroundColor: 'transparent',
     border: 'none',
@@ -446,7 +411,7 @@ const styles = {
     margin: 0,
     textAlign: 'center',
   },
-  
+
   bottomCTA: {
     textAlign: 'center',
     padding: '2.5rem 2rem',
