@@ -36,7 +36,7 @@ function FeaturedPicks() {
       {/* Section Header */}
       <div style={styles.header}>
         <h2 style={styles.sectionTitle}>Featured Picks</h2>
-        <p style={styles.sectionSubtitle}>Three places I'd send my best friend first.</p>
+        <p style={styles.sectionSubtitle}></p>
       </div>
 
       {/* Editorial Grid */}

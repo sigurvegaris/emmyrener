@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FeaturedPicks from './FeaturedPicks';
+
 const fadeInUp = `
   @keyframes fadeInUp {
     from {
@@ -23,6 +24,13 @@ if (typeof document !== 'undefined') {
 function RecommendationsPage() {
   const [activeTab, setActiveTab] = useState('experiences');
   const [showQR, setShowQR] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const recommendations = {
     experiences: [
@@ -32,7 +40,8 @@ function RecommendationsPage() {
         buttonLabel: "Visit KT Wellness",
         href: "https://www.ktwellnessconcierge.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
         perk: "10% off with code: ",
-perkCode: "EMMY10"     },
+        perkCode: "EMMY10"
+      },
       {
         question: "Want to walk around Paris like a local?",
         description: "Download Le Walk app and follow the exact neighborhoods Emmy always returns to.",
@@ -80,7 +89,7 @@ perkCode: "EMMY10"     },
         buttonLabel: "Open in Maps",
         href: "https://www.instagram.com/reel/DUIQYL_DJSU/?igsh=bHptb2hzMTZ0bTBo",
         perk: "10% off with QR code",
-        qrImage: "/videos/qrcode-pharmacy.png"  // Changed from qrInfo to qrImage
+        qrImage: "/videos/qrcode-pharmacy.png"
       }
     ]
   };
@@ -91,6 +100,8 @@ perkCode: "EMMY10"     },
     { id: 'pharmacy', label: 'Pharmacy Recommendations', shortLabel: 'Pharmacy' }
   ];
 
+  const isMobile = windowWidth <= 768;
+
   return (
     <section style={styles.section}>
       <div style={styles.container}>
@@ -99,38 +110,51 @@ perkCode: "EMMY10"     },
         <div style={styles.header}>
           <h1 style={styles.pageTitle}>Recommendations</h1>
           <p style={styles.pageSubtitle}>
-          All my favorite experiences and things to do in Paris with links to do so!
+            All my favorite experiences and things to do in Paris with links to do so!
           </p>
         </div>
 
-                {/* Featured Picks - NEW */}
-                <FeaturedPicks />
+        {/* Featured Picks */}
+        <FeaturedPicks />
 
 {/* Category Tabs */}
-<div style={styles.tabsWrapper}>
-          <div style={styles.tabsContainer}>
+{/* Category Tabs */}
+<div style={{
+          ...styles.tabsOuterWrapper,
+          padding: isMobile ? '0 1.25rem' : '0 1.25rem',
+        }}>
+          <div style={{
+            ...styles.tabsScrollContainer,
+            display: 'flex',
+            gap: isMobile ? '0.5rem' : '0.625rem',
+            padding: isMobile ? '0.375rem' : '0.5rem',
+            justifyContent: isMobile ? 'space-between' : 'center',
+            margin: isMobile ? '0 0.5rem' : '0',  // ADD THIS LINE
+          }}>
             {tabs.map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 style={{
                   ...styles.tab,
-                  ...(activeTab === tab.id ? styles.activeTab : {})
+                  ...(activeTab === tab.id ? styles.activeTab : styles.inactiveTab),
+                  flex: isMobile ? '1' : '0 0 auto',  // Equal width on mobile
+                  fontSize: isMobile ? '0.75rem' : '0.9375rem',
+                  padding: isMobile ? '0 0.5rem' : '0 1.5rem',
+                  height: isMobile ? '42px' : '46px',
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== tab.id) {
-                    e.target.style.backgroundColor = '#E5E0D8';
+                    e.target.style.backgroundColor = '#d4c4b0';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (activeTab !== tab.id) {
-                    e.target.style.backgroundColor = '#F7F4EF';
+                    e.target.style.backgroundColor = '#e9e6e0';
                   }
                 }}
               >
-                {/* Show short label on mobile, full label on desktop */}
-                <span className="tab-full">{tab.label}</span>
-                <span className="tab-short">{tab.shortLabel}</span>
+                {isMobile ? tab.shortLabel : tab.label}
               </button>
             ))}
           </div>
@@ -138,7 +162,7 @@ perkCode: "EMMY10"     },
 
         {/* Recommendations Grid */}
         <div 
-          key={activeTab}  // Add this - forces re-render and re-animation on tab change
+          key={activeTab}
           style={{
             ...styles.grid,
             ...(recommendations[activeTab].length === 1 ? styles.singleCardGrid : {})
@@ -149,20 +173,16 @@ perkCode: "EMMY10"     },
               key={index} 
               style={{
                 ...styles.card,
-                animationDelay: `${0.1 + (index * 0.1)}s`  // Reduced initial delay
+                animationDelay: `${0.1 + (index * 0.1)}s`
               }}
             >
               
               <div style={styles.cardTop}>
-                {/* Question */}
                 <h3 style={styles.question}>{rec.question}</h3>
-                
-                {/* Description */}
                 <p style={styles.description}>{rec.description}</p>
               </div>
               
               <div style={styles.cardBottom}>
-                {/* Primary Button */}
                 <a
                   href={rec.href}
                   target="_blank"
@@ -178,7 +198,6 @@ perkCode: "EMMY10"     },
                   {rec.buttonLabel} →
                 </a>
                 
-                {/* Optional Perk */}
                 {rec.perk && (
                   <div style={styles.perkSection}>
                     {rec.qrImage ? (
@@ -208,7 +227,7 @@ perkCode: "EMMY10"     },
                       </>
                     ) : (
                       <p style={styles.perkText}>
-                         {rec.perk}
+                        ✨ Perk: {rec.perk}
                         {rec.perkCode && (
                           <span style={{
                             fontWeight: 700,
@@ -268,7 +287,6 @@ const styles = {
     margin: '0 auto',
   },
   
-  // Page Header
   header: {
     textAlign: 'center',
     marginBottom: '3rem',
@@ -279,7 +297,7 @@ const styles = {
     fontWeight: 300,
     color: '#111111',
     marginBottom: '0.75rem',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontFamily: 'Lora, serif',
     letterSpacing: '0.02em',
   },
   pageSubtitle: {
@@ -290,37 +308,43 @@ const styles = {
     lineHeight: 1.6,
   },
   
-  // Tabs
-  tabsWrapper: {
-    marginBottom: '2rem',
-    display: 'flex',
+  tabsOuterWrapper: {
+    width: '100%',
+    maxWidth: '1100px',
+    margin: '2rem auto 2rem auto',
     justifyContent: 'center',
-    animation: 'fadeInUp 0.6s ease-out 0.1s backwards',  // Slight delay
   },
-  tabsContainer: {
-    display: 'inline-flex',
-    backgroundColor: '#F7F4EF',
-    padding: '0.375rem',
-    borderRadius: '8px',
-    gap: '0.25rem',
-    border: '1px solid #E5E0D8',
+  
+  tabsScrollContainer: {
+    gap: '0.625rem',
+    backgroundColor: '#f5f3f0',
+    borderRadius: '14px',
+    scrollSnapType: 'x mandatory',
   },
+  
   tab: {
+    minWidth: 'fit-content',
     border: 'none',
-    padding: '0.625rem 1.25rem',
-    fontSize: '0.875rem',
-    fontWeight: 500,
+    borderRadius: '12px',
+    fontWeight: 600,
     cursor: 'pointer',
     transition: 'all 0.3s ease',
-    borderRadius: '6px',
-    letterSpacing: '0.02em',
+    fontFamily: 'Lora, serif',
+    letterSpacing: '0.01em',
+    WebkitTapHighlightColor: 'transparent',
+    outline: 'none',
+    textDecoration: 'none',
+    color: 'inherit',
+    whiteSpace: 'nowrap',
   },
+  
   activeTab: {
     backgroundColor: '#8B7355',
-    color: '#F7F4EF',
+    color: '#FFFFFF',
   },
+  
   inactiveTab: {
-    backgroundColor: '#F7F4EF',
+    backgroundColor: '#e9e6e0',
     color: '#111111',
   },
   
@@ -329,10 +353,9 @@ const styles = {
     gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
     gap: '1.5rem',
     marginBottom: '3rem',
-    justifyItems: 'center',  // Add this - centers items when they don't fill the row
+    justifyItems: 'center',
   },
   
-  // Card
   card: {
     backgroundColor: '#FFFFFF',
     padding: '2rem',
@@ -343,7 +366,7 @@ const styles = {
     justifyContent: 'space-between',
     width: '100%',
     maxWidth: '420px',
-    animation: 'fadeInUp 0.6s ease-out backwards',  // Will be set per card
+    animation: 'fadeInUp 0.6s ease-out backwards',
   },
   
   cardTop: {
@@ -356,7 +379,6 @@ const styles = {
     gap: '0.75rem',
   },
   
-  // Question - Editorial size
   question: {
     fontSize: '1.25rem',
     fontWeight: 600,
@@ -365,7 +387,6 @@ const styles = {
     marginBottom: '1rem',
   },
   
-  // Description
   description: {
     fontSize: '0.9375rem',
     fontWeight: 400,
@@ -373,7 +394,6 @@ const styles = {
     lineHeight: 1.6,
   },
   
-  // Button - Subtle, left-aligned
   button: {
     display: 'inline-block',
     alignSelf: 'flex-start',
@@ -389,7 +409,6 @@ const styles = {
     border: 'none',
   },
   
-  // Perk Section
   perkSection: {
     marginTop: '0.5rem',
   },
@@ -412,11 +431,6 @@ const styles = {
     letterSpacing: '0.02em',
     margin: 0,
   },
-  perkCode: {
-    fontWeight: 700,
-    letterSpacing: '0.08em',
-    fontSize: '0.875rem',
-  },
   qrReveal: {
     marginTop: '0.75rem',
     padding: '1rem',
@@ -430,10 +444,9 @@ const styles = {
     color: '#111111',
     lineHeight: 1.5,
     margin: 0,
-    textAlign: 'center',  // Add this
+    textAlign: 'center',
   },
   
-  // Bottom CTA
   bottomCTA: {
     textAlign: 'center',
     padding: '2.5rem 2rem',
@@ -447,7 +460,7 @@ const styles = {
     fontWeight: 400,
     color: '#111111',
     marginBottom: '0.75rem',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontFamily: 'Lora, serif',
   },
   bottomText: {
     fontSize: '0.9375rem',
@@ -466,7 +479,7 @@ const styles = {
     letterSpacing: '0.05em',
     textDecoration: 'none',
     transition: 'all 0.3s ease',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontFamily: 'Lora, serif',
     cursor: 'pointer',
     borderRadius: '6px',
     border: 'none',
@@ -483,28 +496,6 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
   },
-
-  photoBanner: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '1.5rem',
-    marginBottom: '3rem',
-    animation: 'fadeInUp 0.6s ease-out 0.2s backwards',
-  },
-  bannerImageWrapper: {
-    width: '100%',
-    height: '250px',
-    overflow: 'hidden',
-    borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-  },
-  bannerImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    transition: 'transform 0.4s ease',
-  },
-  
 };
 
 export default RecommendationsPage;
