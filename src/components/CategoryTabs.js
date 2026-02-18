@@ -1,11 +1,7 @@
 import React from 'react';
 
 function CategoryTabs({ activeTab, setActiveTab, isMobile }) {
-  const tabs = [
-    { id: 'experiences', label: 'Classes & Experiences', shortLabel: 'Experiences' },
-    { id: 'shopping', label: 'Shopping Recommendations', shortLabel: 'Shopping' },
-    { id: 'pharmacy', label: 'Pharmacy Recommendations', shortLabel: 'Pharmacy' }
-  ];
+
 
   return (
     <div style={styles.wrapper}>
