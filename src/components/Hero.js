@@ -21,8 +21,8 @@ function Hero() {
       <div style={{
         ...styles.backgroundImage,
         backgroundImage: windowWidth < 900 
-          ? 'url(/videos/scrapbookhero-mobile.png)'
-          : 'url(/videos/scrapbookhero-desktop.png)',
+        ? 'url(/videos/scrapbookhero-mobile.png)'
+        : 'url(/videos/hero-desktop.png)',  // New high-res collage
         backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'scale(1)' : 'scale(1.1)',
@@ -53,17 +53,23 @@ function Hero() {
 const styles = {
   hero: {
     position: 'relative',
+    minHeight: '100vh',
+    height: 'auto',
     width: '100%',
-    height: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
+    overflow: 'visible',  // Changed from 'hidden'
+    backgroundColor: '#F7F4EF',
   },
   backgroundImage: {
     position: 'absolute',
-    inset: 0,
-    backgroundPosition: 'center center',
+    top: '8%',  // Push image down more
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center top',
     backgroundRepeat: 'no-repeat',
     zIndex: 1,
     filter: 'brightness(0.9)',
@@ -88,7 +94,7 @@ const styles = {
   
   heading: {
     color: '#FFFFFF',
-    fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+    fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',  // Only this changed - reduced from 7rem to 4.5rem
     fontWeight: 300,
     letterSpacing: '0.08em',
     textShadow: '0 0 30px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.9), 2px 2px 4px rgba(0,0,0,0.9), -2px -2px 4px rgba(0,0,0,0.9)',

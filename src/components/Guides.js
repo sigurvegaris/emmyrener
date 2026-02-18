@@ -4,7 +4,6 @@ function Guides() {
   
   const guide = {
     gumroadLink: "https://emmyrener.gumroad.com/l/parisbyemmy",
-    originalPrice: "$24",
     currentPrice: "$8.99"
   };
 
@@ -132,7 +131,7 @@ function Guides() {
             </p>
 
             <p style={styles.trustLine}>
-              I lived in Paris for two years. I tried hundreds of spots. These are the 25 I send to friends before they visit.
+              I have lived in Paris and tried hundreds of spots. These are the 25 I send to friends before they visit. 
             </p>
 
             <p style={styles.productClarity}>

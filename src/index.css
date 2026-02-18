@@ -558,4 +558,45 @@ img:hover {
     font-size: 1rem !important;
     padding: 1rem 2rem !important;
   }
+
+  /* Recommendations Banner - Mobile */
+@media (max-width: 768px) {
+  div[style*="photoBanner"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  div[style*="bannerImageWrapper"] {
+    height: 200px !important;
+  }
+}
+
+/* Featured Picks - Mobile */
+@media (max-width: 768px) {
+  div[style*="grid"][style*="gridTemplateColumns: '2fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  div[style*="rightColumn"] {
+    gap: 1rem !important;
+  }
+  
+  div[style*="largeCard"] {
+    height: 300px !important;
+  }
+  
+  div[style*="smallCard"] {
+    height: 250px !important;
+  }
+  
+  div[style*="cardContent"] {
+    bottom: 1.5rem !important;
+    left: 1.5rem !important;
+    right: 1.5rem !important;
+  }
+  
+  h3[style*="cardTitle"] {
+    font-size: 1.375rem !important;
+  }
+}
 }

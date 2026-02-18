@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import FeaturedPicks from './FeaturedPicks';
 const fadeInUp = `
   @keyframes fadeInUp {
     from {
@@ -55,7 +55,7 @@ perkCode: "EMMY10"     },
         question: "Want an intensive French cooking experience?",
         description: "Take a class with Susan Herrmann Loomis at On Rue Tatin, one of the most authentic culinary experiences in Paris.",
         buttonLabel: "Explore Classes",
-        href: "https://onruetatin.com/",
+        href: "https://onruetatin.com/classes-form/",
         perk: "Discount code coming soon"
       },
       {
@@ -102,6 +102,10 @@ perkCode: "EMMY10"     },
           All my favorite experiences and things to do in Paris with links to do so!
           </p>
         </div>
+
+                {/* Featured Picks - NEW */}
+                <FeaturedPicks />
+
 {/* Category Tabs */}
 <div style={styles.tabsWrapper}>
           <div style={styles.tabsContainer}>
@@ -478,6 +482,27 @@ const styles = {
   singleCardGrid: {
     display: 'flex',
     justifyContent: 'center',
+  },
+
+  photoBanner: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '1.5rem',
+    marginBottom: '3rem',
+    animation: 'fadeInUp 0.6s ease-out 0.2s backwards',
+  },
+  bannerImageWrapper: {
+    width: '100%',
+    height: '250px',
+    overflow: 'hidden',
+    borderRadius: '8px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+  },
+  bannerImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    transition: 'transform 0.4s ease',
   },
   
 };
