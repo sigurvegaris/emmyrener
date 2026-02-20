@@ -6,130 +6,87 @@ function FeaturedPicks() {
 
   const picks = [
     {
-      image: '/videos/featured-coffee.jpg',
-      title: 'Boot Café',
-      neighborhood: 'Le Marais',
+      image: '/videos/featuredpic1.png',
+      title: 'Quiet Luxury',
       tag: 'Coffee',
       href: '/recommendations#coffee',
-      color: '#8B7355', // Fallback color if image fails
     },
     {
-      image: '/videos/featured-walk.jpg',
+      image: '/videos/featuredpic2.png',
       title: 'Seine Golden Hour Walk',
-      neighborhood: 'Right Bank',
       tag: 'Walk',
       href: '/recommendations#walk',
-      color: '#B7A99A',
     },
     {
-      image: '/videos/featured-class.jpg',
-      title: 'Croissant Class',
-      neighborhood: 'Saint-Germain',
+      image: '/videos/featuredpic3.png',
+      title: 'Paris Tea',
       tag: 'Class',
       href: '/recommendations#class',
-      color: '#C9A96E',
     },
   ];
 
   return (
     <section style={styles.section}>
-      {/* Section Header */}
       <div style={styles.header}>
         <h2 style={styles.sectionTitle}>Featured Picks</h2>
-        <p style={styles.sectionSubtitle}></p>
       </div>
 
-      {/* Editorial Grid */}
-      <div style={styles.grid}>
-        {/* Large Featured Card - Left */}
-        <Link
-          to={picks[0].href}
-          style={styles.cardLink}
-          aria-label={`${picks[0].title} in ${picks[0].neighborhood}`}
-          onMouseEnter={() => setHoveredIndex(0)}
-          onMouseLeave={() => setHoveredIndex(null)}
-        >
-          <div 
-            style={{
-              ...styles.card,
-              ...styles.largeCard,
-              backgroundColor: picks[0].color,
-            }}
-          >
-            <div
-              style={{
-                ...styles.cardImage,
-                backgroundImage: `url(${picks[0].image})`,
-                transform: hoveredIndex === 0 ? 'scale(1.04)' : 'scale(1)',
-              }}
-            />
-            <div
-              style={{
-                ...styles.overlay,
-                background: hoveredIndex === 0
-                  ? 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 50%, transparent 100%)'
-                  : 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)',
-              }}
-            />
-            <div
-              style={{
-                ...styles.cardContent,
-                transform: hoveredIndex === 0 ? 'translateY(-6px)' : 'translateY(0)',
-              }}
-            >
-              <span style={styles.tag}>{picks[0].tag}</span>
-              <h3 style={styles.cardTitle}>{picks[0].title}</h3>
-              <p style={styles.neighborhood}>{picks[0].neighborhood}</p>
-            </div>
-          </div>
-        </Link>
+      {/* Hero container with background */}
+      <div style={styles.heroContainer}>
+        {/* Blurred restaurant background */}
+        <div style={styles.backgroundImage} />
+        <div style={styles.backgroundOverlay} />
 
-        {/* Right Column - Two Stacked Cards */}
-        <div style={styles.rightColumn}>
-          {picks.slice(1).map((pick, index) => (
-            <Link
-              key={index + 1}
-              to={pick.href}
-              style={styles.cardLink}
-              aria-label={`${pick.title} in ${pick.neighborhood}`}
-              onMouseEnter={() => setHoveredIndex(index + 1)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <div 
-                style={{
-                  ...styles.card,
-                  ...styles.smallCard,
-                  backgroundColor: pick.color,
-                }}
+        {/* Floating image cards */}
+        <div style={styles.floatingGrid}>
+          {picks.map((pick, index) => {
+            const isHovered = hoveredIndex === index;
+            
+            return (
+              <Link
+                key={index}
+                to={pick.href}
+                style={styles.cardLink}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div
-                  style={{
-                    ...styles.cardImage,
-                    backgroundImage: `url(${pick.image})`,
-                    transform: hoveredIndex === index + 1 ? 'scale(1.04)' : 'scale(1)',
-                  }}
-                />
-                <div
-                  style={{
-                    ...styles.overlay,
-                    background: hoveredIndex === index + 1
-                      ? 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 50%, transparent 100%)'
-                      : 'linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 50%, transparent 100%)',
-                  }}
-                />
-                <div
-                  style={{
-                    ...styles.cardContent,
-                    transform: hoveredIndex === index + 1 ? 'translateY(-6px)' : 'translateY(0)',
-                  }}
-                >
-                  <span style={styles.tag}>{pick.tag}</span>
-                  <h3 style={styles.cardTitle}>{pick.title}</h3>
-                  <p style={styles.neighborhood}>{pick.neighborhood}</p>
+                <div style={{
+                  ...styles.imageCard,
+                  transform: isHovered 
+                    ? 'translateY(-16px) rotate(0deg)' 
+                    : 'translateY(0) rotate(0deg)',
+                  boxShadow: isHovered
+                    ? '0 28px 56px rgba(0,0,0,0.3), 0 12px 24px rgba(0,0,0,0.2)'
+                    : '0 16px 40px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.15)',
+                }}>
+                  {/* Full bleed image */}
+                  <div
+                    style={{
+                      ...styles.cardImage,
+                      backgroundImage: `url(${pick.image})`,
+                      transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+                    }}
+                  />
+                  
+                  {/* Subtle gradient overlay */}
+                  <div style={{
+                    ...styles.imageOverlay,
+                    opacity: isHovered ? 0.7 : 0.5,
+                  }} />
+                  
+                  {/* Minimal label on hover */}
+                  <div style={{
+                    ...styles.hoverLabel,
+                    opacity: isHovered ? 1 : 0,
+                    transform: isHovered ? 'translateY(0)' : 'translateY(20px)',
+                  }}>
+                    <span style={styles.tag}>{pick.tag}</span>
+                    <h3 style={styles.title}>{pick.title}</h3>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -138,106 +95,119 @@ function FeaturedPicks() {
 
 const styles = {
   section: {
-    marginBottom: '4rem',
+    marginBottom: '0',
+    padding: '0',
+    maxWidth: '100%',
+    backgroundColor: '#FAF7F2',  // Add background color
   },
   header: {
     marginBottom: '2rem',
+    textAlign: 'center',
+    padding: '0 1.25rem',
   },
   sectionTitle: {
-    fontSize: '1.5rem',
-    fontWeight: 400,
+    fontSize: '2rem',
+    fontWeight: 300,
     color: '#111111',
-    marginBottom: '0.5rem',
     fontFamily: 'Lora, serif',
-    letterSpacing: '0.02em',
+    letterSpacing: '0.03em',
   },
-  sectionSubtitle: {
-    fontSize: '0.9375rem',
-    fontWeight: 400,
-    color: '#111111',
-    opacity: 0.7,
-    fontFamily: 'Lora, serif',
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: '2fr 1fr',
-    gap: '1.5rem',
-  },
-  rightColumn: {
+  heroContainer: {
+    position: 'relative',
+    minHeight: '550px',
+    width: '100%',
     display: 'flex',
-    flexDirection: 'column',
-    gap: '1.5rem',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '4rem 0',
+    overflow: 'hidden',
+    borderRadius: '24px',  // Add rounded corners
+    margin: '0 1.25rem',  // Add side margins so corners are visible
+  },
+  backgroundImage: {
+    position: 'absolute',
+    inset: 0,
+    backgroundImage: 'url(/videos/hero1.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    filter: 'brightness(0.65)',
+    transform: 'scale(1.1)',
+    zIndex: 1,
+  },
+  backgroundOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(135deg, rgba(139,115,85,0.2) 0%, rgba(0,0,0,0.4) 100%)',
+    zIndex: 2,
+  },
+  floatingGrid: {
+    position: 'relative',
+    zIndex: 3,
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '2rem',
+    maxWidth: '1200px',
+    padding: '0 3rem',
+    width: '100%',
   },
   cardLink: {
     textDecoration: 'none',
     display: 'block',
   },
-  card: {
+  imageCard: {
     position: 'relative',
+    aspectRatio: '3 / 4',  // Ensures all cards same size
     borderRadius: '16px',
     overflow: 'hidden',
+    transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
     cursor: 'pointer',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-  },
-  largeCard: {
-    height: '410px',
-  },
-  smallCard: {
-    height: '197px',
-    flex: 1,
+    backgroundColor: '#fff',
   },
   cardImage: {
     position: 'absolute',
     inset: 0,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+    backgroundRepeat: 'no-repeat',
+    transition: 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
   },
-  overlay: {
+  imageOverlay: {
     position: 'absolute',
     inset: 0,
-    transition: 'background 0.4s ease',
+    background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)',
+    transition: 'opacity 0.4s ease',
     zIndex: 1,
   },
-  cardContent: {
+  hoverLabel: {
     position: 'absolute',
     bottom: '2rem',
     left: '2rem',
     right: '2rem',
     zIndex: 2,
-    transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
   },
   tag: {
     display: 'inline-block',
-    fontSize: '0.75rem',
-    fontWeight: 600,
-    letterSpacing: '0.1em',
+    fontSize: '0.6875rem',
+    fontWeight: 700,
+    letterSpacing: '0.15em',
     textTransform: 'uppercase',
     color: '#FFFFFF',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
     backdropFilter: 'blur(10px)',
-    padding: '0.375rem 0.875rem',
+    padding: '0.5rem 1rem',
     borderRadius: '20px',
     marginBottom: '0.75rem',
     fontFamily: 'Montserrat, sans-serif',
+    border: '1px solid rgba(255,255,255,0.3)',
   },
-  cardTitle: {
+  title: {
     fontSize: '1.75rem',
     fontWeight: 400,
     color: '#FFFFFF',
-    marginBottom: '0.375rem',
     fontFamily: 'Lora, serif',
     lineHeight: 1.2,
-    textShadow: '0 2px 8px rgba(0,0,0,0.3)',
-  },
-  neighborhood: {
-    fontSize: '0.875rem',
-    fontWeight: 400,
-    color: '#FFFFFF',
-    opacity: 0.9,
-    fontFamily: 'Lora, serif',
-    textShadow: '0 1px 4px rgba(0,0,0,0.3)',
+    textShadow: '0 4px 12px rgba(0,0,0,0.5)',
   },
 };
 

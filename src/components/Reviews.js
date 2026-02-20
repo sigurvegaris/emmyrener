@@ -20,11 +20,7 @@ function Reviews() {
       author: "Maria",
       location: "Los Angeles"
     },
-    {
-      quote: "We used Emmy's Paris guide for our honeymoon and it was perfect. The wine bars, the hidden cafés, the Sunday walk — everything was exactly what we wanted.",
-      author: "Sophie",
-      location: "Sydney"
-    },
+ 
   ];
 
   // Helper function to truncate text

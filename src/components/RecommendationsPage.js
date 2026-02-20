@@ -111,7 +111,7 @@ function RecommendationsPage() {
         <div style={styles.header}>
           <h1 style={styles.pageTitle}>Recommendations</h1>
           <p style={styles.pageSubtitle}>
-            All my favorite experiences and things to do in Paris with links to do so!
+            Scroll to see all my favorite experiences and things to do in Paris with links to do so!
           </p>
         </div>
 

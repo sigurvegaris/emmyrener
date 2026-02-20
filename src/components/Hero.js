@@ -21,7 +21,7 @@ function Hero() {
       <div style={{
         ...styles.backgroundImage,
         backgroundImage: windowWidth < 900 
-        ? 'url(/videos/scrapbookhero-mobile.png)'
+        ? 'url(/videos/scrapbookhero-mobile1.png)'
         : 'url(/videos/hero-desktop.png)',  // New high-res collage
         backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',
         opacity: isVisible ? 1 : 0,
@@ -38,9 +38,7 @@ function Hero() {
         <p style={styles.casualAside}>
         </p>
         
-        <p style={styles.subheading}>
-        these are the spots I tell my friends about before they visit
-        </p>
+        <p style={styles.subheading}>        </p>
         
         <Link to="/guides" style={styles.ctaButton}>
           View my Guides →

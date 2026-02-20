@@ -460,11 +460,89 @@ div[style*="tabsOuterWrapper"] div:first-child {
 }
   
   /* Featured Picks - Mobile Spacing */
+/* Featured Picks - Mobile Optimized */
+/* Featured Picks - Mobile Stacked Style */
+/* Featured Picks - Mobile Compact Style */
+@media (max-width: 768px) {
+  /* Section background */
   section[style*="section"] {
-    margin-bottom: 2rem !important;
+    background-color: #FAF7F2 !important;
+  }
+  
+  /* Header spacing */
+  div[style*="header"] {
+    margin-bottom: 1.5rem !important;
     padding: 0 1rem !important;
   }
   
+  h2[style*="sectionTitle"] {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Remove background container on mobile */
+  div[style*="heroContainer"] {
+    min-height: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    display: block !important;
+  }
+  
+  /* Hide desktop background elements */
+  div[style*="backgroundImage"],
+  div[style*="backgroundOverlay"] {
+    display: none !important;
+  }
+  
+  /* Stack cards vertically */
+  div[style*="floatingGrid"] {
+    position: static !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  
+  /* Shorter cards - COMPACT HEIGHT */
+  div[style*="imageCard"] {
+    aspect-ratio: 16 / 11 !important;  /* Much shorter ratio */
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  
+  /* Image sizing */
+  div[style*="cardImage"] {
+    background-size: cover !important;
+    background-position: center !important;
+  }
+  
+  /* Force labels to always show on mobile */
+  div[style*="hoverLabel"] {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    bottom: 1.25rem !important;
+    left: 1.25rem !important;
+    right: 1.25rem !important;
+  }
+  
+  /* Adjust overlay for better text visibility */
+  div[style*="imageOverlay"] {
+    opacity: 0.65 !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%) !important;
+  }
+  
+  /* Smaller text for compact cards */
+  span[style*="tag"] {
+    font-size: 0.5625rem !important;
+    padding: 0.3rem 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  h3[style*="title"] {
+    font-size: 1.25rem !important;
+    line-height: 1.15 !important;
+  }
+}
   /* Cards grid */
   div[style*="grid"]:not([style*="whatsInsideGrid"]):not([style*="mealTypesGrid"]) {
     grid-template-columns: 1fr !important;
