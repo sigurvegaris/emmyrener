@@ -2,7 +2,7 @@ import React from 'react';
 
 function CategoryTabs({ activeTab, setActiveTab, isMobile }) {
   return (
-    <div style={styles.wrapper}>
+    <div id="recommendations" style={styles.wrapper}>
       <p style={styles.instructions}>
         Tap a category to see Emmy's recommendations
       </p>

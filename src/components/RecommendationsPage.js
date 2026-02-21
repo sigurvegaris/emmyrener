@@ -123,6 +123,7 @@ function RecommendationsPage() {
 
         {/* Recommendations Grid */}
         <div 
+          id="recommendation-cards"
           key={activeTab}
           style={{
             ...styles.grid,
