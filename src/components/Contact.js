@@ -71,28 +71,7 @@ function Contact() {
           </a>
         </div>
 
-        {/* Newsletter signup (optional) */}
-        <div style={styles.newsletterSection}>
-          <h3 style={styles.newsletterHeading}>Stay Updated</h3>
-          <p style={styles.newsletterText}>
-            Get notified when new guides are released and receive exclusive Paris tips
-          </p>
-          <div style={styles.newsletterForm}>
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              style={styles.emailInput}
-            />
-            <button 
-              style={styles.subscribeButton}
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#6d5940'}
-              onMouseLeave={(e) => e.target.style.backgroundColor = '#8B7355'}
-            >
-              Subscribe
-            </button>
-          </div>
-        </div>
-
+     
         {/* Footer */}
         <div style={styles.footer}>
           <p style={styles.footerText}>
