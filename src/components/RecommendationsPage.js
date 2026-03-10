@@ -39,8 +39,8 @@ function RecommendationsPage() {
         question: "Need help building your itinerary?",
         description: "Meet Kiana, a New Yorker based in Paris (9 years!!!) that helps women plan their trips to Paris and hosts local group and solo tours.",
         buttonLabel: "Visit KT Wellness",
-        href: "https://www.ktwellnessconcierge.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-        perk: "10% off with code: ",
+        href: "https://www.kianatiese.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+        perk: "10% off at checkout with code: ",
         perkCode: "EMMY10"
       },
       {
@@ -62,11 +62,12 @@ function RecommendationsPage() {
         href: "https://www.viator.com/fr-FR/tours/Paris/Cheesemaking-workshop-and-wine-and-cheese-tasting-with-an-expert/d479-6838P5?pid=P00169719&mcid=42383&medium=link"
       },
       {
-        question: "Want an intensive French cooking experience?",
+        question: "Want an unforgettable French cooking experience?",
         description: "Take a class with Susan Herrmann Loomis at On Rue Tatin, one of the most authentic culinary experiences in Paris.",
         buttonLabel: "Explore Classes",
         href: "https://onruetatin.com/classes-form/",
-        perk: "Discount code coming soon"
+        perk: "$50 off at checkout with code: ",
+        perkCode: "EMMY50"
       },
       {
         question: "Want to hear classical music in a stunning chapel?",
@@ -189,7 +190,7 @@ function RecommendationsPage() {
                       </>
                     ) : (
                       <p style={styles.perkText}>
-                        ✨ Perk: {rec.perk}
+                        Perk: {rec.perk}
                         {rec.perkCode && (
                           <span style={{
                             fontWeight: 700,
