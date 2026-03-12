@@ -70,6 +70,14 @@ function RecommendationsPage() {
         perkCode: "EMMY50"
       },
       {
+        question: "Want to learn about French wine and cheese?",
+        description: "Erwan, founder of Secret Wine Door, has the BEST wine tasting experience in Paris. It's fun, informational, and delicious! I highly recommend him to any friend who is visiting!",
+        buttonLabel: "Explore Experience",
+        href: "https://www.secretwinedoor.com/",
+        // perk: "$50 off at checkout with code: ",
+        // perkCode: "EMMY50"
+      },
+      {
         question: "Want to hear classical music in a stunning chapel?",
         description: "Experience an opera performance at Sainte-Chapelle, one of Paris's most beautiful Gothic spaces.",
         buttonLabel: "View Performances",
