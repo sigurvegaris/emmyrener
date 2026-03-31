@@ -73,7 +73,7 @@ function RecommendationsPage() {
         question: "Want to learn about French wine and cheese?",
         description: "Erwan, founder of Secret Wine Door, has the BEST wine tasting experience in Paris. It's fun, informational, and delicious! I highly recommend him to any friend who is visiting!",
         buttonLabel: "Explore Experience",
-        href: "https://www.secretwinedoor.com/",
+        href: "https://fareharbor.com/embeds/book/secretwinedoor/items/716092/calendar/2026/03/?asn=emmyrener-eur&flow=1597248&full-items=yes",
         // perk: "$50 off at checkout with code: ",
         // perkCode: "EMMY50"
       },
