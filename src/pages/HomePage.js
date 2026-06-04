@@ -6,6 +6,7 @@ import Featured from '../components/Featured';
 import Reviews from '../components/Reviews';
 import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
+import EmmyFaves from '../components/EmmyFaves';
 
 function HomePage() {
   return (
@@ -52,6 +53,7 @@ function HomePage() {
       </div>
       <Featured />
       <Reviews />
+      <EmmyFaves />
       <Footer />
     </PageTransition>
   );
