@@ -111,7 +111,7 @@ function Guides() {
           <div style={styles.leftColumn}>
             <div style={styles.phoneFrame}>
               <img 
-                src="/videos/phone1.png" 
+                src="/videos/phone1.jpg" 
                 alt="Paris Food Map on Phone" 
                 style={styles.phoneImage}
               />

@@ -19,7 +19,9 @@ function EmmyFaves() {
           {/* Image Section */}
           <div className="emmys-faves-image-container">
             <img 
-              src="/videos/emmy2.jpg" 
+              src="/videos/emmy2.jpg"
+              loading="lazy"
+              decoding="async"
               alt="Emmy viewing Monet's Water Lilies at the Musée de l'Orangerie"
               className="emmys-faves-image"
             />
