@@ -6,18 +6,18 @@ function FeaturedPicks() {
 
   const picks = [
     {
-      image: '/videos/featuredpic1.png',
+      image: '/videos/featuredpic1.jpg',
       title: 'Quiet Luxury',
       tag: 'Coffee',
       href: '#recommendations-cards'
     },
     {
-      image: '/videos/featuredpic2.png',
+      image: '/videos/featuredpic2.jpg',
       title: 'Seine Golden Hour Walk',
       tag: 'Walk',
     },
     {
-      image: '/videos/featuredpic3.png',
+      image: '/videos/featuredpic3.jpg',
       title: 'Paris Tea',
       tag: 'Class',
     },

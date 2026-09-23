@@ -16,8 +16,8 @@ function Footer() {
     <footer style={{
       ...styles.footer,
       backgroundImage: windowWidth <= 768 
-        ? 'url(/videos/footer-image-mobile.png)'
-        : 'url(/videos/footer-image.png)'
+        ? 'url(/videos/footer-image-mobile.jpg)'
+        : 'url(/videos/footer-image.jpg)'
     }}>
       {/* Dark overlay for better text readability */}
       <div style={{

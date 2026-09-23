@@ -21,8 +21,8 @@ function Hero() {
       <div style={{
         ...styles.backgroundImage,
         backgroundImage: windowWidth < 900 
-        ? 'url(/videos/scrapbookhero-mobile1.png)'
-        : 'url(/videos/hero-desktop.png)',  // New high-res collage
+        ? 'url(/videos/scrapbookhero-mobile1.jpg)'
+        : 'url(/videos/hero-desktop.jpg)',  // New high-res collage
         backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'scale(1)' : 'scale(1.1)',
