@@ -19,8 +19,8 @@ function EmmyFaves() {
           {/* Image Section */}
           <div className="emmys-faves-image-container">
             <img 
-              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" 
-              alt="Emmy's Curated Collection"
+              src="/videos/emmy2.jpg" 
+              alt="Emmy viewing Monet's Water Lilies at the Musée de l'Orangerie"
               className="emmys-faves-image"
             />
           </div>
