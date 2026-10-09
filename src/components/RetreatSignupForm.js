@@ -51,8 +51,8 @@ function RetreatSignupForm() {
   return (
     <div className="pc" style={{
         "--pc-photo": "url(/videos/retreat-banner.webp)",
-        "--pc-front": "url(/videos/postcard-front.jpg)",
-        "--pc-back": "url(/videos/postcard-back.jpg)",
+        "--pc-front": "url(/videos/pc-paper-front.jpg)",
+        "--pc-back": "url(/videos/pc-paper-back.jpg)",
       }}>
       <div className={`pc-inner${flipped ? ' pc-flipped' : ''}`}>
         {/* FRONT */}

@@ -88,16 +88,3 @@
     font-size: 0.875rem;
   }
 }
-
-/* Give the postcard the full phone width */
-@media (max-width: 640px) {
-  #interest-list > div {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  #interest-list h2,
-  #interest-list > div > p {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
