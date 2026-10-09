@@ -47,7 +47,7 @@ function RetreatPageNav() {
   };
 
   return (
-    <nav className="rpn" aria-label="On this page">
+    <div className="rpn" role="navigation" aria-label="On this page">
       <div className="rpn-inner">
         <ul className="rpn-list" ref={listRef}>
           {ITEMS.map((item) => (
@@ -67,7 +67,7 @@ function RetreatPageNav() {
           Join the list
         </a>
       </div>
-    </nav>
+    </div>
   );
 }
 

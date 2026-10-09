@@ -1,12 +1,13 @@
 /* Postcard sign-up. Both faces share one grid cell so the card is as tall as its taller side. */
 .pc {
   --pc-olive: #4f5d3a;
-  --pc-brown: #8b7355;
-  --pc-ink: #2b2a26;
+  --pc-brown: #7a5a3a;
+  --pc-ink: #3a2e22;
   --pc-cream: #fffdf8;
   max-width: 900px;
   margin: 0 auto;
   perspective: 2000px;
+  container-type: inline-size;
 }
 
 .pc-inner {
@@ -22,18 +23,21 @@
   grid-area: 1 / 1;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  padding: 11px;
-  border-radius: 6px;
+  border-radius: 4px;
+  overflow: hidden;
   /* a filter on the 3D parent would flatten the flip, so the shadow lives on each face */
-  box-shadow: 0 18px 32px rgba(60, 45, 25, 0.25);
-  /* airmail border */
-  background: repeating-linear-gradient(
-    135deg,
-    #c9786a 0 16px,
-    var(--pc-cream) 16px 24px,
-    #5e7f9c 24px 40px,
-    var(--pc-cream) 40px 48px
-  );
+  box-shadow: 0 18px 32px rgba(60, 45, 25, 0.28);
+  background-color: #e8dbc2;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.pc-front {
+  background-image: var(--pc-front);
+  background-position: left center;
+}
+.pc-back {
+  background-image: var(--pc-back);
+  background-position: right center;
 }
 .pc-back {
   transform: rotateY(180deg);
@@ -43,27 +47,22 @@
   position: relative;
   height: 100%;
   box-sizing: border-box;
-  border-radius: 3px;
-  background:
-    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.7), transparent 55%),
-    var(--pc-cream);
 }
 
 /* ---------- Front ---------- */
 .pc-front-paper {
-  min-height: 460px;
+  aspect-ratio: 890 / 584;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 2.5rem 1.5rem;
-  overflow: hidden;
+  padding: 1.5rem 3% 1.5rem 40%;
 }
 
 .pc-greetings {
   font-family: 'Caveat', cursive !important;
-  font-size: clamp(2.3rem, 6vw, 3.2rem);
+  font-size: clamp(2rem, 5.4cqw, 3.2rem);
   color: var(--pc-brown);
   margin: 0 0 -0.4rem;
   transform: rotate(-3deg);
@@ -73,7 +72,7 @@
   margin: 0;
   font-family: 'Lora', serif !important;
   font-weight: 700;
-  font-size: clamp(3.1rem, 13vw, 7.5rem);
+  font-size: clamp(2.4rem, 8.6cqw, 5rem);
   letter-spacing: 0.04em;
   line-height: 1.05;
   color: transparent;
@@ -89,8 +88,8 @@
 .pc-front-sub {
   margin: 0.4rem 0 0;
   font-family: 'Cormorant Garamond', serif !important;
-  font-size: clamp(1rem, 2.6vw, 1.3rem);
-  letter-spacing: 0.22em;
+  font-size: clamp(0.8rem, 2.1cqw, 1.2rem);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--pc-olive);
 }
@@ -123,38 +122,6 @@
   box-shadow: 0 12px 22px rgba(79, 93, 58, 0.4);
 }
 
-/* little photo tiles (cropped from the hero collage) */
-.pc-tile {
-  position: absolute;
-  width: 130px;
-  height: 130px;
-  border: 7px solid #fff;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-  background-image: var(--pc-photo);
-  background-repeat: no-repeat;
-}
-.pc-tile-a {
-  left: 3%;
-  top: 4%;
-  background-size: 936px auto;
-  background-position: 0 -325px;
-  transform: rotate(-8deg);
-}
-.pc-tile-b {
-  right: 3%;
-  top: 3%;
-  background-size: 851px auto;
-  background-position: -697px -71px;
-  transform: rotate(7deg);
-}
-.pc-tile-c {
-  right: 5%;
-  bottom: 7%;
-  background-size: 985px auto;
-  background-position: -328px -356px;
-  transform: rotate(-5deg);
-}
-
 /* ---------- Back ---------- */
 .pc-back-paper {
   min-height: 460px;
@@ -180,7 +147,7 @@
 
 .pc-left {
   /* lined letter paper */
-  background-image: repeating-linear-gradient(to bottom, transparent 0 2.05rem, rgba(94, 127, 156, 0.28) 2.05rem calc(2.05rem + 1px));
+  background-image: repeating-linear-gradient(to bottom, transparent 0 2.05rem, rgba(122, 90, 58, 0.25) 2.05rem calc(2.05rem + 1px));
   background-position: 0 0.35rem;
   line-height: 2.05rem;
 }
@@ -199,10 +166,11 @@
 .pc-label {
   display: block;
   font-family: 'Lora', serif !important;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--pc-brown);
+  color: #5a4128;
   margin: 0.4rem 0 0;
   padding: 0;
 }
@@ -211,8 +179,8 @@
   width: 100%;
   box-sizing: border-box;
   border: none;
-  border-bottom: 2px solid #d8cfc0;
-  background: transparent;
+  border-bottom: 2px solid #a48a68;
+  background: rgba(255, 252, 244, 0.45);
   font-size: 1.7rem;
   line-height: 1.4;
   padding: 0.1rem 0.15rem;
@@ -287,10 +255,10 @@
   font-size: 1.35rem;
   line-height: 1;
   padding: 0.5rem 0.95rem;
-  border: 2px solid #d8cfc0;
+  border: 2px solid #b9a283;
   border-radius: 999px;
   color: var(--pc-ink);
-  background: #fff;
+  background: rgba(255, 252, 244, 0.8);
   transition: all 0.2s ease;
 }
 .pc-chip input {
@@ -336,19 +304,19 @@
   height: 92px;
   border-radius: 50%;
   border: 4px double rgba(255, 255, 255, 0.5);
-  background: radial-gradient(circle at 35% 30%, #7a8a58, var(--pc-olive) 60%, #38442a);
+  background: radial-gradient(circle at 35% 30%, #b04a45, #8c2f2f 60%, #5e1c1f);
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.1rem;
-  box-shadow: 0 6px 14px rgba(56, 68, 42, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 14px rgba(94, 28, 31, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.25);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .pc-seal:hover:not(:disabled) {
   transform: rotate(-6deg) scale(1.07);
-  box-shadow: 0 10px 20px rgba(56, 68, 42, 0.5), inset 0 -4px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 20px rgba(94, 28, 31, 0.5), inset 0 -4px 8px rgba(0, 0, 0, 0.25);
 }
 .pc-seal:active:not(:disabled) {
   transform: scale(0.96);
@@ -450,11 +418,20 @@
 
 /* ---------- Small screens ---------- */
 @media (max-width: 760px) {
-  .pc-front-paper { min-height: 440px; padding: 2rem 1rem 2.4rem; }
-  .pc-tile { width: 82px; height: 82px; border-width: 5px; }
-  .pc-tile-a { background-size: 590px auto; background-position: 0 -205px; }
-  .pc-tile-b { background-size: 537px auto; background-position: -440px -45px; }
-  .pc-tile-c { background-size: 622px auto; background-position: -207px -225px; }
+  .pc-front {
+    background-position: 8% center;
+  }
+  .pc-front-paper {
+    aspect-ratio: auto;
+    min-height: 420px;
+    padding: 2rem 1rem 2.4rem;
+    /* soften the tower so the text stays readable over it */
+    background: linear-gradient(rgba(240, 228, 205, 0.35), rgba(240, 228, 205, 0.55));
+  }
+
+  .pc-greetings { font-size: 11cqw; }
+  .pc-photo-title { font-size: 14.5cqw; }
+  .pc-front-sub { font-size: 4.2cqw; }
 
   .pc-back-paper { padding: 1.5rem 1.25rem 2.8rem; }
   .pc-form { grid-template-columns: 1fr; gap: 1.5rem 0; }

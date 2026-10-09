@@ -49,14 +49,15 @@ function RetreatSignupForm() {
   const first = name.trim();
 
   return (
-    <div className="pc" style={{ "--pc-photo": "url(/videos/retreat-hero.webp)" }}>
+    <div className="pc" style={{
+        "--pc-photo": "url(/videos/retreat-banner.webp)",
+        "--pc-front": "url(/videos/postcard-front.jpg)",
+        "--pc-back": "url(/videos/postcard-back.jpg)",
+      }}>
       <div className={`pc-inner${flipped ? ' pc-flipped' : ''}`}>
         {/* FRONT */}
         <div className="pc-face pc-front" inert={flipped} aria-hidden={flipped}>
           <div className="pc-paper pc-front-paper">
-            <span className="pc-tile pc-tile-a" aria-hidden="true" />
-            <span className="pc-tile pc-tile-b" aria-hidden="true" />
-            <span className="pc-tile pc-tile-c" aria-hidden="true" />
             <p className="pc-greetings">Greetings from</p>
             <p className="pc-photo-title">PROVENCE</p>
             <p className="pc-front-sub">Bon Vivant Summer &middot; [Month] 2027</p>

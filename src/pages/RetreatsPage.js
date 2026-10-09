@@ -5,7 +5,7 @@ import RetreatSignupForm from '../components/RetreatSignupForm';
 import RetreatPageNav from '../components/RetreatPageNav';
 
 // TODO(Emmy): swap the collage placeholders below for her retreat photos. A mobile version of the hero would help.
-const HERO_IMAGE = '/videos/retreat-hero.jpg';
+const HERO_IMAGE = '/videos/retreat-banner.jpg';
 const COLLAGE = ['/videos/emmy1.jpg', '/videos/emmy2.jpg', '/videos/emmy3.jpg', '/videos/featuredpic1.jpg'];
 
 function RetreatsPage() {
@@ -33,7 +33,7 @@ function RetreatsPage() {
           <div style={styles.heroFrame}>
             <picture>
               <source
-                srcSet="/videos/retreat-hero.webp 1440w, /videos/retreat-hero-2880.webp 2880w"
+                srcSet="/videos/retreat-banner.webp 1440w, /videos/retreat-banner-2880.webp 2880w"
                 sizes="100vw"
                 type="image/webp"
               />
