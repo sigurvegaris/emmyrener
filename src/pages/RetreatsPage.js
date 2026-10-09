@@ -3,9 +3,8 @@ import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
 import RetreatSignupForm from '../components/RetreatSignupForm';
 
-// TODO(Emmy): swap these placeholder photos for the retreat photos / Canva exports.
-const HERO_DESKTOP = '/videos/hero-desktop.jpg';
-const HERO_MOBILE = '/videos/scrapbookhero-mobile1.jpg';
+// TODO(Emmy): swap the collage placeholders below for her retreat photos. A mobile version of the hero would help.
+const HERO_IMAGE = '/videos/retreat-hero.jpg';
 const COLLAGE = ['/videos/emmy1.jpg', '/videos/emmy2.jpg', '/videos/emmy3.jpg', '/videos/featuredpic1.jpg'];
 
 function RetreatsPage() {
@@ -28,31 +27,30 @@ function RetreatsPage() {
   return (
     <PageTransition>
       <div style={styles.page}>
-        {/* Hero */}
+        {/* Hero: Emmy's finished design (title, dates and button are part of the image) */}
         <section style={styles.hero}>
-          <div
-            style={{
-              ...styles.heroImage,
-              backgroundImage: `url(${isMobile ? HERO_MOBILE : HERO_DESKTOP})`,
-              backgroundSize: isMobile ? '100% 100%' : 'cover',
-            }}
-          />
-          <div style={styles.heroOverlay} />
-          <div style={styles.heroContent}>
-            <p style={styles.heroEyebrow}>Welcome to a</p>
-            <h1 style={styles.heroTitle}>Bon Vivant Summer</h1>
-            <p style={styles.heroMeta}>Provence · [Month] 2027 · 5 nights / 6 days</p>
-            <p style={styles.heroLede}>
-              A lively, food-filled week in the South of France for women who want to explore, eat well, meet new
-              people, and soak up the Provençal way of life.
-            </p>
-            <p style={styles.heroAside}>
-              The South of France is more than rosé all day. However we will, in fact, have a lot of rosé.
-            </p>
-            <a href="#interest-list" onClick={scrollToForm} style={styles.heroButton}>
+          <div style={styles.heroFrame}>
+            <img
+              src={HERO_IMAGE}
+              alt="Bon Vivant Summer. Provence, [Month] 2027, 5 nights / 6 days. A lively, food-filled week in the South of France for women who want to explore, eat well, meet new people, and soak up the Provençal way of life."
+              style={styles.heroImg}
+            />
+            <h1 style={styles.srOnly}>Bon Vivant Summer</h1>
+            {/* Clickable area over the button drawn in the image (desktop and tablet) */}
+            {!isMobile && (
+              <a
+                href="#interest-list"
+                onClick={scrollToForm}
+                style={styles.heroButtonHotspot}
+                aria-label="Get on the interest list"
+              />
+            )}
+          </div>
+          {isMobile && (
+            <a href="#interest-list" onClick={scrollToForm} style={styles.mobileButton}>
               Get on the interest list
             </a>
-          </div>
+          )}
         </section>
 
         <div style={styles.container}>
@@ -156,81 +154,37 @@ function RetreatsPage() {
 
 const styles = {
   page: { minHeight: '100vh', backgroundColor: '#FAF7F2' },
-  hero: {
-    position: 'relative',
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#F7F4EF',
-  },
-  heroImage: {
+  hero: { paddingTop: '72px', backgroundColor: '#F7F4EF' }, // 72px clears the fixed-position nav
+  heroFrame: { position: 'relative', maxWidth: '1600px', margin: '0 auto' },
+  heroImg: { display: 'block', width: '100%', height: 'auto' },
+  // Positioned over the "Get on the interest list" button in the 1440x720 design
+  heroButtonHotspot: {
     position: 'absolute',
-    top: '8%',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundPosition: 'center top',
-    backgroundRepeat: 'no-repeat',
-    filter: 'brightness(0.9)',
-    zIndex: 1,
+    left: '42.6%',
+    top: '66.3%',
+    width: '16.5%',
+    height: '5.9%',
+    display: 'block',
   },
-  heroOverlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%)',
-    zIndex: 2,
-  },
-  heroContent: {
-    position: 'relative',
-    zIndex: 10,
-    textAlign: 'center',
-    maxWidth: '760px',
-    padding: '7rem 2rem 4rem',
+  mobileButton: {
+    display: 'block',
+    margin: '1.5rem auto',
+    width: 'fit-content',
+    backgroundColor: '#4F5D3A',
     color: '#FFFFFF',
-    textShadow: '0 2px 12px rgba(0,0,0,0.8), 0 0 4px rgba(0,0,0,0.6)',
-  },
-  heroEyebrow: {
-    fontFamily: 'Calligraffitti, cursive',
-    fontSize: '1.5rem',
-    marginBottom: '0.25rem',
-  },
-  heroTitle: {
-    fontFamily: 'Calligraffitti, cursive',
-    fontSize: 'clamp(2.5rem, 7vw, 5rem)',
-    fontWeight: 300,
-    letterSpacing: '0.05em',
-    marginBottom: '0.75rem',
-  },
-  heroMeta: {
-    fontSize: '1rem',
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
-    marginBottom: '1.5rem',
-  },
-  heroLede: {
-    fontSize: 'clamp(1.0625rem, 2vw, 1.25rem)',
-    lineHeight: 1.7,
-    marginBottom: '1rem',
-  },
-  heroAside: {
-    fontFamily: 'Cormorant Garamond, serif',
-    fontStyle: 'italic',
-    fontSize: '1.25rem',
-    marginBottom: '2rem',
-  },
-  heroButton: {
-    display: 'inline-block',
-    color: '#FFFFFF',
-    fontSize: '1.125rem',
-    letterSpacing: '0.08em',
     textDecoration: 'none',
-    padding: '1.125rem 2.75rem',
-    border: '2px solid rgba(255,255,255,0.95)',
-    borderRadius: '4px',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    backdropFilter: 'blur(8px)',
-    fontFamily: 'Calligraffitti, cursive',
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    fontSize: '0.875rem',
+    padding: '1rem 2rem',
+  },
+  srOnly: {
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    overflow: 'hidden',
+    clip: 'rect(0 0 0 0)',
+    whiteSpace: 'nowrap',
   },
   container: { maxWidth: '820px', margin: '0 auto', padding: '0 2rem' },
   section: { padding: '4rem 0 1rem' },
