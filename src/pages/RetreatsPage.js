@@ -23,36 +23,36 @@ function RetreatsPage() {
   return (
     <PageTransition>
       <div className="rt">
-        {/* Opening: a long table under an olive tree, with the title card on top */}
-        <header className="rt-top">
-          <picture>
-            <source
-              srcSet="/videos/retreat-top-900.webp 900w, /videos/retreat-top.webp 1657w"
-              sizes="100vw"
-              type="image/webp"
+        {/* Opening: Emmy's finished banner design (title, dates and button are part of the image) */}
+        <header className="rt-banner">
+          <div className="rt-banner-frame">
+            <picture>
+              <source
+                srcSet="/videos/retreat-banner.webp 1440w, /videos/retreat-banner-2880.webp 2880w"
+                sizes="100vw"
+                type="image/webp"
+              />
+              <img
+                src="/videos/retreat-banner.jpg"
+                width="1440"
+                height="720"
+                fetchPriority="high"
+                decoding="async"
+                alt="Bon Vivant Summer. Provence, [Month] 2027, 5 nights / 6 days. A lively, food-filled week in the South of France for women who want to explore, eat well, meet new people, and soak up the Provençal way of life."
+              />
+            </picture>
+            <h1 className="rt-sr">Bon Vivant Summer</h1>
+            {/* Clickable area over the button drawn in the image (desktop and tablet) */}
+            <a
+              href="#interest-list"
+              onClick={scrollToForm}
+              className="rt-banner-hit"
+              aria-label="Get on the interest list"
             />
-            <img
-              className="rt-top-img"
-              src="/videos/retreat-top.webp"
-              width="1657"
-              height="949"
-              fetchPriority="high"
-              decoding="async"
-              alt="A long table set for lunch under an olive tree in Provence"
-            />
-          </picture>
-          <div className="rt-card">
-            <p className="rt-welcome">Welcome to a</p>
-            <h1 className="rt-title">Bon Vivant Summer</h1>
-            <p className="rt-meta">Provence · [Month] 2027 · 5 nights / 6 days</p>
-            <p className="rt-lede">
-              A lively, food-filled week in the South of France for women who want to explore, eat well, meet new
-              people, and soak up the Provençal way of life.
-            </p>
-            <a href="#interest-list" onClick={scrollToForm} className="rt-btn">
-              Get on the interest list
-            </a>
           </div>
+          <a href="#interest-list" onClick={scrollToForm} className="rt-btn rt-banner-mobile">
+            Get on the interest list
+          </a>
         </header>
 
         <RetreatPageNav />
