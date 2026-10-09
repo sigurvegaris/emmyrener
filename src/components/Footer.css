@@ -1,0 +1,138 @@
+/* Paris-at-dusk footer: all vector + CSS, so it is sharp at any size */
+.pf {
+  position: relative;
+  overflow: hidden;
+  color: #f4ece0;
+  background: linear-gradient(180deg, #2b2348 0%, #54406b 38%, #b0627a 72%, #f0a981 100%);
+}
+.pf-stars { position: absolute; inset: 0; pointer-events: none; }
+.pf-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff7e6;
+  opacity: 0.2;
+  animation: pf-twinkle 4s ease-in-out infinite;
+}
+@keyframes pf-twinkle { 0%,100% { opacity: 0.15; transform: scale(0.8); } 50% { opacity: 0.95; transform: scale(1.25); } }
+
+.pf-moon {
+  position: absolute;
+  top: 2.2rem;
+  right: 9%;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffaf0, #f3e3c0 70%);
+  box-shadow: 0 0 40px 10px rgba(255, 238, 200, 0.35);
+}
+
+.pf-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 0;
+  text-align: center;
+}
+.pf-logo {
+  margin: 0;
+  font-family: 'Lora', serif !important;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  color: #fff;
+}
+.pf-tag {
+  margin: 0.6rem 0 1.6rem;
+  font-family: 'Caveat', cursive !important;
+  font-size: 1.9rem;
+  color: #ffe9cf;
+}
+.pf-cta {
+  display: inline-block;
+  padding: 0.8rem 1.9rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 999px;
+  color: #fff !important;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+.pf-cta:hover { background: #fff; color: #54406b !important; transform: translateY(-2px); }
+
+.pf-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.8rem;
+  margin: 2.2rem 0 1.2rem;
+  padding: 0;
+  list-style: none;
+}
+.pf-links a {
+  color: #f4ece0 !important;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.pf-links a:hover { color: #fff !important; border-bottom-color: rgba(255, 255, 255, 0.8); }
+
+.pf-small {
+  margin: 0.4rem 0;
+  font-size: 0.85rem;
+  color: rgba(244, 236, 224, 0.85);
+}
+.pf-small.pf-italic { font-style: italic; }
+.pf-top {
+  margin-top: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffe9cf !important;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.pf-top:hover { color: #fff !important; }
+
+/* skyline sits at the bottom, text rests above it */
+.pf-skyline {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: clamp(110px, 18vw, 220px);
+  margin-top: 1.5rem;
+}
+.pf-skyline .far { fill: #7b4d73; opacity: 0.75; }
+.pf-skyline .near { fill: #241c3b; }
+.pf-skyline .tower { fill: #1b1530; }
+.pf-window { fill: #ffd98a; animation: pf-twinkle 6s ease-in-out infinite; }
+.pf-glint { fill: #fff6d6; transform-box: fill-box; transform-origin: center; animation: pf-glint 1.2s ease-in-out infinite; }
+@keyframes pf-glint { 0%,100% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.6); } }
+
+@media (max-width: 640px) {
+  .pf-inner { padding-top: 3rem; }
+  .pf-moon { width: 26px; height: 26px; right: 5%; top: 0.9rem; box-shadow: 0 0 24px 6px rgba(255, 238, 200, 0.3); }
+  .pf-tag { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-star, .pf-window, .pf-glint { animation: none; }
+  .pf-star { opacity: 0.6; }
+  .pf-glint { opacity: 0; }
+}
+
+/* index.css pads every <footer> on phones with !important; the skyline needs to run edge to edge */
+@media (max-width: 768px) {
+  footer.pf { padding: 0 !important; }
+  footer.pf .pf-links a { font-size: 0.85rem !important; }
+}

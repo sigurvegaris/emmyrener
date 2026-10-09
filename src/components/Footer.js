@@ -1,259 +1,162 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import './Footer.css';
 
-function Footer() {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1200
-  );
+// Deterministic pseudo-random numbers so the star field and rooftops are
+// identical on every render.
+function makeRand(seed) {
+  let s = seed;
+  return () => {
+    s = (s * 1103515245 + 12345) & 0x7fffffff;
+    return s / 0x7fffffff;
+  };
+}
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+const starRand = makeRand(7);
+const STARS = Array.from({ length: 46 }, () => ({
+  left: starRand() * 100,
+  top: starRand() * 62,
+  size: 1.5 + starRand() * 2,
+  delay: starRand() * 4,
+}));
 
+// Row of Haussmann-style rooftops with mansard roofs and chimneys.
+function rooftops(seed, minH, maxH, skip) {
+  const rand = makeRand(seed);
+  const out = [];
+  let x = -10;
+  while (x < 1210) {
+    const w = 38 + rand() * 44;
+    const h = minH + rand() * (maxH - minH);
+    const top = 200 - h;
+    if (!skip(x, x + w)) {
+      out.push({ x, w, top, roof: 9 + rand() * 7, chimney: rand() > 0.6, windows: rand() > 0.5 });
+    }
+    x += w;
+  }
+  return out;
+}
+const FAR = rooftops(3, 55, 95, () => false);
+const NEAR = rooftops(11, 28, 62, () => false);
+
+const links = [
+  ['/', 'Home'],
+  ['/about', 'About Me'],
+  ['/guides', 'Guides'],
+  ['/retreats', 'Retreats'],
+  ['/recommendations', 'Recommendations'],
+  ['/contact', 'Contact'],
+];
+
+function Roof({ b, cls }) {
+  const { x, w, top, roof, chimney } = b;
+  const inset = 7;
   return (
-    <footer style={{
-      ...styles.footer,
-      backgroundImage: windowWidth <= 768 
-        ? 'url(/videos/footer-image-mobile.jpg)'
-        : 'url(/videos/footer-image.jpg)'
-    }}>
-      {/* Dark overlay for better text readability */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 1,
-      }} />
-      
-      <div style={styles.container}>
-        {/* Top section - Logo and tagline */}
-        <div style={styles.topSection}>
-          <h3 style={styles.logo}>EMMY RENER</h3>
-          <p style={styles.tagline}>
-            Your Paris, made with love
-          </p>
-        </div>
-
-        {/* Middle section - Links */}
-        <div style={styles.linksSection}>
-          <div style={styles.linkColumn}>
-            <h4 style={styles.columnTitle}>Explore</h4>
-            <Link 
-              to="/" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/about" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              About Me
-            </Link>
-            <Link 
-              to="/guides" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Guides
-            </Link>
-            <Link 
-              to="/retreats" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Retreats
-            </Link>
-            <Link 
-              to="/recommendations" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Recommendations
-            </Link>
-            <Link 
-              to="/contact" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Contact
-            </Link>
-          </div>
-
-          <div style={styles.linkColumn}>
-            <h4 style={styles.columnTitle}>Connect</h4>
-            <a 
-              href="https://instagram.com/emmyrener" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Instagram
-            </a>
-            <a 
-              href="mailto:emmy@sophisticatedspreads.net" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Email
-            </a>
-          </div>
-
-          <div style={styles.linkColumn}>
-            <h4 style={styles.columnTitle}>Resources</h4>
-            <Link 
-              to="/guides" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Paris Guides
-            </Link>
-            <Link 
-              to="/recommendations" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Trusted Partners
-            </Link>
-          </div>
-        </div>
-
-        {/* Decorative divider */}
-        <div style={styles.divider}>
-          <svg width="60" height="2">
-            <line x1="0" y1="1" x2="20" y2="1" stroke="#B7A99A" strokeWidth="1" opacity="0.5"/>
-            <circle cx="30" cy="1" r="2" fill="#B7A99A" opacity="0.5"/>
-            <line x1="40" y1="1" x2="60" y2="1" stroke="#B7A99A" strokeWidth="1" opacity="0.5"/>
-          </svg>
-        </div>
-
-        {/* Bottom section - Copyright */}
-        <div style={styles.bottomSection}>
-          <p style={styles.seoLine}>
-            Digital Paris Guides by Emmy Rener
-          </p>
-          <p style={styles.copyright}>
-            © 2025 Emmy Rener. Made with ♡ in Paris.
-          </p>
-          <p style={styles.subtext}>
-            All recommendations are genuine and personally vetted
-          </p>
-        </div>
-      </div>
-    </footer>
+    <g className={cls}>
+      <rect x={x} y={top + roof} width={w + 0.5} height={200 - top} />
+      <polygon points={`${x},${top + roof} ${x + inset},${top} ${x + w - inset},${top} ${x + w},${top + roof}`} />
+      {chimney && <rect x={x + w * 0.6} y={top - 9} width="5" height="12" />}
+    </g>
   );
 }
 
-const styles = {
-  footer: {
-    backgroundColor: '#F7F4EF',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    padding: '2.5rem 2rem',
-    borderTop: '1px solid #E5E0D8',
-    position: 'relative',
-  },
-  container: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    position: 'relative',
-    zIndex: 2,
-  },
-  topSection: {
-    textAlign: 'center',
-    marginBottom: '2rem',
-  },
-  logo: {
-    fontSize: '1.25rem',
-    fontWeight: 700,
-    letterSpacing: '0.35em',
-    textTransform: 'uppercase',
-    marginBottom: '1rem',
-    color: '#FFFFFF',
-  },
-  tagline: {
-    fontSize: '1rem',
-    fontWeight: 300,
-    letterSpacing: '0.05em',
-    color: '#FFFFFF',
-    fontStyle: 'italic',
-    fontFamily: 'Lora, serif',
-  },
-  linksSection: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '2rem',
-    marginBottom: '2rem',
-    textAlign: 'center',
-  },
-  linkColumn: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.75rem',
-  },
-  columnTitle: {
-    fontSize: '0.875rem',
-    fontWeight: 600,
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
-    color: '#FFFFFF',
-    marginBottom: '0.5rem',
-  },
-  link: {
-    color: '#E5E0D8',
-    fontSize: '0.9375rem',
-    fontWeight: 300,
-    textDecoration: 'none',
-    transition: 'color 0.3s ease',
-    cursor: 'pointer',
-    letterSpacing: '0.02em',
-  },
-  divider: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem',
-  },
-  bottomSection: {
-    textAlign: 'center',
-    paddingTop: '1.5rem',
-    borderTop: '1px solid rgba(183, 169, 154, 0.2)',
-  },
-  copyright: {
-    fontSize: '0.875rem',
-    fontWeight: 300,
-    color: '#FFFFFF',
-    marginBottom: '0.5rem',
-  },
-  subtext: {
-    fontSize: '0.8125rem',
-    fontWeight: 300,
-    color: '#E5E0D8',
-    opacity: 0.9,
-    fontStyle: 'italic',
-  },
-  seoLine: {
-    fontSize: '0.9375rem',
-    fontWeight: 500,
-    color: '#FFFFFF',
-    marginBottom: '1rem',
-    letterSpacing: '0.05em',
-  },
-};
+function Footer() {
+  return (
+    <footer className="pf">
+      <div className="pf-stars" aria-hidden="true">
+        {STARS.map((st, i) => (
+          <span
+            key={i}
+            className="pf-star"
+            style={{
+              left: `${st.left}%`,
+              top: `${st.top}%`,
+              width: st.size,
+              height: st.size,
+              animationDelay: `${st.delay}s`,
+            }}
+          />
+        ))}
+      </div>
+      <div className="pf-moon" aria-hidden="true" />
+
+      <div className="pf-inner">
+        <h3 className="pf-logo">EMMY RENER</h3>
+        <p className="pf-tag">Your Paris, made with love</p>
+        <Link to="/retreats" className="pf-cta">Join Bon Vivant Summer →</Link>
+
+        <ul className="pf-links">
+          {links.map(([to, label]) => (
+            <li key={to}><Link to={to}>{label}</Link></li>
+          ))}
+          <li>
+            <a href="https://instagram.com/emmyrener" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </li>
+          <li><a href="mailto:emmy@sophisticatedspreads.net">Email</a></li>
+        </ul>
+
+        <p className="pf-small">Digital Paris Guides by Emmy Rener</p>
+        <p className="pf-small">© 2025 Emmy Rener. Made with ♡ in Paris.</p>
+        <p className="pf-small pf-italic">All recommendations are genuine and personally vetted</p>
+        <button
+          type="button"
+          className="pf-top"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          ↑ Back to top
+        </button>
+      </div>
+
+      <svg
+        className="pf-skyline"
+        viewBox="0 0 1200 200"
+        preserveAspectRatio="xMidYMax slice"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {FAR.map((b, i) => <Roof key={`f${i}`} b={b} cls="far" />)}
+
+        {/* Sacré-Cœur */}
+        <g className="far" style={{ opacity: 1 }}>
+          <path d="M170 200 V150 Q200 120 230 150 V200 Z" />
+          <path d="M215 200 V110 Q265 40 315 110 V200 Z" />
+          <path d="M300 200 V150 Q330 120 360 150 V200 Z" />
+          <rect x="263" y="30" width="4" height="14" />
+        </g>
+        {/* Notre-Dame */}
+        <g className="far" style={{ opacity: 1 }}>
+          <rect x="450" y="95" width="34" height="105" />
+          <rect x="492" y="95" width="34" height="105" />
+          <rect x="484" y="120" width="8" height="80" />
+          <polygon points="505,50 510,95 500,95" />
+        </g>
+
+        {/* Eiffel Tower */}
+        <g className="tower">
+          <path d="M752 200 L778 200 Q820 140 862 200 L888 200 L846 118 L837 118 L832 72 L826 44 L820 4 L814 44 L808 72 L803 118 L794 118 Z" />
+          <rect x="790" y="116" width="60" height="7" />
+          <rect x="805" y="68" width="30" height="6" />
+          <path d="M809 150 L831 150 L828 160 L812 160 Z" opacity="0" />
+        </g>
+        {[[812, 80], [828, 100], [806, 130], [836, 134], [820, 30], [818, 60], [830, 56]].map(([gx, gy], i) => (
+          <circle key={i} className="pf-glint" cx={gx} cy={gy} r="2.2" style={{ animationDelay: `${i * 0.17}s` }} />
+        ))}
+
+        {NEAR.map((b, i) => <Roof key={`n${i}`} b={b} cls="near" />)}
+        {NEAR.filter((b) => b.windows).map((b, i) => (
+          <rect
+            key={`w${i}`}
+            className="pf-window"
+            x={b.x + b.w / 2 - 2}
+            y={b.top + b.roof + 8}
+            width="4"
+            height="6"
+            style={{ animationDelay: `${(i % 7) * 0.8}s` }}
+          />
+        ))}
+      </svg>
+    </footer>
+  );
+}
 
 export default Footer;
