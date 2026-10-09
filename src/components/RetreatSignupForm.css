@@ -417,7 +417,7 @@
 }
 
 /* ---------- Small screens ---------- */
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .pc-front {
     background-position: 8% center;
   }
@@ -429,10 +429,12 @@
     background: linear-gradient(rgba(240, 228, 205, 0.35), rgba(240, 228, 205, 0.55));
   }
 
-  .pc-greetings { font-size: 11cqw; }
-  .pc-photo-title { font-size: 14.5cqw; }
-  .pc-front-sub { font-size: 4.2cqw; }
+  .pc-greetings { font-size: min(11cqw, 3.4rem); }
+  .pc-photo-title { font-size: min(14.5cqw, 5.5rem); }
+  .pc-front-sub { font-size: max(min(4.2cqw, 1.3rem), 0.8rem); }
+}
 
+@media (max-width: 760px) {
   .pc-back-paper { padding: 1.5rem 1.25rem 2.8rem; }
   .pc-form { grid-template-columns: 1fr; gap: 1.5rem 0; }
   .pc-divider { height: 1px; width: 100%; background: repeating-linear-gradient(to right, rgba(139, 115, 85, 0.45) 0 6px, transparent 6px 12px); }
