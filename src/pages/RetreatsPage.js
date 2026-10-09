@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
 import RetreatSignupForm from '../components/RetreatSignupForm';
+import RetreatPageNav from '../components/RetreatPageNav';
 
 // TODO(Emmy): swap the collage placeholders below for her retreat photos. A mobile version of the hero would help.
 const HERO_IMAGE = '/videos/retreat-hero.jpg';
@@ -64,9 +65,11 @@ function RetreatsPage() {
           )}
         </section>
 
+        <RetreatPageNav />
+
         <div style={styles.container}>
           {/* Concept */}
-          <section style={styles.section}>
+          <section id="concept" className="retreat-section" style={styles.section}>
             <h2 style={styles.heading}>The concept</h2>
             <p style={styles.body}>
               The more time I spend exploring the South of France, the more I fall in love with it. Living in France
@@ -105,7 +108,7 @@ function RetreatsPage() {
           </div>
 
           {/* Week */}
-          <section style={styles.section}>
+          <section id="week" className="retreat-section" style={styles.section}>
             <h2 style={styles.heading}>What the week might look like</h2>
             <p style={styles.body}>
               Market mornings, cooking classes, antique finds, wellness, local collaborators, long lunches, free time,
@@ -115,7 +118,7 @@ function RetreatsPage() {
           </section>
 
           {/* Who */}
-          <section style={styles.section}>
+          <section id="who" className="retreat-section" style={styles.section}>
             <h2 style={styles.heading}>Who it's for</h2>
             <p style={styles.body}>
               An intimate group of 8 to 10 women ready for good food, new friends, and a week that feels like summer
@@ -124,7 +127,7 @@ function RetreatsPage() {
           </section>
 
           {/* Stay */}
-          <section style={styles.section}>
+          <section id="stay" className="retreat-section" style={styles.section}>
             <h2 style={styles.heading}>The stay</h2>
             <p style={styles.body}>
               We'll all stay under one roof in a beautiful private home just outside Aix-en-Provence, tucked away but
@@ -134,7 +137,7 @@ function RetreatsPage() {
           </section>
 
           {/* Hosts */}
-          <section style={styles.section}>
+          <section id="hosts" className="retreat-section" style={styles.section}>
             <h2 style={styles.heading}>Your hosts</h2>
             <p style={styles.body}>
               Sisters, co-hosts, and the people you'll want at your dinner table. Emmy brings her touches of the bon
@@ -146,7 +149,7 @@ function RetreatsPage() {
         </div>
 
         {/* Interest list */}
-        <section id="interest-list" style={styles.formSection}>
+        <section id="interest-list" className="retreat-section" style={styles.formSection}>
           <div style={styles.container}>
             <h2 style={{ ...styles.heading, textAlign: 'center' }}>Get the first details</h2>
             <p style={{ ...styles.body, textAlign: 'center', maxWidth: '620px', margin: '0 auto 3rem' }}>
