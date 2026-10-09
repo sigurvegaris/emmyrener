@@ -31,8 +31,11 @@ function RetreatsPage() {
         <section style={styles.hero}>
           <div style={styles.heroFrame}>
             <picture>
-              <source media="(max-width: 899px)" srcSet="/videos/retreat-hero-720.webp" type="image/webp" />
-              <source srcSet="/videos/retreat-hero.webp" type="image/webp" />
+              <source
+                srcSet="/videos/retreat-hero.webp 1440w, /videos/retreat-hero-2880.webp 2880w"
+                sizes="100vw"
+                type="image/webp"
+              />
               <img
                 src={HERO_IMAGE}
                 width="1440"
