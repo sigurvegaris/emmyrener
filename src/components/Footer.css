@@ -105,6 +105,9 @@
 .pf-top:hover { color: #fff !important; }
 
 /* skyline sits at the bottom, text rests above it */
+.pf {
+  --river-h: clamp(46px, 6.5vw, 84px);
+}
 .pf-skyline {
   position: relative;
   z-index: 1;
@@ -112,6 +115,7 @@
   width: 100%;
   height: clamp(110px, 18vw, 220px);
   margin-top: 1.5rem;
+  margin-bottom: -1px;
 }
 .pf-skyline .far { fill: #7b4d73; opacity: 0.75; }
 .pf-skyline .near { fill: #241c3b; }
@@ -135,4 +139,32 @@
 @media (max-width: 768px) {
   footer.pf { padding: 0 !important; }
   footer.pf .pf-links a { font-size: 0.85rem !important; }
+}
+
+.pf-river {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: var(--river-h);
+}
+.pf-ripples rect { animation: pf-twinkle 3.5s ease-in-out infinite; }
+.pf-boat { animation: pf-sail 48s linear infinite; transform: translate(-140px, 30px); }
+@keyframes pf-sail { from { transform: translate(-140px, 30px); } to { transform: translate(1300px, 30px); } }
+
+.pf-board {
+  position: absolute;
+  z-index: 3;
+  left: 4%;
+  bottom: calc(var(--river-h) - 6px);
+  width: clamp(110px, 15vw, 210px);
+  height: auto;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.35));
+}
+@media (max-width: 640px) {
+  .pf-board { left: 2%; width: 118px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-ripples rect { animation: none; }
+  .pf-boat { animation: none; transform: translate(480px, 30px); }
 }
