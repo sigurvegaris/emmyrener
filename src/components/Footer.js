@@ -2,45 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
-const TOWER_PATH =
-  'M752 200 L778 200 Q820 140 862 200 L888 200 L846 118 L837 118 L832 72 L826 44 L820 4 L814 44 L808 72 L803 118 L794 118 Z';
-
-// Deterministic pseudo-random numbers so the star field and rooftops are
-// identical on every render.
-function makeRand(seed) {
-  let s = seed;
-  return () => {
-    s = (s * 1103515245 + 12345) & 0x7fffffff;
-    return s / 0x7fffffff;
-  };
-}
-
-const starRand = makeRand(7);
-const STARS = Array.from({ length: 46 }, () => ({
-  left: starRand() * 100,
-  top: starRand() * 62,
-  size: 1.5 + starRand() * 2,
-  delay: starRand() * 4,
-}));
-
-// Row of Haussmann-style rooftops with mansard roofs and chimneys.
-function rooftops(seed, minH, maxH, skip) {
-  const rand = makeRand(seed);
-  const out = [];
-  let x = -10;
-  while (x < 1210) {
-    const w = 38 + rand() * 44;
-    const h = minH + rand() * (maxH - minH);
-    const top = 200 - h;
-    if (!skip(x, x + w)) {
-      out.push({ x, w, top, roof: 9 + rand() * 7, chimney: rand() > 0.6, windows: rand() > 0.5 });
-    }
-    x += w;
-  }
-  return out;
-}
-const FAR = rooftops(3, 55, 95, () => false);
-const NEAR = rooftops(11, 28, 62, () => false);
+const INK = '#3c3a36';
+const GROUND = 270;
 
 const links = [
   ['/', 'Home'],
@@ -51,14 +14,161 @@ const links = [
   ['/contact', 'Contact'],
 ];
 
-function Roof({ b, cls }) {
-  const { x, w, top, roof, chimney } = b;
-  const inset = 7;
+// Hand-drawn Haussmann street. Each building is described by a few numbers and drawn by <Building>.
+const BUILDINGS = [
+  { x: -10, w: 200, top: 96, roof: '#aeb4b8', wall: '#e4d7b8', cols: 4, dormer: 'tri', chimney: 62 },
+  { x: 190, w: 150, top: 118, roof: '#b4bac0', wall: '#aab5c6', cols: 3, dormer: 'arch', gable: true, awning: true },
+  { x: 340, w: 220, top: 84, roof: '#b4b7b8', wall: '#e0d4b4', cols: 4, dormer: 'tri', chimney: 120 },
+  { x: 560, w: 220, top: 58, roof: '#b9bcc2', wall: '#aab5c6', cols: 4, dormer: 'rect', balcony: true, chimney: 40 },
+  { x: 780, w: 230, top: 92, roof: '#8b8d92', wall: '#e4d7b8', cols: 4, dormer: 'round', balcony: true, chimney: 190 },
+  { x: 1010, w: 200, top: 102, roof: '#aeb4b8', wall: '#aab5c6', cols: 3, dormer: 'tri', chimney: 150 },
+];
+
+function Dormer({ cx, y, kind }) {
+  const stroke = { stroke: INK, strokeWidth: 1.4, fill: '#f2ecde' };
+  if (kind === 'round') {
+    return (
+      <g>
+        <path d={`M${cx - 11} ${y + 22} V${y + 8} A11 11 0 0 1 ${cx + 11} ${y + 8} V${y + 22} Z`} {...stroke} />
+        <circle cx={cx} cy={y + 12} r="4.5" fill="none" stroke={INK} strokeWidth="1.2" />
+      </g>
+    );
+  }
+  if (kind === 'arch') {
+    return (
+      <g>
+        <path d={`M${cx - 10} ${y + 24} V${y + 10} A10 10 0 0 1 ${cx + 10} ${y + 10} V${y + 24} Z`} {...stroke} />
+        <rect x={cx - 5} y={y + 11} width="10" height="12" fill="#5f7287" opacity="0.7" stroke={INK} strokeWidth="1" />
+      </g>
+    );
+  }
+  if (kind === 'rect') {
+    return <rect x={cx - 7} y={y + 4} width="14" height="20" {...stroke} />;
+  }
   return (
-    <g className={cls}>
-      <rect x={x} y={top + roof} width={w + 0.5} height={200 - top} />
-      <polygon points={`${x},${top + roof} ${x + inset},${top} ${x + w - inset},${top} ${x + w},${top + roof}`} />
-      {chimney && <rect x={x + w * 0.6} y={top - 9} width="5" height="12" />}
+    <g>
+      <path d={`M${cx - 13} ${y + 24} V${y + 12} L${cx} ${y} L${cx + 13} ${y + 12} V${y + 24} Z`} {...stroke} />
+      <rect x={cx - 5} y={y + 12} width="10" height="12" rx="5" fill="#d9ccb0" stroke={INK} strokeWidth="1" />
+    </g>
+  );
+}
+
+function Building({ b }) {
+  const { x, w, top, roof, wall, cols, dormer, chimney, balcony, gable, awning } = b;
+  const roofH = 46;
+  const wallTop = top + roofH;
+  const groundTop = GROUND - 44;
+  const rows = Math.max(1, Math.floor((groundTop - wallTop - 8) / 38));
+  const dark = wall === '#aab5c6';
+  const winFill = dark ? '#566b82' : '#d8cba9';
+  const cx = (i) => x + (w * (i + 0.5)) / cols;
+  return (
+    <g>
+      {chimney && (
+        <g>
+          <rect x={x + chimney} y={top - 18} width="20" height="22" fill="#d9c9a0" stroke={INK} strokeWidth="1.4" />
+          <rect x={x + chimney - 2} y={top - 22} width="24" height="6" fill="#e6d8b2" stroke={INK} strokeWidth="1.4" />
+        </g>
+      )}
+      <path
+        d={gable ? `M${x + 12} ${top + 4} L${x + w / 2} ${top - 14} L${x + w - 12} ${top + 4} L${x + w} ${top + roofH} L${x} ${top + roofH} Z` : `M${x + 8} ${top} H${x + w - 8} L${x + w} ${top + roofH} H${x} Z`}
+        fill={roof}
+        stroke={INK}
+        strokeWidth="1.8"
+      />
+      {Array.from({ length: cols - (gable ? 2 : 0) }, (_, i) => (
+        <Dormer key={i} cx={gable ? x + w / 2 : cx(i)} y={top + 8} kind={dormer} />
+      )).slice(0, gable ? 1 : cols)}
+      <rect x={x} y={wallTop} width={w} height={GROUND - wallTop} fill={wall} stroke={INK} strokeWidth="1.8" />
+      <rect x={x - 3} y={wallTop} width={w + 6} height="5" fill={dark ? '#c3cad6' : '#efe5c9'} stroke={INK} strokeWidth="1.4" />
+      {Array.from({ length: rows }, (_, r) => {
+        const y = wallTop + 14 + r * 38;
+        return (
+          <g key={r}>
+            {Array.from({ length: cols }, (_, i) => (
+              <g key={i}>
+                <rect x={cx(i) - 8.5} y={y} width="17" height="26" fill={winFill} stroke={INK} strokeWidth="1.4" />
+                <line x1={cx(i)} y1={y} x2={cx(i)} y2={y + 26} stroke={INK} strokeWidth="1" />
+                <line x1={cx(i) - 8.5} y1={y + 12} x2={cx(i) + 8.5} y2={y + 12} stroke={INK} strokeWidth="0.9" />
+                {(balcony || r === 0) && (
+                  <g stroke={INK} strokeWidth="1">
+                    <line x1={cx(i) - 11} y1={y + 26} x2={cx(i) + 11} y2={y + 26} strokeWidth="1.6" />
+                    {[-8, -4, 0, 4, 8].map((d) => (
+                      <line key={d} x1={cx(i) + d} y1={y + 19} x2={cx(i) + d} y2={y + 26} />
+                    ))}
+                  </g>
+                )}
+              </g>
+            ))}
+          </g>
+        );
+      })}
+      {/* ground floor: arches and doors */}
+      <line x1={x} y1={groundTop} x2={x + w} y2={groundTop} stroke={INK} strokeWidth="1.6" />
+      {Array.from({ length: cols }, (_, i) => (
+        <path
+          key={i}
+          d={`M${cx(i) - 13} ${GROUND} V${groundTop + 18} A13 13 0 0 1 ${cx(i) + 13} ${groundTop + 18} V${GROUND} Z`}
+          fill={i % 2 ? '#c9bd9b' : '#7c8c9c'}
+          opacity="0.9"
+          stroke={INK}
+          strokeWidth="1.4"
+        />
+      ))}
+      {awning && (
+        <g>
+          <path d={`M${x - 4} ${groundTop + 4} H${x + w + 4} L${x + w} ${groundTop + 16} H${x} Z`} fill="#f4efe2" stroke={INK} strokeWidth="1.4" />
+        </g>
+      )}
+    </g>
+  );
+}
+
+function Person({ x, coat, hat, flip, className, style }) {
+  return (
+    <g className={className} style={style} transform={flip ? `translate(${x} 0) scale(-1 1)` : `translate(${x} 0)`}>
+      <circle cx="0" cy="252" r="4.6" fill="#f0d9c0" stroke={INK} strokeWidth="1.2" />
+      {hat && <path d="M-6 250 H6 L4 245 H-4 Z" fill={INK} />}
+      <path d="M-6 258 L6 258 L8 280 L-8 280 Z" fill={coat} stroke={INK} strokeWidth="1.3" />
+      <line x1="-3" y1="280" x2="-5" y2="294" stroke={INK} strokeWidth="2" />
+      <line x1="3" y1="280" x2="6" y2="294" stroke={INK} strokeWidth="2" />
+    </g>
+  );
+}
+
+function Tree({ x }) {
+  return (
+    <g>
+      <ellipse cx={x} cy={GROUND - 30} rx="12" ry="38" fill="#6f7d4c" stroke={INK} strokeWidth="1.4" />
+      <path d={`M${x} ${GROUND - 60} V${GROUND - 5}`} stroke="#3f4a2b" strokeWidth="1.2" />
+      <path d={`M${x - 11} ${GROUND + 10} H${x + 11} L${x + 9} ${GROUND + 28} H${x - 9} Z`} fill="#8e9094" stroke={INK} strokeWidth="1.4" />
+    </g>
+  );
+}
+
+function Lamp({ x }) {
+  return (
+    <g stroke={INK} strokeWidth="1.6" fill="none">
+      <path d={`M${x} ${GROUND + 28} V${GROUND - 44} q0 -12 12 -12`} />
+      <path d={`M${x + 8} ${GROUND - 56} h9 l-2 11 h-5 Z`} fill={INK} />
+    </g>
+  );
+}
+
+function CafeTable({ x, board }) {
+  return (
+    <g>
+      <line x1={x} y1="283" x2={x} y2="297" stroke={INK} strokeWidth="1.6" />
+      <line x1={x - 8} y1="297" x2={x + 8} y2="297" stroke={INK} strokeWidth="1.6" />
+      <ellipse cx={x} cy="283" rx="15" ry="3.4" fill="#f4efe2" stroke={INK} strokeWidth="1.4" />
+      {board && (
+        <g>
+          <rect x={x - 8} y="278.5" width="16" height="5" rx="2.5" fill="#a8723e" stroke="#7b4f27" strokeWidth="0.8" />
+          <circle cx={x - 3} cy="280.8" r="1.3" fill="#b0432f" />
+          <circle cx={x + 1} cy="280.8" r="1.3" fill="#f6dc8a" />
+          <circle cx={x + 5} cy="280.8" r="1.3" fill="#5a2f6e" />
+        </g>
+      )}
     </g>
   );
 }
@@ -66,23 +176,6 @@ function Roof({ b, cls }) {
 function Footer() {
   return (
     <footer className="pf">
-      <div className="pf-stars" aria-hidden="true">
-        {STARS.map((st, i) => (
-          <span
-            key={i}
-            className="pf-star"
-            style={{
-              left: `${st.left}%`,
-              top: `${st.top}%`,
-              width: st.size,
-              height: st.size,
-              animationDelay: `${st.delay}s`,
-            }}
-          />
-        ))}
-      </div>
-      <div className="pf-moon" aria-hidden="true" />
-
       <div className="pf-inner">
         <h3 className="pf-logo">EMMY RENER</h3>
         <p className="pf-tag">Your Paris, made with love</p>
@@ -111,126 +204,50 @@ function Footer() {
       </div>
 
       <svg
-        className="pf-skyline"
-        viewBox="0 0 1200 200"
+        className="pf-street"
+        viewBox="0 0 1200 300"
         preserveAspectRatio="xMidYMax slice"
         aria-hidden="true"
         focusable="false"
       >
-        {FAR.map((b, i) => <Roof key={`f${i}`} b={b} cls="far" />)}
-
-        {/* Sacré-Cœur */}
-        <g className="far" style={{ opacity: 1 }}>
-          <path d="M170 200 V150 Q200 120 230 150 V200 Z" />
-          <path d="M215 200 V110 Q265 40 315 110 V200 Z" />
-          <path d="M300 200 V150 Q330 120 360 150 V200 Z" />
-          <rect x="263" y="30" width="4" height="14" />
-        </g>
-        {/* Notre-Dame */}
-        <g className="far" style={{ opacity: 1 }}>
-          <rect x="450" y="95" width="34" height="105" />
-          <rect x="492" y="95" width="34" height="105" />
-          <rect x="484" y="120" width="8" height="80" />
-          <polygon points="505,50 510,95 500,95" />
-        </g>
-
-        {/* Eiffel Tower */}
-        <g className="tower">
-          <path d={TOWER_PATH} />
-          <rect x="790" y="116" width="60" height="7" />
-          <rect x="805" y="68" width="30" height="6" />
-          <path d="M809 150 L831 150 L828 160 L812 160 Z" opacity="0" />
-        </g>
-        {[[812, 80], [828, 100], [806, 130], [836, 134], [820, 30], [818, 60], [830, 56]].map(([gx, gy], i) => (
-          <circle key={i} className="pf-glint" cx={gx} cy={gy} r="2.2" style={{ animationDelay: `${i * 0.17}s` }} />
-        ))}
-
-        {NEAR.map((b, i) => <Roof key={`n${i}`} b={b} cls="near" />)}
-        {NEAR.filter((b) => b.windows).map((b, i) => (
-          <rect
-            key={`w${i}`}
-            className="pf-window"
-            x={b.x + b.w / 2 - 2}
-            y={b.top + b.roof + 8}
-            width="4"
-            height="6"
-            style={{ animationDelay: `${(i % 7) * 0.8}s` }}
-          />
-        ))}
-      </svg>
-
-      {/* The Seine, with the tower's reflection and a passing boat */}
-      <svg
-        className="pf-river"
-        viewBox="0 0 1200 80"
-        preserveAspectRatio="xMidYMin slice"
-        aria-hidden="true"
-        focusable="false"
-      >
         <defs>
-          <linearGradient id="pf-water" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#6a4a7c" />
-            <stop offset="1" stopColor="#201936" />
-          </linearGradient>
+          {/* slight wobble so the lines look hand drawn */}
+          <filter id="pf-sketch" x="-2%" y="-2%" width="104%" height="104%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n" />
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" />
+          </filter>
         </defs>
-        <rect x="0" y="8" width="1200" height="72" fill="url(#pf-water)" />
-        <g opacity="0.32" transform="translate(0 8) scale(1 -0.3) translate(0 -200)">
-          <path d={TOWER_PATH} fill="#1b1530" />
-        </g>
-        <g className="pf-ripples">
-          {[[120, 24], [300, 40], [520, 30], [700, 52], [790, 22], [860, 36], [980, 28], [1100, 48], [420, 60], [640, 66]].map(([rx, ry], i) => (
-            <rect key={i} x={rx} y={ry} width={36 + (i % 3) * 18} height="1.6" rx="0.8" fill="#ffe3c2" opacity="0.45" style={{ animationDelay: `${i * 0.5}s` }} />
-          ))}
-        </g>
-        <g className="pf-boat">
-          <path d="M0 22 H96 L88 34 H10 Z" fill="#150f28" />
-          <path d="M14 22 V12 Q14 8 18 8 H78 Q82 8 82 12 V22 Z" fill="#2c2347" />
-          {[22, 34, 46, 58, 70].map((wx) => (
-            <rect key={wx} x={wx} y="12" width="7" height="6" rx="1" fill="#ffd98a" />
-          ))}
-          <rect x="0" y="35" width="96" height="1.6" fill="#ffe3c2" opacity="0.25" />
-        </g>
-        <rect x="0" y="0" width="1200" height="8" fill="#241c3b" />
-      </svg>
 
-      {/* Charcuterie board on the quay */}
-      <svg className="pf-board" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
-        <rect x="6" y="40" width="168" height="68" rx="14" fill="#a8723e" />
-        <rect x="6" y="40" width="168" height="68" rx="14" fill="none" stroke="#7b4f27" strokeWidth="2.5" />
-        <rect x="170" y="64" width="26" height="12" rx="6" fill="#a8723e" stroke="#7b4f27" strokeWidth="2.5" />
-        <circle cx="187" cy="70" r="2.5" fill="#241c3b" />
-        {/* brie wedge */}
-        <path d="M22 88 L66 66 L66 96 L22 100 Z" fill="#f6dc8a" />
-        <path d="M22 88 L66 66 L70 70 L26 92 Z" fill="#fff0b8" />
-        <circle cx="44" cy="87" r="2.2" fill="#e2bd5c" /><circle cx="54" cy="84" r="1.8" fill="#e2bd5c" />
-        {/* salami fan */}
-        {[[84, 62], [96, 70], [108, 62], [120, 70]].map(([cx, cy], i) => (
-          <g key={i}>
-            <circle cx={cx} cy={cy} r="11" fill="#b0432f" stroke="#7a2a1f" strokeWidth="1.5" />
-            <circle cx={cx - 3} cy={cy - 2} r="1.6" fill="#f3c9b6" /><circle cx={cx + 3} cy={cy + 3} r="1.6" fill="#f3c9b6" />
+        <g className="pf-birds" fill="none" stroke={INK} strokeWidth="1.8" strokeLinecap="round">
+          <path d="M880 40 q8 -9 14 -2 q6 -7 14 2" />
+          <path d="M930 70 q7 -8 12 -2 q5 -6 12 2" />
+          <path d="M840 62 q6 -7 11 -2 q5 -5 11 2" />
+        </g>
+
+        <g filter="url(#pf-sketch)">
+          {BUILDINGS.map((b) => <Building key={b.x} b={b} />)}
+
+          <rect x="-10" y={GROUND} width="1230" height="40" fill="#ebe4d4" />
+          <line x1="-10" y1={GROUND} x2="1210" y2={GROUND} stroke={INK} strokeWidth="1.8" />
+          <g stroke={INK} strokeWidth="1.3" opacity="0.7">
+            {Array.from({ length: 24 }, (_, i) => (
+              <line key={i} x1={20 + i * 52} y1="298" x2={32 + i * 52} y2="291" />
+            ))}
           </g>
-        ))}
-        {/* baguette slices */}
-        {[[82, 90], [102, 92], [122, 90]].map(([cx, cy], i) => (
-          <g key={i}>
-            <ellipse cx={cx} cy={cy} rx="10" ry="7" fill="#d9a35f" stroke="#a9763a" strokeWidth="1.5" />
-            <ellipse cx={cx} cy={cy} rx="6" ry="4" fill="#f3d9a6" />
-          </g>
-        ))}
-        {/* grapes */}
-        {[[148, 62], [158, 62], [168, 62], [153, 71], [163, 71], [158, 80]].map(([cx, cy], i) => (
-          <circle key={i} cx={cx} cy={cy} r="5.2" fill="#5a2f6e" stroke="#3a1c4a" strokeWidth="1" />
-        ))}
-        <path d="M158 56 q2 -8 8 -9" stroke="#4f5d3a" strokeWidth="2" fill="none" />
-        {/* fig + cornichons */}
-        <ellipse cx="146" cy="96" rx="8" ry="6.5" fill="#6c2d52" />
-        <ellipse cx="146" cy="96" rx="3.5" ry="2.6" fill="#e8708f" />
-        <rect x="130" y="52" width="14" height="5" rx="2.5" fill="#6f8a3b" /><rect x="132" y="59" width="14" height="5" rx="2.5" fill="#7c9944" />
-        {/* glass of rosé */}
-        <path d="M184 20 H198 L196 38 Q191 44 186 38 Z" fill="#f4a7b3" opacity="0.95" />
-        <path d="M184 20 H198 L197.4 26 H184.6 Z" fill="#fff" opacity="0.4" />
-        <rect x="190" y="40" width="2" height="10" fill="#ffe9cf" opacity="0.9" />
-        <rect x="185" y="49" width="12" height="2.5" rx="1.2" fill="#ffe9cf" opacity="0.9" />
+
+          {[108, 358, 563, 752, 1012].map((tx) => <Tree key={tx} x={tx} />)}
+          {[138, 388, 590, 790, 1040].map((lx) => <Lamp key={lx} x={lx} />)}
+
+          <CafeTable x={50} />
+          <CafeTable x={228} board />
+          <Person x={42} coat="#7c6a58" hat />
+          <Person x={218} coat="#5b6b7b" />
+          <Person x={242} coat="#9a4f3f" flip />
+
+          <Person x={430} coat="#8a5a3b" hat className="pf-walk pf-walk-a" />
+          <Person x={870} coat="#6c7a86" className="pf-walk pf-walk-b" />
+          <Person x={950} coat="#a3453d" flip className="pf-walk pf-walk-c" />
+        </g>
       </svg>
     </footer>
   );
