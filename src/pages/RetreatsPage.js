@@ -65,7 +65,7 @@ function RetreatsPage() {
 
         {/* Concept */}
         <section id="concept" className="retreat-section rt-split">
-          <img className="rt-photo" src="/videos/retreat-concept.webp" width="1000" height="667" loading="lazy" alt="Friends clinking glasses of rosé" />
+          <img className="rt-photo rt-tall" src="/videos/retreat-concept-board.webp" width="1000" height="1333" loading="lazy" alt="Charcuterie boards with cheese, cured meats, olives and baguette on a picnic table" />
           <div className="rt-text">
             <p className="rt-eyebrow">The concept</p>
             <h2 className="rt-h2">A seat at the table in Provence</h2>
