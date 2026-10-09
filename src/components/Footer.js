@@ -65,6 +65,14 @@ function Footer() {
               Guides
             </Link>
             <Link 
+              to="/retreats" 
+              style={styles.link}
+              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
+            >
+              Retreats
+            </Link>
+            <Link 
               to="/recommendations" 
               style={styles.link}
               onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
