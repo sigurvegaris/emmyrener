@@ -7,10 +7,16 @@ import './RetreatsPage.css';
 
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
 const WEEK = [
-  { src: '/videos/retreat-market.webp', label: 'Au marché', alt: 'A cheese stall at a French market' },
-  { src: '/videos/retreat-table.webp', label: 'À table', alt: 'A charcuterie and cheese board on a picnic table' },
-  { src: '/videos/retreat-lavender.webp', label: 'Sur la route', alt: 'Rows of lavender in a Provence field' },
-  { src: '/videos/retreat-orange.webp', label: 'Au soleil', alt: 'Oranges ripening on a tree in the sun' },
+  { src: '/videos/retreat-wk-market.webp', label: 'Au marché', alt: 'Baskets of strawberries on a French market stall' },
+  { src: '/videos/retreat-wk-table.webp', label: 'À table', alt: 'A long garden table set for lunch with flowers, tarts and string lights' },
+  { src: '/videos/retreat-wk-village.webp', label: 'Sur la route', alt: 'A café terrace on a stone street in a Provence village' },
+  { src: '/videos/retreat-wk-orange.webp', label: 'Au soleil', alt: 'Oranges ripening on a tree in the sun' },
+];
+
+const MOMENTS = [
+  { src: '/videos/retreat-mo-lavender.webp', label: 'Lavande', alt: 'Bundles of dried lavender and wheat at a market' },
+  { src: '/videos/retreat-mo-toast.webp', label: 'Santé', alt: 'Friends clinking wine glasses at a terrace table' },
+  { src: '/videos/retreat-mo-street.webp', label: 'Flâner', alt: 'A woman in a white dress walking down a golden stone street' },
 ];
 
 function RetreatsPage() {
@@ -137,6 +143,19 @@ function RetreatsPage() {
               creating experiences for luxury and hospitality brands, so every detail is handled and all you have to
               do is say yes to another glass.
             </p>
+          </div>
+        </section>
+
+        {/* A few extra moments */}
+        <section className="rt-moments">
+          <p className="rt-eyebrow rt-center">A few moments</p>
+          <div className="rt-week rt-moments-grid">
+            {MOMENTS.map((m) => (
+              <figure key={m.src} className="rt-fig">
+                <img src={m.src} loading="lazy" alt={m.alt} width="900" height="1200" />
+                <figcaption>{m.label}</figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
