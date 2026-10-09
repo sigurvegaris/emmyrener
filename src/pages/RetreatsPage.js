@@ -30,11 +30,19 @@ function RetreatsPage() {
         {/* Hero: Emmy's finished design (title, dates and button are part of the image) */}
         <section style={styles.hero}>
           <div style={styles.heroFrame}>
-            <img
-              src={HERO_IMAGE}
-              alt="Bon Vivant Summer. Provence, [Month] 2027, 5 nights / 6 days. A lively, food-filled week in the South of France for women who want to explore, eat well, meet new people, and soak up the Provençal way of life."
-              style={styles.heroImg}
-            />
+            <picture>
+              <source media="(max-width: 899px)" srcSet="/videos/retreat-hero-720.webp" type="image/webp" />
+              <source srcSet="/videos/retreat-hero.webp" type="image/webp" />
+              <img
+                src={HERO_IMAGE}
+                width="1440"
+                height="720"
+                fetchPriority="high"
+                decoding="async"
+                alt="Bon Vivant Summer. Provence, [Month] 2027, 5 nights / 6 days. A lively, food-filled week in the South of France for women who want to explore, eat well, meet new people, and soak up the Provençal way of life."
+                style={styles.heroImg}
+              />
+            </picture>
             <h1 style={styles.srOnly}>Bon Vivant Summer</h1>
             {/* Clickable area over the button drawn in the image (desktop and tablet) */}
             {!isMobile && (
