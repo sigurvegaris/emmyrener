@@ -7,16 +7,10 @@ import './RetreatsPage.css';
 
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
 const WEEK = [
-  { src: '/videos/retreat-wk-market.webp', label: 'Au marché', alt: 'Baskets of strawberries on a French market stall' },
+  { src: '/videos/retreat-market.webp', label: 'Au marché', alt: 'A cheese stall at a French market' },
   { src: '/videos/retreat-wk-table.webp', label: 'À table', alt: 'A long garden table set for lunch with flowers, tarts and string lights' },
-  { src: '/videos/retreat-wk-village.webp', label: 'Sur la route', alt: 'A café terrace on a stone street in a Provence village' },
+  { src: '/videos/retreat-lavender.webp', label: 'Sur la route', alt: 'Rows of lavender in a Provence field' },
   { src: '/videos/retreat-wk-orange.webp', label: 'Au soleil', alt: 'Oranges ripening on a tree in the sun' },
-];
-
-const MOMENTS = [
-  { src: '/videos/retreat-mo-lavender.webp', label: 'Lavande', alt: 'Bundles of dried lavender and wheat at a market' },
-  { src: '/videos/retreat-mo-toast.webp', label: 'Santé', alt: 'Friends clinking wine glasses at a terrace table' },
-  { src: '/videos/retreat-mo-street.webp', label: 'Flâner', alt: 'A woman in a white dress walking down a golden stone street' },
 ];
 
 function RetreatsPage() {
@@ -29,36 +23,37 @@ function RetreatsPage() {
   return (
     <PageTransition>
       <div className="rt">
-        {/* Opening: Emmy's finished banner design (title, dates and button are part of the image) */}
+        {/* Opening: Emmy's photo collage with the title card set in its empty center */}
         <header className="rt-banner">
           <div className="rt-banner-frame">
             <picture>
-              <source
-                srcSet="/videos/retreat-banner.webp 1440w, /videos/retreat-banner-2880.webp 2880w"
-                sizes="100vw"
-                type="image/webp"
-              />
+              <source srcSet="/videos/retreat-collage.webp" type="image/webp" />
               <img
-                src="/videos/retreat-banner.jpg"
+                src="/videos/retreat-collage.jpg"
                 width="1440"
                 height="720"
                 fetchPriority="high"
                 decoding="async"
-                alt="Bon Vivant Summer. Provence, [Month] 2027, 5 nights / 6 days. A lively, food-filled week in the South of France for women who want to explore, eat well, meet new people, and soak up the Provençal way of life."
+                alt="A collage of Provence: lavender bundles, a market stall of strawberries, cafés on a stone street, a charcuterie board, pink spritzes, a long dinner table in the vines, and Emmy and Hannah in a blue doorway covered in red roses"
               />
             </picture>
-            <h1 className="rt-sr">Bon Vivant Summer</h1>
-            {/* Clickable area over the button drawn in the image (desktop and tablet) */}
-            <a
-              href="#interest-list"
-              onClick={scrollToForm}
-              className="rt-banner-hit"
-              aria-label="Get on the interest list"
-            />
+            <div className="rt-banner-copy">
+              <p className="rt-welcome">Welcome to a</p>
+              <h1 className="rt-title">Bon Vivant Summer</h1>
+              <p className="rt-def">
+                <em>bon vivant</em> /bɔ̃ viˈvɑ̃/ noun: a person who loves luxury, fine food, good wine, and an active
+                social life
+              </p>
+              <p className="rt-meta">Provence · [Month] 2027 · 5 nights / 6 days</p>
+              <p className="rt-lede">
+                A lively, food-filled week in the South of France for women who want to explore, eat well, meet new
+                people, and soak up the Provençal way of life.
+              </p>
+              <a href="#interest-list" onClick={scrollToForm} className="rt-btn">
+                Get on the interest list
+              </a>
+            </div>
           </div>
-          <a href="#interest-list" onClick={scrollToForm} className="rt-btn rt-banner-mobile">
-            Get on the interest list
-          </a>
         </header>
 
         <RetreatPageNav />
@@ -143,19 +138,6 @@ function RetreatsPage() {
               creating experiences for luxury and hospitality brands, so every detail is handled and all you have to
               do is say yes to another glass.
             </p>
-          </div>
-        </section>
-
-        {/* A few extra moments */}
-        <section className="rt-moments">
-          <p className="rt-eyebrow rt-center">A few moments</p>
-          <div className="rt-week rt-moments-grid">
-            {MOMENTS.map((m) => (
-              <figure key={m.src} className="rt-fig">
-                <img src={m.src} loading="lazy" alt={m.alt} width="900" height="1200" />
-                <figcaption>{m.label}</figcaption>
-              </figure>
-            ))}
           </div>
         </section>
 

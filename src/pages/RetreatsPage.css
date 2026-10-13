@@ -9,7 +9,46 @@
   background: var(--rt-cream);
   color: var(--rt-ink);
 }
-.rt-btn, .rt-text p, .rt-intro, .rt-eyebrow, .rt-who p, .rt-join-p, .rt-fine, .rt-btn { font-family: 'Lato', sans-serif !important; }
+.rt-banner-copy p, .rt-btn, .rt-text p, .rt-intro, .rt-eyebrow, .rt-who p, .rt-join-p, .rt-fine, .rt-btn { font-family: 'Lato', sans-serif !important; }
+.rt-banner-copy h1, .rt-welcome, .rt-text h2, .rt-join h2, .rt-quote, .rt-big, .rt-fig figcaption {
+  font-family: 'Fraunces', Georgia, serif !important;
+}
+.rt img:hover { transform: none; }
+
+/* ---------- Opening ---------- */
+.rt-banner { margin-top: 72px; /* clears the fixed nav */ background: #f3ece1; }
+.rt-banner-frame { position: relative; max-width: 1600px; margin: 0 auto; container-type: inline-size; }
+.rt-banner-frame img { display: block; width: 100%; height: auto; }
+.rt-banner-copy { padding: 2.2rem 1.5rem 2.6rem; text-align: center; background: #f3ece1; }
+.rt-welcome { margin: 0; font-style: italic; font-size: 1.15rem; }
+.rt-title { margin: 0.3rem 0 0.7rem; font-weight: 500; font-size: clamp(2.6rem, 11vw, 3.6rem); line-height: 1.05; color: var(--rt-olive); }
+.rt-def { margin: 0 auto 0.8rem; max-width: 420px; font-size: 0.78rem; line-height: 1.5; opacity: 0.7; }
+.rt-meta { margin: 0 0 1rem; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; }
+.rt-lede { margin: 0 auto 1.6rem; max-width: 460px; font-size: 0.98rem; line-height: 1.7; }
+/* wide screens: the text sits in the empty cream area of the 1440x720 collage */
+@media (min-width: 1000px) {
+  .rt-banner-copy {
+    position: absolute;
+    left: 27%;
+    top: 23.4%;
+    width: 41.5%;
+    height: 52.8%;
+    box-sizing: border-box;
+    padding: 0;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .rt-welcome { font-size: max(1rem, 1.5cqw); }
+  .rt-title { font-size: 4.3cqw; white-space: nowrap; margin: 0.3cqw 0 0.8cqw; }
+  .rt-def { font-size: max(0.66rem, 0.8cqw); max-width: 90%; margin-bottom: 1cqw; }
+  .rt-meta { font-size: max(0.62rem, 0.82cqw); margin-bottom: 1.1cqw; }
+  .rt-lede { font-size: max(0.78rem, 1.12cqw); max-width: 88%; margin-bottom: 1.8cqw; }
+  .rt-banner-copy .rt-btn { font-size: max(0.62rem, 0.82cqw); padding: 1.1cqw 2.2cqw; }
+}
+.rt-btn { font-family: 'Lato', sans-serif !important; }
 .rt-text h2, .rt-join h2, .rt-quote, .rt-big, .rt-fig figcaption {
   font-family: 'Fraunces', Georgia, serif !important;
 }
@@ -66,9 +105,6 @@
 .rt-fig img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
 .rt-fig figcaption { margin-top: 0.6rem; font-style: italic; font-size: 1rem; }
 
-.rt-moments { padding: 4.5rem 1.5rem 4rem; }
-.rt-moments-grid { grid-template-columns: repeat(3, 1fr); max-width: 900px; }
-
 /* ---------- Who ---------- */
 .rt-who { padding: 4.5rem 1.5rem; text-align: center; }
 .rt-big { max-width: 640px; margin: 0 auto; font-size: clamp(1.4rem, 2.6vw, 1.9rem) !important; line-height: 1.4; font-weight: 400; }
@@ -86,7 +122,6 @@
   .rt-flip .rt-text { order: 2; }
   .rt-tall { aspect-ratio: 4 / 5; }
   .rt-week { grid-template-columns: repeat(2, 1fr); }
-  .rt-moments-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* index.css pads every <section> on phones with !important; the postcard needs the full width */
@@ -94,8 +129,4 @@
   .rt section.rt-join { padding-left: 0 !important; padding-right: 0 !important; }
 }
 
-/* phones and small tablets: the button inside the image is too small to tap, so show a real one */
-@media (max-width: 899px) {
-  .rt-banner-hit { display: none; }
-  .rt-banner .rt-banner-mobile { display: block; }
-}
+.rt-banner-copy p.rt-welcome { font-family: 'Fraunces', Georgia, serif !important; }
