@@ -27,14 +27,18 @@ function RetreatsPage() {
         <header className="rt-banner">
           <div className="rt-banner-frame">
             <picture>
-              <source srcSet="/videos/retreat-collage.webp" type="image/webp" />
+              <source
+                type="image/webp"
+                srcSet="/videos/retreat-collage-960.webp 960w, /videos/retreat-collage-1440.webp 1440w, /videos/retreat-collage-1920.webp 1920w, /videos/retreat-collage-2880.webp 2880w"
+                sizes="(min-width: 1600px) 1600px, 100vw"
+              />
               <img
                 src="/videos/retreat-collage.jpg"
                 width="1440"
                 height="720"
                 fetchPriority="high"
                 decoding="async"
-                alt="A collage of Provence: lavender bundles, a market stall of strawberries, cafés on a stone street, a charcuterie board, pink spritzes, a long dinner table in the vines, and Emmy and Hannah in a blue doorway covered in red roses"
+                alt="A collage of Provence: Emmy and Hannah in a blue doorway covered in red roses, lavender bundles, a selfie with horses, croissants, a café street, a charcuterie board with wine, a long table set in the vines, strawberries at the market, and pink spritzes"
               />
             </picture>
             <div className="rt-banner-copy">
