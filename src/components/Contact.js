@@ -71,20 +71,6 @@ function Contact() {
           </a>
         </div>
 
-     
-        {/* Footer */}
-        <div style={styles.footer}>
-          <p style={styles.footerText}>
-            © 2025 Emmy Rener. Made with ♡ in Paris.
-          </p>
-          <div style={styles.footerLinks}>
-            <a href="#hero" style={styles.footerLink}>Back to Top</a>
-            <span style={styles.footerDivider}>•</span>
-            <a href="#guides" style={styles.footerLink}>Guides</a>
-            <span style={styles.footerDivider}>•</span>
-            <a href="#recommendations" style={styles.footerLink}>Recommendations</a>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -228,36 +214,6 @@ const styles = {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     fontFamily: 'Cormorant Garamond, serif',
-  },
-  footer: {
-    textAlign: 'center',
-    paddingTop: '3rem',
-    borderTop: '1px solid rgba(139, 115, 85, 0.2)',
-  },
-  footerText: {
-    color: '#111111',
-    fontSize: '0.9375rem',
-    fontWeight: 400,
-    marginBottom: '1rem',
-    opacity: 0.8,
-  },
-  footerLinks: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '1rem',
-    flexWrap: 'wrap',
-  },
-  footerLink: {
-    color: '#8B7355',
-    fontSize: '0.875rem',
-    fontWeight: 400,
-    textDecoration: 'none',
-    transition: 'opacity 0.3s ease',
-  },
-  footerDivider: {
-    color: '#8B7355',
-    opacity: 0.5,
   },
 };
 
