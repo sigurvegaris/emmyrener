@@ -8,7 +8,7 @@ import './RetreatsPage.css';
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
 const WEEK = [
   { src: '/videos/retreat-market.webp', label: 'Au marché', alt: 'A cheese stall at a French market' },
-  { src: '/videos/retreat-wk-table.webp', label: 'À table', alt: 'A long garden table set for lunch with flowers, tarts and string lights' },
+  { src: '/videos/retreat-wk-lunch.webp', label: 'À table', alt: 'A table laid for lunch on the grass outside a stone cottage' },
   { src: '/videos/retreat-lavender.webp', label: 'Sur la route', alt: 'Rows of lavender in a Provence field' },
   { src: '/videos/retreat-wk-orange.webp', label: 'Au soleil', alt: 'Oranges ripening on a tree in the sun' },
 ];
@@ -62,18 +62,10 @@ function RetreatsPage() {
 
         <RetreatPageNav />
 
-        <blockquote className="rt-quote">
-          The South of France is more than rosé all day.
-          <br />
-          But we will, in fact, have a lot of rosé.
-        </blockquote>
-
-        {/* Concept */}
-        <section id="concept" className="retreat-section rt-split">
-          <img className="rt-photo rt-tall" src="/videos/retreat-concept-board.webp" width="1000" height="1333" loading="lazy" alt="Charcuterie boards with cheese, cured meats, olives and baguette on a picnic table" />
-          <div className="rt-text">
-            <p className="rt-eyebrow">The concept</p>
-            <h2 className="rt-h2">A seat at the table in Provence</h2>
+        {/* Concept: a centered statement, then two tall photos side by side */}
+        <section id="concept" className="retreat-section rt-sec">
+          <h2 className="rt-cap">A seat at the table in Provence</h2>
+          <div className="rt-prose">
             <p>
               The more time I spend exploring the South of France, the more I fall in love with it. Living in France
               has given me a seat at tables I never imagined my American self would be welcomed to: sharing wine,
@@ -88,12 +80,29 @@ function RetreatsPage() {
               than a great trip. You leave knowing the people and places that make Provence what it is.
             </p>
           </div>
+          <div className="rt-pair">
+            <img src="/videos/retreat-pair-garden.webp" width="1000" height="1333" loading="lazy" alt="A garden lunch table under string lights with flowers, tarts and wine" />
+            <img src="/videos/retreat-pair-blossom.webp" width="1000" height="1333" loading="lazy" alt="A table set for dinner on the lawn under a blossoming tree" />
+          </div>
+        </section>
+
+        {/* Full-width photo with the rosé line over it */}
+        <section className="rt-banner2" aria-label="A toast">
+          <picture>
+            <source media="(min-width: 900px)" srcSet="/videos/retreat-toast-1800.webp" />
+            <img src="/videos/retreat-toast-1000.webp" width="1800" height="900" loading="lazy" alt="Friends raising glasses of wine over dinner" />
+          </picture>
+          <p className="rt-banner2-text">
+            The South of France is more than rosé all day.
+            <br />
+            But we will, in fact, have a lot of rosé.
+          </p>
         </section>
 
         {/* Week */}
-        <section id="week" className="retreat-section rt-band">
-          <p className="rt-eyebrow rt-center">What the week might look like</p>
-          <p className="rt-intro">
+        <section id="week" className="retreat-section rt-sec">
+          <h2 className="rt-cap">What the week might look like</h2>
+          <p className="rt-prose rt-prose-one">
             Market mornings, cooking classes, antique finds, wellness, local collaborators, long lunches, free time,
             and a few surprises along the way. The exact itinerary is still taking shape, but the spirit is already
             here: curious, social, and very Provençal.
@@ -110,44 +119,40 @@ function RetreatsPage() {
 
         {/* Who */}
         <section id="who" className="retreat-section rt-who">
-          <p className="rt-eyebrow rt-center">Who it's for</p>
+          <h2 className="rt-cap">Who it's for</h2>
           <p className="rt-big">
             An intimate group of 8 to 10 women ready for good food, new friends, and a week that feels like summer
             camp for grown-ups. Come with a friend or come solo.
           </p>
         </section>
 
-        {/* Stay */}
-        <section id="stay" className="retreat-section rt-split rt-flip">
-          <div className="rt-text">
-            <p className="rt-eyebrow">The stay</p>
-            <h2 className="rt-h2">A villa outside Aix-en-Provence</h2>
+        {/* Stay and hosts as two cards */}
+        <section className="retreat-section rt-sec rt-cards">
+          <article id="stay" className="rt-card">
+            <img src="/videos/retreat-villa.webp" width="900" height="1200" loading="lazy" alt="A stone villa with shutters and climbing white roses" style={{ objectPosition: '50% 60%' }} />
+            <h3>The stay</h3>
+            <p className="rt-card-sub">A villa outside Aix-en-Provence</p>
             <p>
               We'll all stay under one roof in a private villa just outside Aix-en-Provence, tucked away but close
               enough to wander into town. We'll share the exact house once it's confirmed.
             </p>
-          </div>
-          <img className="rt-photo rt-tall" src="/videos/retreat-villa.webp" width="900" height="1200" loading="lazy" alt="A stone villa with shutters and climbing white roses" />
-        </section>
-
-        {/* Hosts */}
-        <section id="hosts" className="retreat-section rt-band rt-split">
-          <img className="rt-photo rt-tall" src="/videos/retreat-hosts.webp" width="900" height="1200" loading="lazy" alt="Emmy and Hannah in a blue doorway covered in red roses" />
-          <div className="rt-text">
-            <p className="rt-eyebrow">Your hosts</p>
-            <h2 className="rt-h2">Emmy &amp; Hannah Rener</h2>
+          </article>
+          <article id="hosts" className="rt-card">
+            <img src="/videos/retreat-hosts.webp" width="900" height="1200" loading="lazy" alt="Emmy and Hannah in a blue doorway covered in red roses" style={{ objectPosition: '50% 62%' }} />
+            <h3>Your hosts</h3>
+            <p className="rt-card-sub">Emmy &amp; Hannah Rener</p>
             <p>
               Sisters, co-hosts, and the people you'll want at your dinner table. Emmy brings the Provence she's come
               to know since moving to France: the producers, the markets, and the long lunches. Hannah brings years of
               creating experiences for luxury and hospitality brands, so every detail is handled and all you have to
               do is say yes to another glass.
             </p>
-          </div>
+          </article>
         </section>
 
         {/* Interest list */}
         <section id="interest-list" className="retreat-section rt-join">
-          <h2 className="rt-h2 rt-join-h">Get the first details</h2>
+          <h2 className="rt-cap rt-join-h">Get the first details</h2>
           <p className="rt-join-p">
             We're planning for [Month] 2027 and the details are coming together. Join the list to be the first to hear
             about dates, location, and booking.
