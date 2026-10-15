@@ -1,108 +1,102 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap');
 
-/* Site footer (every page): Emmy's blue toile behind a classic column layout */
+/* Site footer (every page): a light toile band with Emmy's name, then navy link columns */
 .pf {
   --pf-ink: #3e4a6a;
-  --pf-rose: #a77467;
+  --pf-navy: #2c3550;
+  --pf-rose: #d9a99c;
+  padding: 0;
+}
+
+.pf-top {
+  padding: 4rem 1.5rem 3.6rem;
+  text-align: center;
   background-color: #f6f6f3;
   background-repeat: repeat;
   background-position: center top;
   background-size: auto, 1226px auto;
   border-top: 1px solid rgba(62, 74, 106, 0.2);
-  color: var(--pf-ink);
 }
-.pf-main {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 3rem;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 4.5rem 2rem 4rem;
-}
-.pf-logo {
-  display: inline-block;
+.pf-icons { display: flex; justify-content: center; gap: 1.1rem; margin-bottom: 1.8rem; }
+.pf-icons a { display: inline-flex; color: var(--pf-ink) !important; transition: color 0.2s ease, transform 0.2s ease; }
+.pf-icons a:hover { color: #a77467 !important; transform: translateY(-2px); }
+.pf-icons svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.pf-icons .pf-dot { fill: currentColor; stroke: none; }
+.pf-name {
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-weight: 500;
-  font-size: 1.6rem;
-  letter-spacing: 0.32em;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  text-transform: uppercase;
   color: var(--pf-ink) !important;
   text-decoration: none;
 }
 .pf-tag {
-  margin: 0.3rem 0 1rem;
+  margin: 0.5rem 0 0.3rem;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-style: italic;
-  font-size: 1.4rem;
-  color: var(--pf-rose);
+  font-size: 1.45rem;
+  color: #a77467;
 }
-.pf-about {
-  max-width: 340px;
-  margin: 0 0 1.6rem;
-  font-family: 'Jost', sans-serif !important;
-  font-weight: 300;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: #4e5670;
-}
-.pf-cta {
-  display: inline-block;
-  padding: 0.8rem 1.7rem;
-  background: var(--pf-rose);
-  color: #fff !important;
-  text-decoration: none;
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: 0.98rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  transition: background 0.2s ease;
-}
-.pf-cta:hover { background: #8c5c50; }
-
-.pf-col h4 {
-  margin: 0.4rem 0 1.2rem;
-  font-family: 'Jost', sans-serif !important;
-  font-weight: 400;
-  font-size: 0.78rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--pf-rose);
-}
-.pf-col ul { list-style: none; margin: 0; padding: 0; }
-.pf-col li { margin: 0 0 0.7rem; }
-.pf-col a {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: 1.2rem;
-  color: var(--pf-ink) !important;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.pf-col a:hover { color: var(--pf-rose) !important; border-bottom-color: var(--pf-rose); }
-
-.pf-bottom {
-  background: var(--pf-ink);
-  padding: 1rem 2rem;
-  text-align: center;
-}
-.pf-bottom p {
+.pf-place {
   margin: 0;
   font-family: 'Jost', sans-serif !important;
   font-weight: 300;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--pf-ink);
+}
+
+.pf-bottom { background: var(--pf-navy); padding: 4rem 1.5rem 3rem; }
+.pf-cols {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.pf-col h4 {
+  margin: 0 0 1.5rem;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 500;
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.pf-col ul { list-style: none; margin: 0; padding: 0; }
+.pf-col li { margin: 0 0 0.9rem; }
+.pf-col a {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--pf-rose) !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.pf-col a:hover { color: #fff !important; }
+.pf-copy {
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 /* index.css pads and re-flows every <footer> on phones with !important */
 @media (max-width: 768px) {
-  footer.pf { padding: 0 !important; background-size: auto, 900px auto; }
-  footer.pf > div.pf-main {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.4rem 1.5rem !important;
-    padding: 3.2rem 1.5rem 2.8rem;
-    text-align: left !important;
-  }
-  .pf-brand { grid-column: 1 / -1; }
-  footer.pf .pf-col a { font-size: 1.1rem !important; }
-  footer.pf .pf-cta { font-size: 0.9rem !important; }
+  footer.pf { padding: 0 !important; }
+  footer.pf > div { gap: 0 !important; }
+  .pf-top { padding: 3.2rem 1.5rem 3rem; background-size: auto, 900px auto; }
+  .pf-bottom { padding: 3rem 1.75rem 2.4rem; }
+  .pf-cols { grid-template-columns: 1fr 1fr; gap: 2.4rem 1.5rem; text-align: left; }
+  .pf-col h4 { margin-bottom: 1rem; font-size: 1.15rem; }
+  footer.pf .pf-col a { font-size: 0.95rem !important; }
+  footer.pf a.pf-name { font-size: 1.6rem !important; }
+  .pf-copy { text-align: center; }
 }
