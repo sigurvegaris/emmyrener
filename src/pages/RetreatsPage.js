@@ -86,8 +86,8 @@ function RetreatsPage() {
         {/* Full-width photo with the rosé line over it */}
         <section className="rt-banner2" aria-label="A toast">
           <picture>
-            <source media="(min-width: 900px)" srcSet="/videos/retreat-toast-1800.webp" />
-            <img src="/videos/retreat-toast-1000.webp" width="1800" height="900" loading="lazy" alt="Friends raising glasses of wine over dinner" />
+            <source media="(min-width: 700px)" srcSet="/videos/retreat-toast-1600.webp" />
+            <img src="/videos/retreat-toast-900.webp" width="1600" height="900" loading="lazy" alt="Friends raising glasses of wine over dinner" />
           </picture>
           <p className="rt-banner2-text">
             The South of France is more than rosé all day.

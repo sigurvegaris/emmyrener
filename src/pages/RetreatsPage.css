@@ -88,21 +88,22 @@
 .rt-pair img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
 
 /* full-width photo, darkened, with white caps text on top */
-.rt-banner2 { position: relative; margin: 6rem 0 0; }
-.rt-banner2 img { display: block; width: 100%; height: auto; min-height: 340px; max-height: 720px; object-fit: cover; }
-.rt-banner2::after { content: ''; position: absolute; inset: 0; background: rgba(20, 16, 12, 0.45); }
+.rt-banner2 { position: relative; max-width: 1180px; margin: 6rem auto 0; padding: 0 1.5rem; }
+.rt-banner2 img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; min-height: 300px; object-fit: cover; }
+.rt-banner2::after { content: ''; position: absolute; inset: 0 1.5rem; background: rgba(20, 16, 12, 0.42); }
 .rt-banner2-text {
   position: absolute;
-  inset: 0;
+  inset: 0 1.5rem;
   z-index: 1;
   margin: 0;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #fff;
-  font-size: clamp(1.4rem, 3.4vw, 2.9rem);
+  font-size: clamp(1.15rem, 2.5vw, 2.2rem);
+  text-wrap: balance;
   line-height: 1.35;
   letter-spacing: 0.04em;
   text-transform: uppercase;
