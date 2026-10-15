@@ -4,10 +4,10 @@
 // Environment variables (Vercel > Project Settings > Environment Variables):
 //   RESEND_API_KEY              required
 //   RETREAT_FROM_EMAIL          e.g. "Emmy Rener <retreats@yourdomain.com>" (domain verified in Resend)
-//   RETREAT_NOTIFY_EMAIL        defaults to emmy@sophisticatedspreads.net
+//   RETREAT_NOTIFY_EMAIL        defaults to emmy@sophisticatedsocial.net
 //   RETREAT_QUESTIONNAIRE_URL   link to the questionnaire (optional until Emmy has one)
 
-const NOTIFY_DEFAULT = 'emmy@sophisticatedspreads.net';
+const NOTIFY_DEFAULT = 'emmy@sophisticatedsocial.net';
 const ROOM_OPTIONS = ['Private room', 'Shared room', 'Not sure yet'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

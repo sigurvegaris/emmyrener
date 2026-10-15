@@ -6,7 +6,7 @@ const COLUMNS = [
   { title: 'Explore', links: [['/', 'Home'], ['/about', 'About Me'], ['/contact', 'Contact']] },
   { title: 'Paris', links: [['/guides', 'Guides'], ['/recommendations', 'Recommendations']] },
   { title: 'Retreats', links: [['/retreats', 'Bon Vivant Summer'], ['/retreats', 'Join the Interest List']] },
-  { title: 'Connect', links: [['/collabs', 'Collabs'], ['mailto:emmy@sophisticatedspreads.net', 'Email Emmy']] },
+  { title: 'Connect', links: [['/collabs', 'Collabs'], ['mailto:emmy@sophisticatedsocial.net', 'Email Emmy']] },
 ];
 
 // Emmy's toile, washed light so the name stays easy to read.
@@ -33,7 +33,7 @@ function Footer() {
               <circle cx="17.4" cy="6.6" r="1" className="pf-dot" />
             </svg>
           </a>
-          <a href="mailto:emmy@sophisticatedspreads.net" aria-label="Email">
+          <a href="mailto:emmy@sophisticatedsocial.net" aria-label="Email">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <rect x="3" y="5.5" width="18" height="13" rx="1.5" />
               <path d="M3.5 6.5 12 13l8.5-6.5" />

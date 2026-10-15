@@ -46,7 +46,7 @@ function Contact() {
 
           {/* Email */}
           <a 
-            href="mailto:emmy@sophisticatedspreads.net"
+            href="mailto:emmy@sophisticatedsocial.net"
             style={styles.contactCard}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-4px)';
@@ -67,7 +67,7 @@ function Contact() {
             <p style={styles.cardDescription}>
               For collaboration inquiries or questions about the guides
             </p>
-            <span style={styles.cardHandle}>emmy@sophisticatedspreads.net</span>
+            <span style={styles.cardHandle}>emmy@sophisticatedsocial.net</span>
           </a>
         </div>
 
