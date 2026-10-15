@@ -2,7 +2,6 @@ import React from 'react';
 import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
 import RetreatSignupForm from '../components/RetreatSignupForm';
-import RetreatPageNav from '../components/RetreatPageNav';
 import './RetreatsPage.css';
 
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
@@ -59,8 +58,6 @@ function RetreatsPage() {
             </div>
           </div>
         </header>
-
-        <RetreatPageNav />
 
         {/* Concept: a centered statement, then two tall photos side by side */}
         <section id="concept" className="retreat-section rt-sec">
