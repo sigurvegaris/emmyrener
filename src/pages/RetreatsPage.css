@@ -1,27 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Lato:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Jost:wght@300;400&display=swap');
 
 /* Retreats landing page. index.css forces Lora on most tags with !important, so fonts here do too. */
 .rt {
-  --rt-olive: #4f5d3a;
-  --rt-cream: #faf7f0;
-  --rt-sand: #f0ebdf;
-  --rt-ink: #2b2a27;
+  --rt-rose: #a77467;
+  --rt-rose-dark: #8c5c50;
+  --rt-ink: #2f2f2f;
+  --rt-body: #555;
   background: #fff;
   color: var(--rt-ink);
 }
-.rt-banner-copy p, .rt-btn { font-family: 'Lato', sans-serif !important; }
-.rt-banner-copy h1, .rt-welcome, .rt img:hover { transform: none; }
+/* One type system for the whole page: Cormorant Garamond for display, Jost for reading text */
+.rt-banner-copy p { font-family: 'Jost', sans-serif !important; }
+.rt-banner-copy h1, .rt-banner-copy p.rt-welcome, .rt-btn { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.rt img:hover { transform: none; }
 
 /* ---------- Opening ---------- */
 .rt-banner { margin-top: 72px; /* clears the fixed nav */ background: #f2ece2; }
 .rt-banner-frame { position: relative; max-width: 1600px; margin: 0 auto; container-type: inline-size; }
 .rt-banner-frame img { display: block; width: 100%; height: auto; }
 .rt-banner-copy { padding: 2.2rem 1.5rem 2.6rem; text-align: center; background: #f2ece2; }
-.rt-welcome { margin: 0; font-style: italic; font-size: 1.15rem; }
-.rt-title { margin: 0.3rem 0 0.7rem; font-weight: 500; font-size: clamp(2.6rem, 11vw, 3.6rem); line-height: 1.05; color: var(--rt-olive); }
-.rt-def { margin: 0 auto 0.8rem; max-width: 420px; font-size: 0.78rem; line-height: 1.5; opacity: 0.7; }
-.rt-meta { margin: 0 0 1rem; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; }
-.rt-lede { margin: 0 auto 1.6rem; max-width: 460px; font-size: 0.98rem; line-height: 1.7; }
+.rt-welcome { margin: 0; font-style: italic; font-size: 1.35rem; color: var(--rt-rose); }
+.rt-title { margin: 0.3rem 0 0.9rem; font-weight: 400; font-size: clamp(2.2rem, 9.5vw, 3.2rem); line-height: 1.1; letter-spacing: 0.05em; text-transform: uppercase; color: var(--rt-ink); }
+.rt-def { margin: 0 auto 0.9rem; max-width: 420px; font-weight: 300; font-size: 0.8rem; line-height: 1.6; color: #777; }
+.rt-meta { margin: 0 0 1rem; font-size: 0.72rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--rt-rose); }
+.rt-lede { margin: 0 auto 1.6rem; max-width: 460px; font-weight: 300; font-size: 1rem; line-height: 1.8; color: var(--rt-body); }
 /* wide screens: the text sits in the empty cream area of the 2:1 collage */
 @media (min-width: 1000px) {
   .rt-banner-copy {
@@ -38,29 +40,27 @@
     align-items: center;
     justify-content: center;
   }
-  .rt-welcome { font-size: max(1rem, 1.5cqw); }
-  .rt-title { font-size: 4.1cqw; white-space: nowrap; margin: 0.3cqw 0 0.8cqw; }
+  .rt-welcome { font-size: max(1.05rem, 1.75cqw); }
+  .rt-title { font-size: 3.5cqw; white-space: nowrap; margin: 0.2cqw 0 1cqw; }
   .rt-def { font-size: max(0.66rem, 0.8cqw); max-width: 90%; margin-bottom: 1cqw; }
   .rt-meta { font-size: max(0.62rem, 0.82cqw); margin-bottom: 1.1cqw; }
   .rt-lede { font-size: max(0.78rem, 1.12cqw); max-width: 88%; margin-bottom: 1.8cqw; }
-  .rt-banner-copy .rt-btn { font-size: max(0.62rem, 0.82cqw); padding: 1.1cqw 2.2cqw; }
+  .rt-banner-copy .rt-btn { font-size: max(0.8rem, 1.05cqw); padding: 1cqw 2.4cqw; }
 }
-.rt-btn { font-family: 'Lato', sans-serif !important; }
-.rt img:hover { transform: none; }
 
 .rt-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .rt-btn {
   display: inline-block;
-  background: var(--rt-olive);
+  background: var(--rt-rose);
   color: #fff !important;
   text-decoration: none;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 1rem 2rem;
-  transition: background 0.2s ease, transform 0.2s ease;
+  padding: 0.9rem 2.2rem;
+  transition: background 0.2s ease;
 }
-.rt-btn:hover { background: #3f4b2e; transform: translateY(-2px); }
+.rt-btn:hover { background: var(--rt-rose-dark); }
 
 /* ---------- Sections below the hero: airy, white, all-caps serif headings (Cook's Atelier feel) ---------- */
 .rt-cap, .rt-fig figcaption, .rt-banner2-text {
@@ -118,7 +118,7 @@
   margin-top: 1.4rem;
   padding: 0.7rem 1.6rem;
   border: 1px solid #b98a7d;
-  color: #a77467;
+  color: var(--rt-rose);
   font-size: 1.05rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -132,7 +132,7 @@
 .rt-stay { display: grid; grid-template-columns: 5fr 6fr; gap: 4.5rem; align-items: center; max-width: 1080px; padding-bottom: 6rem; }
 .rt-stay img { display: block; width: 100%; height: auto; }
 .rt-stay .rt-cap { text-align: left; margin: 0 0 0.4rem; }
-.rt-sub, .rt-hosts-last { font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic; color: #a77467; }
+.rt-sub, .rt-hosts-last { font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic; color: var(--rt-rose); }
 .rt-sub { margin: 0 0 1.4rem; font-size: 1.45rem; }
 .rt-stay-text p:not(.rt-sub), .rt-hosts-text p:not(.rt-kicker):not(.rt-hosts-last) {
   font-family: 'Jost', sans-serif !important; margin: 0; font-weight: 300; font-size: 1.06rem; line-height: 1.95; color: #555;
@@ -144,7 +144,7 @@
 .rt-hosts-photo { position: relative; }
 .rt-hosts-photo::before { content: ''; position: absolute; inset: -1.4rem 1.4rem 1.4rem -1.4rem; border: 1px solid #b98a7d; }
 .rt-hosts-photo img { position: relative; display: block; width: 100%; height: auto; box-shadow: 0 24px 50px -24px rgba(60, 40, 30, 0.45); }
-.rt-kicker { margin: 0 0 1rem; font-family: 'Jost', sans-serif !important; font-size: 0.8rem; letter-spacing: 0.32em; text-transform: uppercase; color: #a77467; }
+.rt-kicker { margin: 0 0 1rem; font-family: 'Jost', sans-serif !important; font-size: 0.8rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--rt-rose); }
 .rt-hosts-name {
   margin: 0;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
@@ -153,14 +153,14 @@
   line-height: 0.95;
   color: #2f2f2f;
 }
-.rt-hosts-name span { font-style: italic; color: #a77467; }
+.rt-hosts-name span { font-style: italic; color: var(--rt-rose); }
 .rt-hosts-last { margin: 0.4rem 0 2rem; font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: 0.06em; }
 .rt-outline {
   display: inline-block;
   margin-top: 2.4rem;
   padding: 0.9rem 2rem;
-  border: 1px solid #a77467;
-  color: #a77467 !important;
+  border: 1px solid var(--rt-rose);
+  color: var(--rt-rose) !important;
   text-decoration: none;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-size: 1.05rem;
@@ -168,7 +168,7 @@
   text-transform: uppercase;
   transition: background 0.2s ease, color 0.2s ease;
 }
-.rt-outline:hover { background: #a77467; color: #fff !important; }
+.rt-outline:hover { background: var(--rt-rose); color: #fff !important; }
 
 /* ---------- Join ---------- */
 .rt-join .pc { width: calc(100% - 3rem); }
@@ -185,6 +185,7 @@
   .rt-hosts-text { text-align: center; }
 }
 @media (max-width: 600px) {
+  .rt-meta { font-size: 0.66rem; letter-spacing: 0.14em; }
   .rt-sec, .rt-who { padding-top: 4rem; }
   .rt-pair { gap: 0.8rem; margin-top: 2.5rem; }
   .rt-banner2 { margin-top: 4rem; }
@@ -200,4 +201,3 @@
   .rt section.rt-join { padding-left: 0 !important; padding-right: 0 !important; }
 }
 
-.rt-banner-copy p.rt-welcome { font-family: 'Fraunces', Georgia, serif !important; }

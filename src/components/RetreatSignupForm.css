@@ -1,6 +1,6 @@
 /* Postcard sign-up. Both faces share one grid cell so the card is as tall as its taller side. */
 .pc {
-  --pc-olive: #4f5d3a;
+  --pc-olive: #8c5c50; /* named olive historically; now the page's dusty rose */
   --pc-brown: #7a5a3a;
   --pc-ink: #3a2e22;
   --pc-cream: #fffdf8;
@@ -70,7 +70,7 @@
 
 .pc-photo-title {
   margin: 0;
-  font-family: 'Lora', serif !important;
+  font-family: 'Cormorant Garamond', serif !important;
   font-weight: 700;
   font-size: clamp(2.4rem, 8.6cqw, 5rem);
   letter-spacing: 0.04em;
@@ -165,7 +165,7 @@
 
 .pc-label {
   display: block;
-  font-family: 'Lora', serif !important;
+  font-family: 'Cormorant Garamond', serif !important;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -326,7 +326,7 @@
   opacity: 0.8;
 }
 .pc-seal-main {
-  font-family: 'Lora', serif !important;
+  font-family: 'Cormorant Garamond', serif !important;
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: 0.06em;
@@ -359,7 +359,7 @@
   position: absolute;
   left: 1.6rem;
   bottom: 0.7rem;
-  font-family: 'Lora', serif !important;
+  font-family: 'Cormorant Garamond', serif !important;
   font-size: 0.8125rem;
   letter-spacing: 0.04em;
   color: var(--pc-brown);
