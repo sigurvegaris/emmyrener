@@ -63,10 +63,10 @@
 .rt-btn:hover { background: #3f4b2e; transform: translateY(-2px); }
 
 /* ---------- Sections below the hero: airy, white, all-caps serif headings (Cook's Atelier feel) ---------- */
-.rt-cap, .rt-card h3, .rt-fig figcaption, .rt-banner2-text {
+.rt-cap, .rt-fig figcaption, .rt-banner2-text {
   font-family: 'Cormorant Garamond', Georgia, serif !important;
 }
-.rt-prose p, .rt-prose-one, .rt-big, .rt-card p, .rt-join-p, .rt-fine { font-family: 'Jost', sans-serif !important; }
+.rt-prose p, .rt-prose-one, .rt-big, .rt-join-p, .rt-fine { font-family: 'Jost', sans-serif !important; }
 
 .rt-sec { max-width: 1180px; margin: 0 auto; padding: 6rem 1.5rem 0; }
 .rt-cap {
@@ -128,12 +128,47 @@
 .rt-who { padding: 6rem 1.5rem 0; text-align: center; }
 .rt-big { max-width: 760px; margin: 0 auto; font-weight: 300; font-size: clamp(1.15rem, 2vw, 1.45rem) !important; line-height: 1.8; color: #555; }
 
-/* ---------- Stay + hosts cards ---------- */
-.rt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; padding-bottom: 6rem; }
-.rt-card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
-.rt-card h3 { margin: 2rem 0 0.2rem; font-weight: 400; font-size: 1.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: #2f2f2f; }
-.rt-card p.rt-card-sub { margin: 0 0 1rem; font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic; font-weight: 400; font-size: 1.3rem; color: #a77467; }
-.rt-card p { margin: 0; font-weight: 300; font-size: 1.02rem; line-height: 1.95; color: #555; }
+/* ---------- Stay ---------- */
+.rt-stay { display: grid; grid-template-columns: 5fr 6fr; gap: 4.5rem; align-items: center; max-width: 1080px; padding-bottom: 6rem; }
+.rt-stay img { display: block; width: 100%; height: auto; }
+.rt-stay .rt-cap { text-align: left; margin: 0 0 0.4rem; }
+.rt-sub, .rt-hosts-last { font-family: 'Cormorant Garamond', Georgia, serif !important; font-style: italic; color: #a77467; }
+.rt-sub { margin: 0 0 1.4rem; font-size: 1.45rem; }
+.rt-stay-text p:not(.rt-sub), .rt-hosts-text p:not(.rt-kicker):not(.rt-hosts-last) {
+  font-family: 'Jost', sans-serif !important; margin: 0; font-weight: 300; font-size: 1.06rem; line-height: 1.95; color: #555;
+}
+
+/* ---------- Hosts spotlight ---------- */
+.rt-hosts { background: #efe4dc; padding: 7rem 1.5rem; }
+.rt-hosts-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5.5rem; align-items: center; max-width: 1120px; margin: 0 auto; }
+.rt-hosts-photo { position: relative; }
+.rt-hosts-photo::before { content: ''; position: absolute; inset: -1.4rem 1.4rem 1.4rem -1.4rem; border: 1px solid #b98a7d; }
+.rt-hosts-photo img { position: relative; display: block; width: 100%; height: auto; box-shadow: 0 24px 50px -24px rgba(60, 40, 30, 0.45); }
+.rt-kicker { margin: 0 0 1rem; font-family: 'Jost', sans-serif !important; font-size: 0.8rem; letter-spacing: 0.32em; text-transform: uppercase; color: #a77467; }
+.rt-hosts-name {
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400;
+  font-size: clamp(3.2rem, 6.5vw, 5.6rem);
+  line-height: 0.95;
+  color: #2f2f2f;
+}
+.rt-hosts-name span { font-style: italic; color: #a77467; }
+.rt-hosts-last { margin: 0.4rem 0 2rem; font-size: clamp(1.6rem, 2.6vw, 2.2rem); letter-spacing: 0.06em; }
+.rt-outline {
+  display: inline-block;
+  margin-top: 2.4rem;
+  padding: 0.9rem 2rem;
+  border: 1px solid #a77467;
+  color: #a77467 !important;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 1.05rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.rt-outline:hover { background: #a77467; color: #fff !important; }
 
 /* ---------- Join ---------- */
 .rt-join .pc { width: calc(100% - 3rem); }
@@ -144,7 +179,10 @@
 
 @media (max-width: 900px) {
   .rt-week { grid-template-columns: repeat(2, 1fr); row-gap: 2.4rem; }
-  .rt-cards { grid-template-columns: 1fr; gap: 4rem; }
+  .rt-stay, .rt-hosts-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .rt-stay img { max-width: 520px; margin: 0 auto; }
+  .rt-hosts-photo { max-width: 460px; margin: 1.4rem auto 0; width: calc(100% - 1.4rem); }
+  .rt-hosts-text { text-align: center; }
 }
 @media (max-width: 600px) {
   .rt-sec, .rt-who { padding-top: 4rem; }
@@ -152,7 +190,9 @@
   .rt-banner2 { margin-top: 4rem; }
   .rt-week { gap: 1rem; }
   .rt-fig figcaption { font-size: 0.85rem; padding: 0.55rem 0.9rem; letter-spacing: 0.1em; }
-  .rt-cards { padding-bottom: 4rem; }
+  .rt-stay { padding-bottom: 4rem; }
+  .rt-hosts { padding: 4.5rem 1.5rem; }
+  .rt-outline { font-size: 0.9rem; letter-spacing: 0.1em; padding: 0.85rem 1.3rem; white-space: nowrap; }
 }
 
 /* index.css pads every <section> on phones with !important; the postcard needs the full width */

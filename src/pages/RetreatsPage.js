@@ -124,27 +124,38 @@ function RetreatsPage() {
         </section>
 
         {/* Stay and hosts as two cards */}
-        <section className="retreat-section rt-sec rt-cards">
-          <article id="stay" className="rt-card">
-            <img src="/videos/retreat-villa.webp" width="900" height="1200" loading="lazy" alt="A stone villa with shutters and climbing white roses" style={{ objectPosition: '50% 60%' }} />
-            <h3>The stay</h3>
-            <p className="rt-card-sub">A villa outside Aix-en-Provence</p>
+        {/* Stay: the whole house, uncropped, beside the details */}
+        <section id="stay" className="retreat-section rt-sec rt-stay">
+          <img src="/videos/retreat-villa.webp" width="900" height="1200" loading="lazy" alt="A stone villa with shutters and climbing white roses" />
+          <div className="rt-stay-text">
+            <h2 className="rt-cap">The stay</h2>
+            <p className="rt-sub">A villa outside Aix-en-Provence</p>
             <p>
               We'll all stay under one roof in a private villa just outside Aix-en-Provence, tucked away but close
               enough to wander into town. We'll share the exact house once it's confirmed.
             </p>
-          </article>
-          <article id="hosts" className="rt-card">
-            <img src="/videos/retreat-hosts.webp" width="900" height="1200" loading="lazy" alt="Emmy and Hannah in a blue doorway covered in red roses" style={{ objectPosition: '50% 62%' }} />
-            <h3>Your hosts</h3>
-            <p className="rt-card-sub">Emmy &amp; Hannah Rener</p>
-            <p>
-              Sisters, co-hosts, and the people you'll want at your dinner table. Emmy brings the Provence she's come
-              to know since moving to France: the producers, the markets, and the long lunches. Hannah brings years of
-              creating experiences for luxury and hospitality brands, so every detail is handled and all you have to
-              do is say yes to another glass.
-            </p>
-          </article>
+          </div>
+        </section>
+
+        {/* Hosts: their own full-width spotlight */}
+        <section id="hosts" className="retreat-section rt-hosts">
+          <div className="rt-hosts-inner">
+            <div className="rt-hosts-photo">
+              <img src="/videos/retreat-hosts.webp" width="900" height="1200" loading="lazy" alt="Emmy and Hannah in a blue doorway covered in red roses" />
+            </div>
+            <div className="rt-hosts-text">
+              <p className="rt-kicker">Your hosts</p>
+              <h2 className="rt-hosts-name">Emmy <span>&amp;</span> Hannah</h2>
+              <p className="rt-hosts-last">Rener</p>
+              <p>
+                Sisters, co-hosts, and the people you'll want at your dinner table. Emmy brings the Provence she's come
+                to know since moving to France: the producers, the markets, and the long lunches. Hannah brings years of
+                creating experiences for luxury and hospitality brands, so every detail is handled and all you have to
+                do is say yes to another glass.
+              </p>
+              <a className="rt-outline" href="#interest-list" onClick={scrollToForm}>Get on the interest list</a>
+            </div>
+          </div>
         </section>
 
         {/* Interest list */}
