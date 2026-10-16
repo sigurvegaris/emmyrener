@@ -7,12 +7,11 @@
 //   RETREAT_NOTIFY_EMAIL        defaults to emmy@sophisticatedsocial.net
 //   RETREAT_QUESTIONNAIRE_URL   link to the questionnaire (optional until Emmy has one)
 
+const { confirmationHtml, confirmationText, notificationHtml, notificationText } = require('./_retreat-emails');
+
 const NOTIFY_DEFAULT = 'emmy@sophisticatedsocial.net';
 const ROOM_OPTIONS = ['Private room', 'Shared room', 'Not sure yet'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const esc = (s) =>
-  String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 async function sendEmail(apiKey, payload) {
   const res = await fetch('https://api.resend.com/emails', {
@@ -57,63 +56,15 @@ module.exports = async function handler(req, res) {
   // Preview/test deployments are tagged so they are never mistaken for real sign-ups.
   const tag = process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production' ? '[TEST] ' : '';
 
-  const confirmation = `
-    <div style="font-family: Georgia, serif; color:#111; max-width:560px; line-height:1.6">
-      <h2 style="font-weight:400">Merci, ${esc(name)}!</h2>
-      <p>You're on the list for <strong>Bon Vivant Summer</strong>, a week of long lunches, markets, and rosé in Provence with Emmy and Hannah.</p>
-      <p><strong>The details so far</strong><br>
-      Provence (just outside Aix-en-Provence) &middot; 2027 &middot; 5 nights / 6 days<br>
-      An intimate group of 8 to 10 women, all under one roof in a private home.</p>
-      <p>Dates, location, and booking details are still coming together, and you'll be among the first to hear.</p>
-      ${
-        questionnaire
-          ? `<p>If you're seriously thinking about joining, this short questionnaire (dates, budget, and what you're hoping for) helps us plan: <a href="${esc(
-              questionnaire
-            )}">fill it out here</a>.</p>`
-          : ''
-      }
-      <p>Joining the list is free and doesn't commit you to booking.</p>
-      <p>À bientôt,<br>Emmy &amp; Hannah</p>
-    </div>`;
-
-  // Plain-text versions alongside the HTML read as personal mail and help keep these out of spam/Promotions.
-  const confirmationText = [
-    `Merci, ${name}!`,
-    '',
-    "You're on the list for Bon Vivant Summer, a week of long lunches, markets, and rosé in Provence with Emmy and Hannah.",
-    '',
-    'The details so far:',
-    'Provence (just outside Aix-en-Provence) · 2027 · 5 nights / 6 days',
-    'An intimate group of 8 to 10 women, all under one roof in a private home.',
-    '',
-    "Dates, location, and booking details are still coming together, and you'll be among the first to hear.",
-    ...(questionnaire
-      ? ['', `If you're seriously thinking about joining, this short questionnaire helps us plan: ${questionnaire}`]
-      : []),
-    '',
-    "Joining the list is free and doesn't commit you to booking.",
-    '',
-    'À bientôt,',
-    'Emmy & Hannah',
-  ].join('\n');
-
-  const notificationText = [
-    'New Bon Vivant Summer interest sign-up:',
-    '',
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Room preference: ${room}`,
-  ].join('\n');
-
-  const notification = `
-    <div style="font-family: sans-serif">
-      <p>New Bon Vivant Summer interest sign-up:</p>
-      <ul>
-        <li><strong>Name:</strong> ${esc(name)}</li>
-        <li><strong>Email:</strong> ${esc(email)}</li>
-        <li><strong>Room preference:</strong> ${esc(room)}</li>
-      </ul>
-    </div>`;
+  const receivedAt = new Date().toLocaleString('en-GB', {
+    timeZone: 'Europe/Paris',
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    hour: '2-digit',
+    minute: '2-digit',
+  }) + ' (Paris)';
+  const data = { name, email, room, questionnaire, receivedAt };
 
   try {
     await sendEmail(apiKey, {
@@ -121,16 +72,16 @@ module.exports = async function handler(req, res) {
       to: [email],
       reply_to: notify,
       subject: `${tag}You're on the list for Bon Vivant Summer`,
-      html: confirmation,
-      text: confirmationText,
+      html: confirmationHtml(data),
+      text: confirmationText(data),
     });
     await sendEmail(apiKey, {
       from,
       to: [notify],
       reply_to: email,
       subject: `${tag}New retreat sign-up: ${name}`,
-      html: notification,
-      text: notificationText,
+      html: notificationHtml(data),
+      text: notificationText(data),
     });
   } catch (err) {
     console.error('retreat-signup failed', err);
