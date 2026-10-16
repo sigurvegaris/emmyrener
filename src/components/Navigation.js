@@ -29,6 +29,9 @@ function Navigation() {
         <Link to="/guides" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
           Guides
         </Link>
+        <Link to="/retreats" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
+          Retreats
+        </Link>
         <Link to="/recommendations" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
           Recommendations
         </Link>
@@ -79,6 +82,14 @@ function Navigation() {
               onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
             >
               Guides
+            </Link>
+            <Link 
+              to="/retreats" 
+              style={styles.navLink}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#8B7355'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#111111'}
+            >
+              Retreats
             </Link>
             <Link 
               to="/recommendations" 
