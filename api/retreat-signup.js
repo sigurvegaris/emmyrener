@@ -76,6 +76,35 @@ module.exports = async function handler(req, res) {
       <p>À bientôt,<br>Emmy &amp; Hannah</p>
     </div>`;
 
+  // Plain-text versions alongside the HTML read as personal mail and help keep these out of spam/Promotions.
+  const confirmationText = [
+    `Merci, ${name}!`,
+    '',
+    "You're on the list for Bon Vivant Summer, a week of long lunches, markets, and rosé in Provence with Emmy and Hannah.",
+    '',
+    'The details so far:',
+    'Provence (just outside Aix-en-Provence) · 2027 · 5 nights / 6 days',
+    'An intimate group of 8 to 10 women, all under one roof in a private home.',
+    '',
+    "Dates, location, and booking details are still coming together, and you'll be among the first to hear.",
+    ...(questionnaire
+      ? ['', `If you're seriously thinking about joining, this short questionnaire helps us plan: ${questionnaire}`]
+      : []),
+    '',
+    "Joining the list is free and doesn't commit you to booking.",
+    '',
+    'À bientôt,',
+    'Emmy & Hannah',
+  ].join('\n');
+
+  const notificationText = [
+    'New Bon Vivant Summer interest sign-up:',
+    '',
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Room preference: ${room}`,
+  ].join('\n');
+
   const notification = `
     <div style="font-family: sans-serif">
       <p>New Bon Vivant Summer interest sign-up:</p>
@@ -93,6 +122,7 @@ module.exports = async function handler(req, res) {
       reply_to: notify,
       subject: `${tag}You're on the list for Bon Vivant Summer`,
       html: confirmation,
+      text: confirmationText,
     });
     await sendEmail(apiKey, {
       from,
@@ -100,6 +130,7 @@ module.exports = async function handler(req, res) {
       reply_to: email,
       subject: `${tag}New retreat sign-up: ${name}`,
       html: notification,
+      text: notificationText,
     });
   } catch (err) {
     console.error('retreat-signup failed', err);
