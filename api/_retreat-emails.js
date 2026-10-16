@@ -51,7 +51,9 @@ function frame({ preheader, inner, img }) {
   <tr><td align="center" style="padding:28px 12px;">
     <table role="presentation" class="card" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="${C.paper}" style="width:600px;max-width:600px;background:${C.paper};border:1px solid #e3d5c0;">
       <tr><td style="line-height:0;font-size:0;"><img src="${img}/email/airmail.png" width="600" height="7" alt="" style="display:block;width:100%;height:7px;border:0;"></td></tr>
+      <tr><td style="line-height:0;font-size:0;padding:6px 0 0;"><img src="${img}/email/roses-garland.png" width="600" height="72" alt="" style="display:block;width:100%;height:auto;border:0;"></td></tr>
       ${inner}
+      <tr><td style="line-height:0;font-size:0;padding:0 0 6px;"><img src="${img}/email/roses-garland-bottom.png" width="600" height="72" alt="" style="display:block;width:100%;height:auto;border:0;"></td></tr>
       <tr><td style="line-height:0;font-size:0;"><img src="${img}/email/airmail.png" width="600" height="7" alt="" style="display:block;width:100%;height:7px;border:0;"></td></tr>
     </table>
   </td></tr>
@@ -78,6 +80,9 @@ function detailRows(rows) {
     .join('');
 }
 
+const divider = (img) =>
+  `<img src="${img}/email/roses-divider.png" width="200" height="34" alt="" style="display:block;margin:0 auto;border:0;width:200px;height:34px;">`;
+
 function button(href, label) {
   return `
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 22px;">
@@ -90,7 +95,7 @@ function button(href, label) {
 function confirmationHtml({ name, room, questionnaire }) {
   const img = assetBase();
   const inner = `
-      <tr><td class="pad" style="padding:22px 40px 0;">
+      <tr><td class="pad" style="padding:4px 40px 0;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
           <td valign="middle" style="font-family:${SERIF};white-space:nowrap;">
             <span style="display:inline-block;background:${C.navy};color:#fbf6ee;font-size:11px;letter-spacing:4px;padding:5px 10px;text-transform:uppercase;">Par avion</span>
@@ -104,19 +109,20 @@ function confirmationHtml({ name, room, questionnaire }) {
         ${kicker('Bon Vivant Summer &middot; Provence 2027')}
         <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(name)}</h1>
         ${para(`Your letter arrived, and it made our day. You're on the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>: a week of long lunches, morning markets, lavender fields, and rosé at sunset in Provence with the two of us.`)}
-        ${para("There is a seat at our long table with your name on it, and you'll be among the very first to hear when the dates and booking open.")}
+        ${para("We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be among the very first to hear when the dates are set.")}
       </td></tr>
 
-      <tr><td class="pad" style="padding:6px 40px 0;">
+      <tr><td class="pad" style="padding:6px 60px 0;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
           <td style="padding:8px;background:#ffffff;border:1px solid #e6d9c6;">
-            <img src="${img}/email/hosts.jpg" width="504" alt="Emmy and Hannah in a blue doorway covered in red roses" style="display:block;width:100%;height:auto;border:0;">
+            <img src="${img}/email/hosts.jpg" width="464" alt="Emmy and Hannah in a blue doorway covered in red roses" style="display:block;width:100%;height:auto;border:0;">
           </td>
         </tr></table>
         <p style="margin:10px 0 0;text-align:center;font-family:${SERIF};font-style:italic;font-size:15px;color:${C.rose};">Your hosts, Emmy &amp; Hannah</p>
       </td></tr>
 
-      <tr><td class="pad" style="padding:26px 40px 6px;">
+      <tr><td class="pad" style="padding:22px 40px 6px;">
+        <div style="padding-bottom:18px;">${divider(img)}</div>
         ${kicker('The details so far')}
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 22px;">
           ${detailRows([
@@ -138,7 +144,10 @@ function confirmationHtml({ name, room, questionnaire }) {
 
       <tr><td class="pad" style="padding:4px 40px 30px;">
         <p style="margin:0;font-family:${SERIF};font-style:italic;font-size:18px;color:${C.soft};">À très bientôt,</p>
-        <img src="${img}/email/signature.png" width="230" height="51" alt="Emmy &amp; Hannah" style="display:block;border:0;width:230px;height:51px;margin-top:4px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td valign="bottom"><img src="${img}/email/signature.png" width="230" height="51" alt="Emmy &amp; Hannah" style="display:block;border:0;width:230px;height:51px;margin-top:4px;"></td>
+          <td valign="bottom" style="padding-left:4px;"><img src="${img}/email/roses-sprig.png" width="64" height="44" alt="" style="display:block;border:0;width:64px;height:44px;"></td>
+        </tr></table>
       </td></tr>
 
       <tr><td class="pad" style="padding:0 40px 22px;">
@@ -146,7 +155,7 @@ function confirmationHtml({ name, room, questionnaire }) {
           You're receiving this because you joined the Bon Vivant Summer interest list on emmyrener.com.
         </p>
       </td></tr>`;
-  return frame({ preheader: "You're on the list. A seat at the long table has your name on it.", inner, img });
+  return frame({ preheader: "You're on the list, and we're saving a seat at the long table for you.", inner, img });
 }
 
 function notificationHtml({ name, email, room, receivedAt }) {
@@ -172,6 +181,7 @@ function notificationHtml({ name, email, room, receivedAt }) {
       </td></tr>
 
       <tr><td align="center" class="pad" style="padding:0 40px 8px;">
+        <div style="padding-bottom:16px;">${divider(img)}</div>
         ${button(mailto, `Write back to ${esc(name)}`)}
       </td></tr>
 
@@ -189,7 +199,7 @@ function confirmationText({ name, room, questionnaire }) {
     '',
     "Your letter arrived, and it made our day. You're on the list for Bon Vivant Summer: a week of long lunches, morning markets, lavender fields, and rosé at sunset in Provence with the two of us.",
     '',
-    "There is a seat at our long table with your name on it, and you'll be among the very first to hear when the dates and booking open.",
+    "We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be among the very first to hear when the dates are set.",
     '',
     'The details so far',
     'Where: just outside Aix-en-Provence',

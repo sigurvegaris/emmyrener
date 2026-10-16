@@ -103,8 +103,9 @@ function RetreatSignupForm() {
           <p className="pc-note-kicker">Your letter is on its way to Provence</p>
           <p className="pc-note-title">Merci{first ? `, ${first}` : ''}</p>
           <p className="pc-note-body">
-            We are so happy you wrote. There is a seat at our long table with your name on it, and you will be among
-            the very first to hear about the dates, the villa, and everything we have planned for Bon Vivant Summer.
+            We are so happy you wrote. We will be saving a seat at our long table for you. It is not official until
+            booking opens, but you are one step closer to seeing your name on it, and you will be among the very first
+            to hear about the dates, the villa, and everything we have planned for Bon Vivant Summer.
           </p>
           <p className="pc-note-body">A little note from us is already waiting in your inbox (do peek in spam, just in case).</p>
           <p className="pc-note-sign">
