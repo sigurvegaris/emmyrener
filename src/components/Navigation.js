@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 
 function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
 
   // Prevent background scroll when menu is open
   useEffect(() => {
@@ -17,40 +18,44 @@ function Navigation() {
     };
   }, [mobileMenuOpen]);
 
+  const MOBILE_LINKS = [
+    ['/', 'Home'],
+    ['/about', 'About Me'],
+    ['/guides', 'Guides'],
+    ['/retreats', 'Retreats'],
+    ['/recommendations', 'Recommendations'],
+    ['/collabs', 'Collabs'],
+    ['/contact', 'Contact'],
+  ];
+
   const MobileMenu = () => (
     <div style={styles.mobileMenuOverlay} onClick={() => setMobileMenuOpen(false)}>
       <div style={styles.mobileMenuContent} onClick={(e) => e.stopPropagation()}>
-        <Link to="/" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          Home
-        </Link>
-        <Link to="/about" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          About Me
-        </Link>
-        <Link to="/guides" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          Guides
-        </Link>
-        <Link to="/retreats" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          Retreats
-        </Link>
-        <Link to="/recommendations" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          Recommendations
-        </Link>
-        <Link to="/collabs" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          Collabs
-        </Link>
-        <Link to="/contact" style={styles.mobileNavLink} onClick={() => setMobileMenuOpen(false)}>
-          Contact
-        </Link>
+        {MOBILE_LINKS.map(([to, label]) => (
+          <Link
+            key={to}
+            to={to}
+            style={{ ...styles.mobileNavLink, ...(pathname === to ? styles.mobileNavLinkActive : {}) }}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {label}
+          </Link>
+        ))}
+        <a
+          href="https://instagram.com/emmyrener"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={styles.mobileMenuInsta}
+        >
+          @emmyrener
+        </a>
       </div>
     </div>
   );
 
   return (
     <>
-      <nav style={{
-        ...styles.nav,
-        backgroundColor: mobileMenuOpen ? 'rgba(17, 17, 17, 0.95)' : 'rgba(247, 244, 239, 0.95)',
-      }}>
+      <nav className="site-nav" style={styles.nav}>
         <div style={styles.container}>
           {/* Logo */}
           <Link to="/" style={styles.logo}>
@@ -221,13 +226,13 @@ const styles = {
   mobileMenuOverlay: {
     position: 'fixed',
     inset: 0,
-    backgroundColor: 'rgba(17, 17, 17, 0.92)',
-    backdropFilter: 'blur(10px)',
+    backgroundColor: '#F7F4EF',
     zIndex: 10000,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingTop: '7rem',
+    overflowY: 'auto',
     animation: 'fadeIn 0.3s ease-out',
   },
 
@@ -237,22 +242,32 @@ const styles = {
     maxWidth: '520px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '2.25rem',
+    gap: '1.6rem',
     alignItems: 'center',
     padding: '0 2rem 3rem',
-    overflowY: 'auto',
-    WebkitOverflowScrolling: 'touch',
     animation: 'slideUp 0.4s ease-out',
   },
 
   mobileNavLink: {
-    color: '#FFFFFF',
+    color: '#2C3550',
     textDecoration: 'none',
-    fontSize: '2.25rem',
-    fontWeight: 500,
-    letterSpacing: '0.05em',
-    fontFamily: 'Cormorant Garamond, serif',
+    fontSize: '1.9rem',
+    fontWeight: 400,
+    letterSpacing: '0.04em',
     transition: 'color 0.3s ease',
+  },
+  mobileNavLinkActive: {
+    color: '#A77467',
+    fontStyle: 'italic',
+  },
+  mobileMenuInsta: {
+    marginTop: '1.4rem',
+    paddingTop: '1.6rem',
+    borderTop: '1px solid rgba(167, 116, 103, 0.4)',
+    color: '#A77467',
+    fontSize: '1rem',
+    letterSpacing: '0.12em',
+    textDecoration: 'none',
   },
 };
 
@@ -279,9 +294,7 @@ styleSheet.textContent = `
     }
   }
 
-  a[style*="mobileNavLink"]:hover {
-    color: #8B7355 !important;
-  }
+
 `;
 if (!document.querySelector('[data-nav-animations]')) {
   styleSheet.setAttribute('data-nav-animations', 'true');

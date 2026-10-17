@@ -19,6 +19,16 @@
 .rt-banner-frame { position: relative; max-width: 1600px; margin: 0 auto; container-type: inline-size; }
 .rt-banner-frame img { display: block; width: 100%; height: auto; }
 .rt-banner-copy { padding: 2.2rem 1.5rem 2.6rem; text-align: center; background: #f2ece2; }
+/* phones and tablets: collage bands above and below the title card, on the collage's own cream */
+.rt-banner-frame { background: #f2ece2; }
+.rt-banner-m-bottom { display: block; }
+@media (max-width: 999px) {
+  .rt-banner-img { aspect-ratio: 1170 / 659; }
+  .rt-banner-copy { padding: 1.6rem 1.5rem 1.8rem; }
+}
+@media (min-width: 1000px) {
+  .rt-banner-m-bottom { display: none !important; }
+}
 .rt-welcome { margin: 0; font-style: italic; font-size: 1.35rem; color: var(--rt-rose); }
 .rt-title { margin: 0.3rem 0 0.9rem; font-weight: 400; font-size: clamp(2.2rem, 9.5vw, 3.2rem); line-height: 1.1; letter-spacing: 0.05em; text-transform: uppercase; color: var(--rt-ink); }
 .rt-def { margin: 0 auto 0.9rem; max-width: 420px; font-weight: 300; font-size: 0.8rem; line-height: 1.6; color: #777; }

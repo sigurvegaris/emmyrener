@@ -668,20 +668,33 @@
 
 /* ---------- Small screens ---------- */
 @media (max-width: 900px) {
+  /* The face grows to the height of the form on the back, so a stretched tower would blur and sit
+     behind the words. Show the plain paper instead, with the engraving at its own size above the title. */
   .pc-front {
-    background-position: 8% center;
+    background-position: right center;
   }
   .pc-front-paper {
     aspect-ratio: auto;
     min-height: 420px;
     padding: 2rem 1rem 2.4rem;
-    /* soften the tower so the text stays readable over it */
-    background: linear-gradient(rgba(240, 228, 205, 0.35), rgba(240, 228, 205, 0.55));
+  }
+  .pc-front-paper::before {
+    content: '';
+    flex: none;
+    width: 200px;
+    height: 270px;
+    margin-bottom: 0.4rem;
+    background-image: var(--pc-front);
+    background-size: 520px auto;
+    background-position: -45px -30px;
+    background-repeat: no-repeat;
+    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 92%);
+    mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 92%);
   }
 
   .pc-greetings { font-size: min(11cqw, 3.4rem); }
   .pc-photo-title { font-size: min(14.5cqw, 5.5rem); }
-  .pc-front-sub { font-size: max(min(4.2cqw, 1.3rem), 0.8rem); }
+  .pc-front-sub { font-size: max(min(4.2cqw, 1.3rem), 0.8rem); letter-spacing: 0.1em; }
 }
 
 @media (max-width: 760px) {

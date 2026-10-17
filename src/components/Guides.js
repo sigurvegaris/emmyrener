@@ -38,6 +38,8 @@ function Guides() {
 
   // Responsive testimonials per page: 1 on mobile, 3 on desktop
   const testimonialsPerPage = windowWidth < 900 ? 1 : 3;
+  const isPhone = windowWidth < 600;
+  const touchStartX = React.useRef(null);
   const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
 
   // Track window width
@@ -246,9 +248,22 @@ function Guides() {
         <div style={styles.testimonialSection}>
           <h3 style={styles.testimonialHeading}>Loved by travelers around the world</h3>
           
-          <div style={styles.carouselContainer}>
-            {/* Left Arrow */}
-            <button 
+          <div
+            style={{
+              ...styles.carouselContainer,
+              padding: isPhone ? '0' : styles.carouselContainer.padding,
+            }}
+            onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
+            onTouchEnd={(e) => {
+              if (touchStartX.current === null) return;
+              const dx = e.changedTouches[0].clientX - touchStartX.current;
+              touchStartX.current = null;
+              if (dx < -40) goToNext();
+              else if (dx > 40) goToPrev();
+            }}
+          >
+            {/* Left Arrow (phones swipe instead) */}
+            {!isPhone && <button 
               onClick={goToPrev}
               style={{...styles.arrowButton, ...styles.leftArrow}}
               onMouseEnter={(e) => {
@@ -261,7 +276,7 @@ function Guides() {
               }}
             >
               ‹
-            </button>
+            </button>}
 
             {/* Carousel Track */}
             <div style={styles.carouselTrack}>
@@ -319,7 +334,7 @@ function Guides() {
             </div>
 
             {/* Right Arrow */}
-            <button 
+            {!isPhone && <button 
               onClick={goToNext}
               style={{...styles.arrowButton, ...styles.rightArrow}}
               onMouseEnter={(e) => {
@@ -332,7 +347,7 @@ function Guides() {
               }}
             >
               ›
-            </button>
+            </button>}
           </div>
 
           {/* Dots */}

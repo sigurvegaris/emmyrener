@@ -26,12 +26,15 @@ function RetreatsPage() {
         <header className="rt-banner">
           <div className="rt-banner-frame">
             <picture>
+              {/* phones: the top band of the collage; its bottom band sits below the title card */}
+              <source media="(max-width: 999px)" type="image/webp" srcSet="/videos/retreat-collage-m-top.webp" />
               <source
                 type="image/webp"
                 srcSet="/videos/retreat-collage-960.webp 960w, /videos/retreat-collage-1440.webp 1440w, /videos/retreat-collage-1920.webp 1920w, /videos/retreat-collage-2880.webp 2880w"
                 sizes="(min-width: 1600px) 1600px, 100vw"
               />
               <img
+                className="rt-banner-img"
                 src="/videos/retreat-collage.jpg"
                 width="1440"
                 height="720"
@@ -56,6 +59,14 @@ function RetreatsPage() {
                 Get on the interest list
               </a>
             </div>
+            <img
+              className="rt-banner-m-bottom"
+              src="/videos/retreat-collage-m-bottom.webp"
+              width="1170"
+              height="457"
+              loading="lazy"
+              alt=""
+            />
           </div>
         </header>
 
