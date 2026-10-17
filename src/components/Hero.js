@@ -26,7 +26,7 @@ function Hero() {
         backgroundSize: 'cover',
         backgroundPosition: windowWidth < 900 ? 'center' : 'center top',
         // phones: start the collage just under the nav bar instead of stretching it
-        top: windowWidth < 900 ? '84px' : '8%',
+        top: windowWidth < 900 ? '69px' : '8%',
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'scale(1)' : 'scale(1.1)',
         transition: 'opacity 1.2s ease-out, transform 1.2s ease-out',
