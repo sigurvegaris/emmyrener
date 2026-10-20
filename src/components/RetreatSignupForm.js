@@ -133,9 +133,31 @@ function RetreatSignupForm() {
         {/* FRONT */}
         <div className="pc-face pc-front" inert={flipped || mailing} aria-hidden={flipped}>
           <div className="pc-paper pc-front-paper">
+            {/* Phones: a snapshot of Provence taped to the card, in place of the engraving */}
+            <figure className="pc-snap" aria-hidden="true">
+              <img src="/videos/retreat-lavender.webp" alt="" loading="lazy" decoding="async" />
+              <span className="pc-snap-tape" />
+              <svg className="pc-snap-mark" viewBox="0 0 100 100">
+                <g fill="none" stroke="#2c3550" strokeWidth="1.4">
+                  <circle cx="50" cy="50" r="44" />
+                  <circle cx="50" cy="50" r="36" strokeWidth="0.8" />
+                </g>
+                <defs>
+                  <path id="pc-snap-arc" d="M50 50 m-40 0 a40 40 0 1 1 80 0" />
+                </defs>
+                <text fontSize="8" letterSpacing="1.2" fill="#2c3550" fontFamily="Cormorant Garamond, serif">
+                  <textPath href="#pc-snap-arc" startOffset="50%" textAnchor="middle">AIX-EN-PROVENCE</textPath>
+                </text>
+                <text x="50" y="56" textAnchor="middle" fontSize="11" letterSpacing="1.5" fill="#2c3550" fontFamily="Cormorant Garamond, serif">2027</text>
+              </svg>
+            </figure>
             <p className="pc-greetings">Greetings from</p>
             <p className="pc-photo-title">PROVENCE</p>
-            <p className="pc-front-sub">Bon Vivant Summer &middot; [Month] 2027</p>
+            <p className="pc-front-sub">
+              <span>Bon Vivant Summer</span>
+              <span className="pc-front-sub-dot"> &middot; </span>
+              <span>[Month] 2027</span>
+            </p>
             <p className="pc-front-note">Summer camp for grown-ups. Rosé included.</p>
             <button type="button" className="pc-write" ref={flipBtnRef} onClick={() => flip(true)}>
               Write your note

@@ -125,6 +125,8 @@
   box-shadow: 0 12px 22px rgba(79, 93, 58, 0.4);
 }
 
+.pc-snap { display: none; }
+
 /* ---------- Back ---------- */
 .pc-back-paper {
   min-height: 460px;
@@ -678,19 +680,46 @@
     min-height: 420px;
     padding: 2rem 1rem 2.4rem;
   }
-  .pc-front-paper::before {
-    content: '';
-    flex: none;
-    width: 200px;
-    height: 270px;
-    margin-bottom: 0.4rem;
-    background-image: var(--pc-front);
-    background-size: 520px auto;
-    background-position: -45px -30px;
-    background-repeat: no-repeat;
-    -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 92%);
-    mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 92%);
+
+  .pc-snap {
+    display: block;
+    position: relative;
+    width: min(72%, 300px);
+    margin: 0.4rem auto 2rem;
+    padding: 10px 10px 34px;
+    background: #fffdf8;
+    box-shadow: 0 14px 26px -12px rgba(60, 40, 25, 0.45), 0 2px 4px rgba(60, 40, 25, 0.12);
+    transform: rotate(-3deg);
   }
+  .pc-snap img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: saturate(0.92) sepia(0.08);
+  }
+  .pc-snap-tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 92px;
+    height: 26px;
+    transform: translateX(-50%) rotate(4deg);
+    background: rgba(167, 116, 103, 0.55);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  }
+  .pc-snap-mark {
+    position: absolute;
+    right: -26px;
+    bottom: -18px;
+    width: 92px;
+    height: 92px;
+    transform: rotate(14deg);
+    opacity: 0.7;
+  }
+  .pc-front-sub span:not(.pc-front-sub-dot) { display: block; }
+  .pc-front-sub-dot { display: none; }
+  .pc-front-sub { line-height: 1.6; }
 
   .pc-greetings { font-size: min(11cqw, 3.4rem); }
   .pc-photo-title { font-size: min(14.5cqw, 5.5rem); }
@@ -705,6 +734,8 @@
   .pc-postage, .pc-avion { order: -1; }
   .pc-postmark { right: 130px; width: 140px; top: 14px; }
   .pc-dear { font-size: 2rem; }
+  .pc-signature { font-size: 2.2rem; min-height: 2.6rem; }
+  .pc-avion { font-size: 0.88rem; }
   .pc-msg { font-size: 1.22rem; }
   .env { width: 82%; }
   .pc-note { padding: 2.6rem 1.8rem 2.4rem; }
