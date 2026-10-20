@@ -41,3 +41,16 @@ h1, h2, h3 {
     outline: 3px solid #B7A99A !important;
     outline-offset: 2px;
   }
+/* Phones and tablets: keep the nav bar (and the menu's close button) on screen while scrolling */
+@media (max-width: 900px) {
+  .site-nav {
+    position: fixed !important;
+  }
+}
+
+/* Phones: the home collage fills the screen even with Safari's toolbars showing */
+@media (max-width: 899px) {
+  .home-hero {
+    min-height: 100svh !important;
+  }
+}

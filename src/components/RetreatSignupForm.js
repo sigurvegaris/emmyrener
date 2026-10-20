@@ -133,9 +133,59 @@ function RetreatSignupForm() {
         {/* FRONT */}
         <div className="pc-face pc-front" inert={flipped || mailing} aria-hidden={flipped}>
           <div className="pc-paper pc-front-paper">
+            {/* Phones: the front is a plain notecard with a lavender stamp and postmark in the corner */}
+            {/* Phones: a satin bow tied over the top of the notecard */}
+            <svg className="pc-bow" viewBox="0 0 160 110" aria-hidden="true">
+              <defs>
+                <linearGradient id="pc-satin" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stopColor="#f9c3d3" />
+                  <stop offset="0.45" stopColor="#ef8fae" />
+                  <stop offset="0.7" stopColor="#fbd3df" />
+                  <stop offset="1" stopColor="#e2769a" />
+                </linearGradient>
+                <linearGradient id="pc-satin-dark" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stopColor="#ec86a7" />
+                  <stop offset="1" stopColor="#d4628a" />
+                </linearGradient>
+              </defs>
+              {/* tails */}
+              <path d="M74 50 C66 70 56 88 44 104 L58 102 L62 110 C70 92 76 72 80 54 Z" fill="url(#pc-satin-dark)" />
+              <path d="M86 50 C94 70 104 88 116 104 L102 102 L98 110 C90 92 84 72 80 54 Z" fill="url(#pc-satin-dark)" />
+              {/* loops */}
+              <path d="M78 46 C60 20 22 8 14 26 C6 44 34 66 78 54 Z" fill="url(#pc-satin)" stroke="#d96690" strokeWidth="1" />
+              <path d="M82 46 C100 20 138 8 146 26 C154 44 126 66 82 54 Z" fill="url(#pc-satin)" stroke="#d96690" strokeWidth="1" />
+              <path d="M70 46 C56 32 34 24 26 30" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="2" strokeLinecap="round" />
+              <path d="M90 46 C104 32 126 24 134 30" fill="none" stroke="#fff" strokeOpacity="0.55" strokeWidth="2" strokeLinecap="round" />
+              {/* knot */}
+              <rect x="70" y="40" width="20" height="18" rx="7" fill="url(#pc-satin-dark)" stroke="#c9557f" strokeWidth="1" />
+              <path d="M74 45 Q80 42 86 45" fill="none" stroke="#fff" strokeOpacity="0.6" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+            <div className="pc-card-post" aria-hidden="true">
+              <svg className="pc-card-stamp" viewBox="0 0 90 108">
+                <rect x="4" y="4" width="82" height="100" fill="#fbf6ee" stroke="#fffdf8" strokeWidth="8" strokeDasharray="6 6" />
+                <rect x="12" y="12" width="66" height="84" fill="#ece4f0" stroke="#8b7355" strokeWidth="0.8" />
+                <g stroke="#6f8a5c" strokeWidth="1.6" strokeLinecap="round" fill="none">
+                  <path d="M45 86 C45 70 44 56 45 38" />
+                  <path d="M45 72 C39 68 35 64 33 58" />
+                  <path d="M45 64 C51 60 55 56 57 50" />
+                </g>
+                <g fill="#7b62a3">
+                  <ellipse cx="45" cy="30" rx="3.4" ry="6" />
+                  <ellipse cx="40" cy="37" rx="3.4" ry="6" transform="rotate(-20 40 37)" />
+                  <ellipse cx="50" cy="37" rx="3.4" ry="6" transform="rotate(20 50 37)" />
+                  <ellipse cx="39" cy="47" rx="3.4" ry="6" transform="rotate(-24 39 47)" />
+                  <ellipse cx="51" cy="47" rx="3.4" ry="6" transform="rotate(24 51 47)" />
+                </g>
+                <text x="45" y="93" textAnchor="middle" fontSize="7" letterSpacing="1.4" fill="#5a4128" fontFamily="Cormorant Garamond, serif">PROVENCE</text>
+              </svg>
+            </div>
             <p className="pc-greetings">Greetings from</p>
             <p className="pc-photo-title">PROVENCE</p>
-            <p className="pc-front-sub">Bon Vivant Summer &middot; [Month] 2027</p>
+            <p className="pc-front-sub">
+              <span>Bon Vivant Summer</span>
+              <span className="pc-front-sub-dot"> &middot; </span>
+              <span>[Month] 2027</span>
+            </p>
             <p className="pc-front-note">Summer camp for grown-ups. Rosé included.</p>
             <button type="button" className="pc-write" ref={flipBtnRef} onClick={() => flip(true)}>
               Write your note

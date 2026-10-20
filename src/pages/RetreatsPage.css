@@ -19,6 +19,67 @@
 .rt-banner-frame { position: relative; max-width: 1600px; margin: 0 auto; container-type: inline-size; }
 .rt-banner-frame img { display: block; width: 100%; height: auto; }
 .rt-banner-copy { padding: 2.2rem 1.5rem 2.6rem; text-align: center; background: #f2ece2; }
+/* ---------- Phones and tablets: a scrapbook spread ----------
+   Cut-outs of the collage are scattered above and below the title, which sits on a taped notecard. */
+.rt-scrap { display: none; }
+@media (max-width: 999px) {
+  .rt-banner-frame picture { display: none; }
+  .rt-banner-frame { max-width: 620px; overflow: hidden; padding-bottom: 0.5rem; }
+  .rt-scrap { display: block; position: relative; width: 100%; }
+  .rt-scrap-top { aspect-ratio: 13 / 10; }
+  .rt-scrap-bottom { aspect-ratio: 3 / 2; margin-top: -1.2rem; }
+
+  /* rotate (not transform) so the site-wide image fade-in animation can't straighten them */
+  .rt-scrap .rt-snip {
+    position: absolute;
+    height: auto;
+    border: 5px solid #fffdf8;
+    box-shadow: 0 12px 20px -10px rgba(60, 40, 25, 0.5), 0 1px 3px rgba(60, 40, 25, 0.15);
+  }
+  .rt-scrap .rt-snip-cafe { left: -3%; top: 3%; width: 40%; rotate: -7deg; z-index: 1; }
+  .rt-scrap .rt-snip-door { left: 6%; top: 21%; width: 35%; rotate: -3deg; z-index: 3; }
+  .rt-scrap .rt-snip-selfie { right: -3%; top: 4%; width: 56%; rotate: 4deg; z-index: 2; }
+  .rt-scrap .rt-snip-croissant { right: 5%; top: 43%; width: 34%; rotate: -4deg; z-index: 3; }
+  .rt-scrap .rt-snip-lavender { left: 39%; top: 47%; width: 23%; rotate: 9deg; z-index: 4; }
+  .rt-scrap-mark { position: absolute; left: 33%; top: 1%; width: 19%; rotate: -14deg; z-index: 8; opacity: 0.9; }
+
+  .rt-scrap .rt-snip-straw { left: 3%; top: -6%; width: 44%; rotate: -4deg; z-index: 3; }
+  .rt-scrap .rt-snip-pink { right: 2%; top: 4%; width: 40%; rotate: 6deg; z-index: 2; }
+  .rt-scrap .rt-snip-cheese { left: 40%; top: 30%; width: 23%; rotate: -8deg; z-index: 4; }
+  .rt-scrap .rt-snip-board { left: 4%; top: 44%; width: 38%; rotate: 3deg; z-index: 2; }
+  .rt-scrap .rt-snip-table { right: 9%; top: 42%; width: 32%; rotate: -3deg; z-index: 3; }
+
+  /* the title notecard */
+  .rt-banner-copy {
+    position: relative;
+    z-index: 6;
+    margin: -1.8rem 6% 0;
+    padding: 2.2rem 1.4rem 2.4rem;
+    background: #fffdf8;
+    box-shadow: 0 18px 30px -16px rgba(60, 40, 25, 0.45), 0 1px 3px rgba(60, 40, 25, 0.12);
+  }
+  .rt-banner-copy::before {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border: 1px solid rgba(167, 116, 103, 0.35);
+    pointer-events: none;
+  }
+  .rt-banner-copy::after {
+    content: '';
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    width: 104px;
+    height: 26px;
+    transform: translateX(-50%) rotate(-3deg);
+    background: rgba(167, 116, 103, 0.5);
+  }
+  .rt-banner-copy .rt-btn { position: relative; letter-spacing: 0.12em; padding: 0.9rem 1.4rem; }
+  .rt-meta span:not(.rt-meta-dot) { display: block; }
+  .rt-meta-dot { display: none; }
+  .rt-meta { line-height: 1.9; }
+}
 .rt-welcome { margin: 0; font-style: italic; font-size: 1.35rem; color: var(--rt-rose); }
 .rt-title { margin: 0.3rem 0 0.9rem; font-weight: 400; font-size: clamp(2.2rem, 9.5vw, 3.2rem); line-height: 1.1; letter-spacing: 0.05em; text-transform: uppercase; color: var(--rt-ink); }
 .rt-def { margin: 0 auto 0.9rem; max-width: 420px; font-weight: 300; font-size: 0.8rem; line-height: 1.6; color: #777; }

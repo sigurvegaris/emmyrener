@@ -125,6 +125,8 @@
   box-shadow: 0 12px 22px rgba(79, 93, 58, 0.4);
 }
 
+.pc-card-post, .pc-bow { display: none; }
+
 /* ---------- Back ---------- */
 .pc-back-paper {
   min-height: 460px;
@@ -668,20 +670,114 @@
 
 /* ---------- Small screens ---------- */
 @media (max-width: 900px) {
+  /* The face grows to the height of the form on the back, so a stretched tower would blur and sit
+     behind the words. Show the plain paper instead, with the engraving at its own size above the title. */
   .pc-front {
-    background-position: 8% center;
+    background-position: right center;
   }
   .pc-front-paper {
     aspect-ratio: auto;
     min-height: 420px;
     padding: 2rem 1rem 2.4rem;
-    /* soften the tower so the text stays readable over it */
-    background: linear-gradient(rgba(240, 228, 205, 0.35), rgba(240, 228, 205, 0.55));
   }
+
+  /* The card takes the height of whichever side is showing, so the notecard front isn't
+     stretched to the height of the form on the back. */
+  .pc-inner:not(.pc-flipped) .pc-back { position: absolute; inset: 0 0 auto 0; }
+
+  /* a plain cream notecard, framed like the hero's title card */
+  /* Girly notecard: blush candy stripes, a stitched white label, a satin bow and pink type */
+  .pc-front {
+    background-image: repeating-linear-gradient(90deg, #f9d3de 0 16px, #fdeef2 16px 32px);
+    background-color: #fdeef2;
+  }
+  .pc-front-paper {
+    position: relative;
+    height: auto;
+    margin: 30px 18px 22px;
+    padding: 4.4rem 1.1rem 2.6rem;
+    min-height: 0;
+    background: radial-gradient(ellipse at 50% 0%, #fff 0%, #fffafb 60%, #fff3f6 100%);
+    border-radius: 6px;
+    box-shadow: 0 14px 30px -14px rgba(201, 85, 127, 0.45), 0 0 0 1px rgba(232, 140, 170, 0.35);
+  }
+  /* stitched edge */
+  .pc-front-paper::before {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border: 1.5px dashed rgba(226, 118, 154, 0.55);
+    border-radius: 3px;
+    pointer-events: none;
+  }
+  .pc-bow {
+    display: block;
+    position: absolute;
+    top: -34px;
+    left: 50%;
+    width: 132px;
+    margin-left: -66px;
+    filter: drop-shadow(0 6px 6px rgba(201, 85, 127, 0.3));
+    z-index: 2;
+  }
+  .pc-card-post {
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 52px;
+    height: 64px;
+  }
+  .pc-card-stamp { position: absolute; right: 0; top: 0; width: 46px; transform: rotate(6deg); filter: drop-shadow(0 2px 3px rgba(201, 85, 127, 0.3)); }
+
+  .pc-greetings { color: #c9557f; }
+  .pc-photo-title {
+    background-image: linear-gradient(180deg, #f7a8c2 0%, #e2648f 55%, #c9466f 100%);
+    background-size: 100% 100%;
+    -webkit-text-stroke: 0;
+    filter: drop-shadow(0 3px 0 #fff) drop-shadow(0 6px 10px rgba(201, 70, 111, 0.3));
+  }
+  .pc-front-sub { color: #b84d76; }
+  .pc-front-note { color: #8f3d5e; }
+  .pc-front-note::after { content: ' \2661'; color: #e2648f; font-style: normal; }
+  .pc-write {
+    background: linear-gradient(135deg, #f6a6c0 0%, #e2648f 55%, #d14f7c 100%);
+    box-shadow: 0 10px 22px -6px rgba(209, 79, 124, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    font-size: 1.12rem;
+    padding: 0.9rem 1.9rem;
+  }
+  /* the writing side matches: blush paper, pink-and-rose airmail edge, pink wax seal */
+  .pc-back { background-image: none; background-color: #fff6f8; }
+  .pc-back-paper {
+    background: repeating-linear-gradient(0deg, transparent 0 31px, rgba(236, 150, 178, 0.18) 31px 32px);
+  }
+  .pc-back-paper::before {
+    border-image: repeating-linear-gradient(-45deg, #f2a3bd 0 9px, transparent 9px 16px, #c9557f 16px 25px, transparent 25px 32px) 7;
+  }
+  .pc-dear { color: #c9557f; }
+  .pc-msg, .pc-love { color: #6f3a50; }
+  .pc-label { color: #b84d76; }
+  .pc-input { border-bottom-color: #eaa3bb; }
+  .pc-input:focus { border-bottom-color: #c9557f; background: rgba(255, 228, 236, 0.45); }
+  .pc-chip { border-color: #f0b3c6; background: #fff; color: #8f3d5e; }
+  .pc-chip-on { background: linear-gradient(135deg, #f6a6c0, #d9578a); border-color: #d9578a; color: #fff; }
+  .pc-seal {
+    border-color: rgba(255, 230, 238, 0.7);
+    background: radial-gradient(circle at 35% 30%, #f7a3bf, #e0608e 58%, #b8406b);
+    box-shadow: 0 8px 16px rgba(201, 70, 111, 0.4), inset 0 -4px 8px rgba(120, 20, 60, 0.25);
+  }
+  .pc-avion span { background: #c9557f; }
+  .pc-avion { color: #b84d76; }
+
+  .pc-front-sub span:not(.pc-front-sub-dot) { display: block; }
+  .pc-front-sub-dot { display: none; }
+  .pc-front-sub { line-height: 1.6; }
 
   .pc-greetings { font-size: min(11cqw, 3.4rem); }
   .pc-photo-title { font-size: min(14.5cqw, 5.5rem); }
-  .pc-front-sub { font-size: max(min(4.2cqw, 1.3rem), 0.8rem); }
+  .pc-front-sub { font-size: max(min(4.2cqw, 1.3rem), 0.8rem); letter-spacing: 0.1em; }
 }
 
 @media (max-width: 760px) {
@@ -692,6 +788,8 @@
   .pc-postage, .pc-avion { order: -1; }
   .pc-postmark { right: 130px; width: 140px; top: 14px; }
   .pc-dear { font-size: 2rem; }
+  .pc-signature { font-size: 2.2rem; min-height: 2.6rem; }
+  .pc-avion { font-size: 0.88rem; }
   .pc-msg { font-size: 1.22rem; }
   .env { width: 82%; }
   .pc-note { padding: 2.6rem 1.8rem 2.4rem; }

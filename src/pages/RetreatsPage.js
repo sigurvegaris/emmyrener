@@ -12,6 +12,22 @@ const WEEK = [
   { src: '/videos/retreat-wk-orange.webp', label: 'Au soleil', alt: 'Oranges ripening on a tree in the sun' },
 ];
 
+// Pieces of the hero collage, laid out as a scrapbook spread on phones (positions live in RetreatsPage.css)
+const SCRAP_TOP = [
+  { src: 'cafe', cls: 'rt-snip-cafe' },
+  { src: 'door', cls: 'rt-snip-door' },
+  { src: 'selfie', cls: 'rt-snip-selfie' },
+  { src: 'croissant', cls: 'rt-snip-croissant' },
+  { src: 'lavender', cls: 'rt-snip-lavender' },
+];
+const SCRAP_BOTTOM = [
+  { src: 'table', cls: 'rt-snip-table' },
+  { src: 'straw', cls: 'rt-snip-straw' },
+  { src: 'pink', cls: 'rt-snip-pink' },
+  { src: 'board', cls: 'rt-snip-board' },
+  { src: 'cheese', cls: 'rt-snip-cheese' },
+];
+
 function RetreatsPage() {
   const scrollToForm = (e) => {
     e.preventDefault();
@@ -26,12 +42,15 @@ function RetreatsPage() {
         <header className="rt-banner">
           <div className="rt-banner-frame">
             <picture>
+              {/* phones and tablets get the scrapbook spread below instead of the wide collage */}
+              <source media="(max-width: 999px)" srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACw=" />
               <source
                 type="image/webp"
                 srcSet="/videos/retreat-collage-960.webp 960w, /videos/retreat-collage-1440.webp 1440w, /videos/retreat-collage-1920.webp 1920w, /videos/retreat-collage-2880.webp 2880w"
                 sizes="(min-width: 1600px) 1600px, 100vw"
               />
               <img
+                className="rt-banner-img"
                 src="/videos/retreat-collage.jpg"
                 width="1440"
                 height="720"
@@ -40,6 +59,20 @@ function RetreatsPage() {
                 alt="A collage of Provence: Emmy and Hannah in a blue doorway covered in red roses, lavender bundles, a selfie with horses, croissants, a café street, a charcuterie board with wine, a long table set in the vines, strawberries at the market, and pink spritzes"
               />
             </picture>
+            {/* phones: Emmy's photos scattered like a scrapbook page around the title notecard */}
+            <div className="rt-scrap rt-scrap-top" aria-hidden="true">
+              {SCRAP_TOP.map((p) => (
+                <img key={p.src} className={`rt-snip ${p.cls}`} src={`/videos/scrap/${p.src}.webp`} alt="" decoding="async" />
+              ))}
+              <svg className="rt-scrap-mark" viewBox="0 0 100 100">
+                <g fill="none" stroke="#a77467" strokeWidth="1.5">
+                  <circle cx="50" cy="50" r="44" />
+                  <circle cx="50" cy="50" r="37" strokeWidth="0.8" />
+                </g>
+                <text x="50" y="47" textAnchor="middle" fontSize="11" letterSpacing="2" fill="#a77467" fontFamily="Cormorant Garamond, serif">PROVENCE</text>
+                <text x="50" y="62" textAnchor="middle" fontSize="9" letterSpacing="1.5" fill="#a77467" fontFamily="Cormorant Garamond, serif">2027</text>
+              </svg>
+            </div>
             <div className="rt-banner-copy">
               <p className="rt-welcome">Welcome to a</p>
               <h1 className="rt-title">Bon Vivant Summer</h1>
@@ -47,7 +80,11 @@ function RetreatsPage() {
                 <em>bon vivant</em> /bɔ̃ viˈvɑ̃/ noun: a person who loves luxury, fine food, good wine, and an active
                 social life
               </p>
-              <p className="rt-meta">Provence · [Month] 2027 · 5 nights / 6 days</p>
+              <p className="rt-meta">
+                <span>Provence · [Month] 2027</span>
+                <span className="rt-meta-dot"> · </span>
+                <span>5 nights / 6 days</span>
+              </p>
               <p className="rt-lede">
                 A lively, food-filled week in the South of France for women who want to explore, eat well, meet new
                 people, and soak up the Provençal way of life.
@@ -55,6 +92,11 @@ function RetreatsPage() {
               <a href="#interest-list" onClick={scrollToForm} className="rt-btn">
                 Get on the interest list
               </a>
+            </div>
+            <div className="rt-scrap rt-scrap-bottom" aria-hidden="true">
+              {SCRAP_BOTTOM.map((p) => (
+                <img key={p.src} className={`rt-snip ${p.cls}`} src={`/videos/scrap/${p.src}.webp`} alt="" loading="lazy" decoding="async" />
+              ))}
             </div>
           </div>
         </header>

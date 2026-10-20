@@ -16,14 +16,17 @@ function Hero() {
 
 
   return (
-    <section style={styles.hero}>
+    <section className="home-hero" style={styles.hero}>
       {/* Background Image - Responsive */}
       <div style={{
         ...styles.backgroundImage,
         backgroundImage: windowWidth < 900 
         ? 'url(/videos/scrapbookhero-mobile1.jpg)'
         : 'url(/videos/hero-desktop.jpg)',  // New high-res collage
-        backgroundSize: windowWidth < 900 ? '100% 100%' : 'cover',
+        backgroundSize: 'cover',
+        backgroundPosition: windowWidth < 900 ? 'center' : 'center top',
+        // phones: start the collage just under the nav bar instead of stretching it
+        top: windowWidth < 900 ? '69px' : '8%',
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'scale(1)' : 'scale(1.1)',
         transition: 'opacity 1.2s ease-out, transform 1.2s ease-out',
