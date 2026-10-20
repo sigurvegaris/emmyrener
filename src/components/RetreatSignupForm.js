@@ -133,24 +133,36 @@ function RetreatSignupForm() {
         {/* FRONT */}
         <div className="pc-face pc-front" inert={flipped || mailing} aria-hidden={flipped}>
           <div className="pc-paper pc-front-paper">
-            {/* Phones: a snapshot of Provence taped to the card, in place of the engraving */}
-            <figure className="pc-snap" aria-hidden="true">
-              <img src="/videos/retreat-lavender.webp" alt="" loading="lazy" decoding="async" />
-              <span className="pc-snap-tape" />
-              <svg className="pc-snap-mark" viewBox="0 0 100 100">
-                <g fill="none" stroke="#2c3550" strokeWidth="1.4">
+            {/* Phones: the front is a plain notecard with a lavender stamp and postmark in the corner */}
+            <div className="pc-card-post" aria-hidden="true">
+              <svg className="pc-card-mark" viewBox="0 0 100 100">
+                <g fill="none" stroke="#3e4a6a" strokeWidth="1.4" opacity="0.6">
                   <circle cx="50" cy="50" r="44" />
-                  <circle cx="50" cy="50" r="36" strokeWidth="0.8" />
+                  <circle cx="50" cy="50" r="37" strokeWidth="0.8" />
                 </g>
-                <defs>
-                  <path id="pc-snap-arc" d="M50 50 m-40 0 a40 40 0 1 1 80 0" />
-                </defs>
-                <text fontSize="8" letterSpacing="1.2" fill="#2c3550" fontFamily="Cormorant Garamond, serif">
-                  <textPath href="#pc-snap-arc" startOffset="50%" textAnchor="middle">AIX-EN-PROVENCE</textPath>
-                </text>
-                <text x="50" y="56" textAnchor="middle" fontSize="11" letterSpacing="1.5" fill="#2c3550" fontFamily="Cormorant Garamond, serif">2027</text>
+                <g fill="#3e4a6a" opacity="0.65" fontFamily="Cormorant Garamond, serif" textAnchor="middle">
+                  <text x="50" y="47" fontSize="10" letterSpacing="1.5">AIX</text>
+                  <text x="50" y="61" fontSize="8" letterSpacing="1.2">2027</text>
+                </g>
               </svg>
-            </figure>
+              <svg className="pc-card-stamp" viewBox="0 0 90 108">
+                <rect x="4" y="4" width="82" height="100" fill="#fbf6ee" stroke="#fffdf8" strokeWidth="8" strokeDasharray="6 6" />
+                <rect x="12" y="12" width="66" height="84" fill="#ece4f0" stroke="#8b7355" strokeWidth="0.8" />
+                <g stroke="#6f8a5c" strokeWidth="1.6" strokeLinecap="round" fill="none">
+                  <path d="M45 86 C45 70 44 56 45 38" />
+                  <path d="M45 72 C39 68 35 64 33 58" />
+                  <path d="M45 64 C51 60 55 56 57 50" />
+                </g>
+                <g fill="#7b62a3">
+                  <ellipse cx="45" cy="30" rx="3.4" ry="6" />
+                  <ellipse cx="40" cy="37" rx="3.4" ry="6" transform="rotate(-20 40 37)" />
+                  <ellipse cx="50" cy="37" rx="3.4" ry="6" transform="rotate(20 50 37)" />
+                  <ellipse cx="39" cy="47" rx="3.4" ry="6" transform="rotate(-24 39 47)" />
+                  <ellipse cx="51" cy="47" rx="3.4" ry="6" transform="rotate(24 51 47)" />
+                </g>
+                <text x="45" y="93" textAnchor="middle" fontSize="7" letterSpacing="1.4" fill="#5a4128" fontFamily="Cormorant Garamond, serif">PROVENCE</text>
+              </svg>
+            </div>
             <p className="pc-greetings">Greetings from</p>
             <p className="pc-photo-title">PROVENCE</p>
             <p className="pc-front-sub">
