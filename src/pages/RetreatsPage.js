@@ -32,6 +32,7 @@ function RetreatsPage() {
         {/* Opening: Emmy's photo collage with the title card set in its empty center */}
         <header className="rt-banner">
           <div className="rt-banner-frame">
+            <div className="rt-banner-pic">
             <picture>
               <source
                 type="image/webp"
@@ -47,6 +48,11 @@ function RetreatsPage() {
                 alt="A collage of Provence: Emmy and Hannah in a blue doorway covered in red roses, lavender bundles, a selfie with horses, croissants, a café street, a charcuterie board with wine, a long table set in the vines, strawberries at the market, and pink spritzes"
               />
             </picture>
+            <div className="rt-banner-mark" aria-hidden="true">
+              <span className="rt-mark-welcome">Welcome to a</span>
+              <span className="rt-mark-title">Bon Vivant<br />Summer</span>
+            </div>
+            </div>
             <div className="rt-banner-copy">
               <p className="rt-welcome">Welcome to a</p>
               <h1 className="rt-title">Bon Vivant Summer</h1>

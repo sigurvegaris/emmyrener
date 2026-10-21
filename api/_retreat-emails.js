@@ -7,6 +7,9 @@ const esc = (s) =>
 
 // Images must be publicly reachable. Production serves them from the live site; previews are behind
 // Vercel login, so they load from the public GitHub repo on the deployed branch instead.
+// The guest signs with their full name; the welcome note greets them by their first.
+const firstName = (name) => String(name).trim().split(/\s+/)[0];
+
 function assetBase() {
   if (process.env.RETREAT_EMAIL_ASSET_BASE) return process.env.RETREAT_EMAIL_ASSET_BASE.replace(/\/$/, '');
   if (process.env.VERCEL_ENV === 'production') return 'https://emmyrener.com';
@@ -122,7 +125,7 @@ function confirmationHtml({ name, room, questionnaire }) {
 
       <tr><td class="pad" style="padding:26px 40px 4px;">
         ${kicker('Bon Vivant Summer &middot; Provence &middot; May 2027')}
-        <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(name)}!</h1>
+        <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(firstName(name))}!</h1>
         ${para(`Thank you for joining the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>, our week in Provence this May. Your letter made our day.`)}
         ${para("Your seat isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.")}
         ${para('Until then, picture yourself wandering the morning markets, lingering over a three-hour lunch in the garden, and raising a glass of rosé with new friends as the sun goes down. We can\'t wait to share it with you.')}
@@ -219,7 +222,7 @@ function notificationHtml({ name, email, room, receivedAt }) {
 
 function confirmationText({ name, room, questionnaire }) {
   return [
-    `Merci, ${name}!`,
+    `Merci, ${firstName(name)}!`,
     '',
     'Thank you for joining the list for Bon Vivant Summer, our week in Provence this May. Your letter made our day.',
     '',

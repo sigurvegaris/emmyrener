@@ -24,6 +24,30 @@
 .rt-def { margin: 0 auto 0.9rem; max-width: 420px; font-weight: 300; font-size: 0.8rem; line-height: 1.6; color: #777; }
 .rt-meta { margin: 0 0 1rem; font-size: 0.72rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--rt-rose); }
 .rt-lede { margin: 0 auto 1.6rem; max-width: 460px; font-weight: 300; font-size: 1rem; line-height: 1.8; color: var(--rt-body); }
+/* Small screens: the full copy sits below the collage, so its empty cream centre gets the title */
+.rt-banner-pic { position: relative; }
+.rt-banner-mark {
+  position: absolute;
+  left: 26.3%;
+  right: 29.7%;
+  top: 22.9%;
+  bottom: 23.75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.rt-banner-mark span { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+.rt-banner-mark .rt-mark-welcome { font-style: italic; font-size: 4cqw; color: var(--rt-rose); line-height: 1.1; }
+.rt-banner-mark .rt-mark-title { margin-top: 0.6cqw; font-size: 5.6cqw; line-height: 1.05; letter-spacing: 0.06em; text-transform: uppercase; color: var(--rt-ink); }
+@media (max-width: 999.98px) {
+  .rt-banner-copy .rt-welcome { display: none; }
+  .rt-banner-copy .rt-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; }
+}
+@media (min-width: 1000px) { .rt-banner-mark { display: none; } }
+
 /* wide screens: the text sits in the empty cream area of the 2:1 collage */
 @media (min-width: 1000px) {
   .rt-banner-copy {
@@ -186,7 +210,9 @@
   .rt-week { grid-template-columns: repeat(2, 1fr); row-gap: 2.4rem; }
   .rt-stay, .rt-hosts-inner { grid-template-columns: 1fr; gap: 3rem; }
   .rt-stay img { max-width: 520px; margin: 0 auto; }
-  .rt-hosts-photo { max-width: 460px; margin: 1.4rem auto 0; width: calc(100% - 1.4rem); }
+  .rt-hosts-photo { max-width: 460px; margin: 1.4rem auto 0; width: calc(100% - 1.6rem); }
+  /* centred mat frame on small screens: the offset frame ran past the left edge */
+  .rt-hosts-photo::before { inset: -0.8rem; }
   .rt-hosts-text { text-align: center; }
 }
 @media (max-width: 600px) {

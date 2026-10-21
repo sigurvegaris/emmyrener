@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RetreatSignupForm.css';
 
@@ -7,7 +7,8 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAIL_MS = 3600; // length of the envelope animation in RetreatSignupForm.css
 
 // Interest-list sign-up as a postcard: a "Greetings from Provence" front that flips over to
-// a writable back. On send it is tucked into an airmail envelope, sealed and flown off, then the
+// a writable back. The back walks the visitor through it in three steps: the card zooms in on
+// the signature, then on the address, then pulls back for a last look and a send. On send it is tucked into an airmail envelope, sealed and flown off, then the
 // visitor lands on the thank-you page (/retreats/merci). Posts to /api/retreat-signup.
 function RetreatSignupForm() {
   const navigate = useNavigate();
@@ -19,16 +20,25 @@ function RetreatSignupForm() {
   const [status, setStatus] = useState('idle'); // idle | sending | mailing | error
   const [error, setError] = useState('');
   const [hints, setHints] = useState({});
+  const [step, setStep] = useState(1); // 1 name, 2 email, 3 look over and send
+  const [consent, setConsent] = useState(false);
+  const [view, setView] = useState({ h: undefined, t: 'none' });
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const flipBtnRef = useRef(null);
   const cardRef = useRef(null);
+  const stageRef = useRef(null);
+  const zoomRef = useRef(null);
+  const nameZoneRef = useRef(null);
+  const emailZoneRef = useRef(null);
+  const guideRef = useRef(null);
+  const sealRef = useRef(null);
 
   const flip = (to) => {
     setFlipped(to);
     // Move focus to the face that just became visible.
     window.setTimeout(() => {
-      if (to && nameRef.current) nameRef.current.focus({ preventScroll: true });
+      if (to) focusStep(step);
       if (!to && flipBtnRef.current) flipBtnRef.current.focus({ preventScroll: true });
     }, 450);
   };
@@ -46,19 +56,56 @@ function RetreatSignupForm() {
     return () => window.clearTimeout(t);
   }, [status, name, navigate]);
 
+  const nameHint = (v) => {
+    const parts = v.trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'Every good letter needs a signature. Add your name so we know whose seat to save.';
+    if (parts.length < 2) return 'Lovely! Could you add your last name too, so we can find you on the guest list?';
+    return undefined;
+  };
+  const emailHint = (v) => {
+    if (!v.trim()) return 'Almost there! Where should Emmy & Hannah send the news?';
+    if (!EMAIL_RE.test(v.trim())) return 'Hmm, that address looks a little off. Mind giving it another look?';
+    return undefined;
+  };
+
+  const focusStep = useCallback((n) => {
+    const el = n === 1 ? nameRef.current : n === 2 ? emailRef.current : sealRef.current;
+    if (el) el.focus({ preventScroll: true });
+  }, []);
+
+  const goTo = (n) => {
+    setStep(n);
+    window.setTimeout(() => focusStep(n), 380);
+  };
+
+  const next = () => {
+    if (step === 1) {
+      const h = nameHint(name);
+      setHints((x) => ({ ...x, name: h }));
+      if (h) return nameRef.current && nameRef.current.focus();
+      return goTo(2);
+    }
+    if (step === 2) {
+      const h = emailHint(email);
+      setHints((x) => ({ ...x, email: h }));
+      if (h) return emailRef.current && emailRef.current.focus();
+      return goTo(3);
+    }
+    return undefined;
+  };
+
   const validate = () => {
-    const next = {};
-    if (!name.trim()) next.name = 'Sign with your first name, so we know who it’s from.';
-    if (!email.trim()) next.email = 'Add your email so we can write back.';
-    else if (!EMAIL_RE.test(email.trim())) next.email = 'That address doesn’t look quite right.';
+    const next = { name: nameHint(name), email: emailHint(email) };
+    if (!consent) next.consent = 'One last thing: tick the box so we have your blessing to write to you.';
     setHints(next);
-    if (next.name && nameRef.current) nameRef.current.focus();
-    else if (next.email && emailRef.current) emailRef.current.focus();
-    return !next.name && !next.email;
+    if (next.name) goTo(1);
+    else if (next.email) goTo(2);
+    return !next.name && !next.email && !next.consent;
   };
 
   const submit = async (e) => {
     e.preventDefault();
+    if (step < 3) return next();
     if (!validate()) return;
     setStatus('sending');
     setError('');
@@ -66,7 +113,7 @@ function RetreatSignupForm() {
       const res = await fetch('/api/retreat-signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, room, website }),
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), room, website }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -79,9 +126,65 @@ function RetreatSignupForm() {
     }
   };
 
+  // Point the "camera" at the part of the card for this step: scale and pan the card inside a
+  // fixed window. Step 3 shows the whole card. Measured in untransformed layout (offsets).
+  const frame = useCallback(() => {
+    const stage = stageRef.current;
+    const layer = zoomRef.current;
+    if (!stage || !layer) return;
+    const W = stage.clientWidth;
+    const H = layer.offsetHeight;
+    const phone = W < 600;
+    const zone = step === 1 ? nameZoneRef.current : step === 2 ? emailZoneRef.current : null;
+    if (!zone) {
+      setView({ h: H, t: 'none' });
+      return;
+    }
+    const h = phone ? Math.min(H, 440) : H;
+    let x = 0;
+    let y = 0;
+    for (let el = zone; el && el !== layer; el = el.offsetParent) {
+      x += el.offsetLeft;
+      y += el.offsetTop;
+    }
+    const zw = zone.offsetWidth;
+    const zh = zone.offsetHeight;
+    const s = Math.max(1, Math.min(1.7, (W * 0.9) / zw, (h * 0.8) / zh));
+    const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+    const tx = clamp(W / 2 - s * (x + zw / 2), W - s * W, 0);
+    const ty = clamp(h / 2 - s * (y + zh / 2), Math.min(0, h - s * H), 0);
+    setView({ h, t: `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px) scale(${s.toFixed(3)})` });
+  }, [step]);
+
+  useLayoutEffect(() => {
+    frame();
+  }, [frame, hints, flipped]);
+
+  useEffect(() => {
+    window.addEventListener('resize', frame);
+    return () => window.removeEventListener('resize', frame);
+  }, [frame]);
+
+  // Keep the step and its guide on screen (on phones the card is taller than the screen).
+  useEffect(() => {
+    if (!flipped || !cardRef.current) return undefined;
+    const t = window.setTimeout(() => {
+      const card = cardRef.current.getBoundingClientRect();
+      const guide = guideRef.current && guideRef.current.getBoundingClientRect();
+      if (card.top < 70) window.scrollBy({ top: card.top - 90, behavior: 'smooth' });
+      else if (guide && guide.bottom > window.innerHeight) {
+        // the last step needs its Send button in view; earlier steps keep the card's top in view
+        const by = guide.bottom - window.innerHeight + 16;
+        window.scrollBy({ top: step === 3 ? by : Math.min(by, card.top - 90), behavior: 'smooth' });
+      }
+    }, 650);
+    return () => window.clearTimeout(t);
+  }, [step, flipped]);
+
   const clearHint = (field) => hints[field] && setHints((h) => ({ ...h, [field]: undefined }));
 
-  const first = name.trim();
+  const signature = name.trim();
+  const first = signature.split(/\s+/)[0] || '';
   const mailing = status === 'mailing';
 
   return (
@@ -112,7 +215,9 @@ function RetreatSignupForm() {
         {/* BACK */}
         <div className="pc-face pc-back" inert={!flipped || mailing} aria-hidden={!flipped}>
           <div className="pc-paper pc-back-paper">
-            <form className="pc-form" onSubmit={submit} noValidate>
+            <form onSubmit={submit} noValidate>
+              <div className={`pc-stage${step < 3 ? ' pc-stage-zoom' : ''}`} ref={stageRef} style={{ height: view.h }}>
+              <div className={`pc-form pc-at-${step}`} ref={zoomRef} style={{ transform: view.t }}>
               {/* Message side */}
               <div className="pc-left">
                 <p className="pc-script pc-dear">Chères Emmy &amp; Hannah,</p>
@@ -120,7 +225,8 @@ function RetreatSignupForm() {
                   Save me a seat at the long table. I would love to be the very first to hear about Bon Vivant Summer,
                   and I simply cannot wait to see you in Provence.
                 </p>
-                <label className="pc-label" htmlFor="retreat-name">My first name</label>
+                <div className="pc-zone pc-zone-name" ref={nameZoneRef}>
+                <label className="pc-label" htmlFor="retreat-name">My full name</label>
                 <input
                   id="retreat-name"
                   ref={nameRef}
@@ -132,7 +238,8 @@ function RetreatSignupForm() {
                     clearHint('name');
                   }}
                   maxLength={80}
-                  autoComplete="given-name"
+                  autoComplete="name"
+                  placeholder="first and last name"
                   aria-invalid={hints.name ? 'true' : undefined}
                   aria-describedby={hints.name ? 'retreat-name-hint' : undefined}
                 />
@@ -141,8 +248,9 @@ function RetreatSignupForm() {
                 )}
                 <p className="pc-love">
                   Bisous,
-                  <span className="pc-script pc-signature">{first || ' '}</span>
+                  <span className="pc-script pc-signature">{signature || ' '}</span>
                 </p>
+                </div>
               </div>
 
               <div className="pc-divider" aria-hidden="true" />
@@ -200,6 +308,7 @@ function RetreatSignupForm() {
                   <span>Par avion</span> By air mail
                 </p>
 
+                <div className="pc-zone pc-zone-email" ref={emailZoneRef}>
                 <label className="pc-label" htmlFor="retreat-email">Send the news to</label>
                 <input
                   id="retreat-email"
@@ -235,6 +344,7 @@ function RetreatSignupForm() {
                     </label>
                   ))}
                 </fieldset>
+                </div>
 
                 {/* Honeypot: hidden from people, tempting to bots */}
                 <input
@@ -247,24 +357,82 @@ function RetreatSignupForm() {
                   aria-hidden="true"
                   className="pc-honey"
                 />
+              </div>
+              </div>
+              </div>
 
-                {status === 'error' && (
-                  <p className="pc-hint pc-error" role="alert">{error}</p>
+              {/* The guide: what to do on each step, and the send at the end */}
+              <div className="pc-guide" ref={guideRef} aria-live="polite">
+                <p className="pc-guide-step">Step {step} of 3</p>
+                {step === 1 && (
+                  <>
+                    <p className="pc-guide-title">First, sign your note</p>
+                    <p className="pc-guide-text">Your first and last name, just as you&rsquo;d like it on your place card.</p>
+                  </>
+                )}
+                {step === 2 && (
+                  <>
+                    <p className="pc-guide-title">Where should we send the news?</p>
+                    <p className="pc-guide-text">
+                      Your email, so Emmy &amp; Hannah can write the moment booking opens. And which room are you
+                      dreaming of?
+                    </p>
+                  </>
+                )}
+                {step === 3 && (
+                  <>
+                    <p className="pc-guide-title">Everything looks lovely{first ? `, ${first}` : ''}!</p>
+                    <dl className="pc-sum">
+                      <div><dt>Signed</dt><dd>{signature}</dd></div>
+                      <div><dt>Send the news to</dt><dd>{email.trim()}</dd></div>
+                      <div><dt>Dreaming of</dt><dd>{room === 'Not sure yet' ? 'Not sure yet' : `A ${room.toLowerCase()}`}</dd></div>
+                    </dl>
+                    <label className={`pc-consent${hints.consent ? ' pc-consent-flag' : ''}`}>
+                      <input
+                        type="checkbox"
+                        checked={consent}
+                        onChange={(e) => {
+                          setConsent(e.target.checked);
+                          clearHint('consent');
+                        }}
+                        aria-describedby={hints.consent ? 'retreat-consent-hint' : undefined}
+                      />
+                      <span>Yes, Emmy &amp; Hannah may email me about Bon Vivant Summer.</span>
+                    </label>
+                    {hints.consent && (
+                      <p className="pc-hint" id="retreat-consent-hint">{hints.consent}</p>
+                    )}
+                    {status === 'error' && (
+                      <p className="pc-hint pc-error" role="alert">{error}</p>
+                    )}
+                  </>
                 )}
 
-                <div className="pc-actions">
-                  <button type="submit" className="pc-seal" disabled={status === 'sending' || mailing}>
-                    <span className="pc-seal-main">{status === 'sending' ? 'Sending' : 'Send'}</span>
-                    <span className="pc-seal-sub">{status === 'sending' ? '…' : 'with love'}</span>
-                  </button>
-                  <p className="pc-fine">Free to join. No commitment to book.</p>
+                <div className="pc-guide-actions">
+                  {step === 1 ? (
+                    <button type="button" className="pc-guide-back" onClick={() => flip(false)}>
+                      <span aria-hidden="true">&larr; </span>See the front
+                    </button>
+                  ) : (
+                    <button type="button" className="pc-guide-back" onClick={() => goTo(step - 1)}>
+                      <span aria-hidden="true">&larr; </span>{step === 3 ? 'Make a change' : 'Back'}
+                    </button>
+                  )}
+                  {step < 3 ? (
+                    <button type="submit" className="pc-next">
+                      Next<span aria-hidden="true"> &rarr;</span>
+                    </button>
+                  ) : (
+                    <button type="submit" ref={sealRef} className="pc-seal" disabled={status === 'sending' || mailing}>
+                      <span className="pc-seal-main">{status === 'sending' ? 'Sending' : 'Send'}</span>
+                      <span className="pc-seal-sub">{status === 'sending' ? '…' : 'with love'}</span>
+                    </button>
+                  )}
                 </div>
+                {step === 3 && <p className="pc-fine">Free to join. No commitment to book.</p>}
               </div>
             </form>
 
-            <button type="button" className="pc-flip-back" onClick={() => flip(false)}>
-              <span aria-hidden="true">&larr; </span>See the front
-            </button>
           </div>
         </div>
       </div>

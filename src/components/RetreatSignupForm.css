@@ -218,7 +218,9 @@
   border-bottom-width: 2px;
 }
 .pc .pc-seal:focus-visible,
-.pc .pc-write:focus-visible {
+.pc .pc-write:focus-visible,
+.pc .pc-next:focus-visible,
+.pc .pc-guide-back:focus-visible {
   outline: 2px solid rgba(140, 92, 80, 0.6) !important;
   outline-offset: 3px;
 }
@@ -365,13 +367,6 @@
   opacity: 0;
 }
 
-.pc-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  margin-top: 1.4rem;
-}
-
 /* wax-seal style send button */
 .pc-seal {
   appearance: none;
@@ -424,24 +419,150 @@
   opacity: 0.75;
 }
 
-.pc-flip-back {
+
+/* ---------- Guided steps: the card is a window the "camera" zooms and pans inside ---------- */
+.pc-stage {
+  position: relative;
+  overflow: hidden;
+  transition: height 0.6s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+.pc-stage.pc-stage-zoom {
+  /* soft edges where the zoomed card runs out of the window */
+  -webkit-mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+}
+.pc-stage > .pc-form {
+  transform-origin: 0 0;
+  transition: transform 0.75s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+.pc-dear, .pc-msg, .pc-left, .pc-right, .pc-divider, .pc-postage, .pc-avion {
+  transition: opacity 0.5s ease;
+}
+/* the part being filled in stays bright; the rest of the card fades back */
+.pc-at-1 .pc-dear, .pc-at-1 .pc-msg, .pc-at-1 .pc-divider, .pc-at-1 .pc-right,
+.pc-at-2 .pc-left, .pc-at-2 .pc-divider, .pc-at-2 .pc-postage, .pc-at-2 .pc-avion {
+  opacity: 0.32;
+}
+
+.pc-guide {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(139, 115, 85, 0.45);
+  text-align: center;
+}
+.pc-guide-step {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #6b5238;
+}
+.pc-guide-title {
+  margin: 0.15rem 0 0.2rem;
+  font-family: 'Pinyon Script', cursive !important;
+  font-size: 2.1rem;
+  line-height: 1.25;
+  color: var(--pc-olive);
+}
+.pc-guide-text {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic;
+  font-size: 1.18rem;
+  line-height: 1.45;
+  color: var(--pc-ink);
+}
+.pc-guide .pc-hint { text-align: center; }
+.pc-guide-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-top: 1.1rem;
+}
+.pc-next {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  background: var(--pc-olive);
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.8rem 2rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(94, 60, 50, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pc-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(94, 60, 50, 0.35);
+}
+.pc-guide-back {
   appearance: none;
   background: none;
   border: none;
   cursor: pointer;
-  position: absolute;
-  left: 1.9rem;
-  bottom: 1rem;
   font-family: 'Cormorant Garamond', serif !important;
-  font-size: 0.875rem;
+  font-size: 1rem;
   letter-spacing: 0.04em;
   color: var(--pc-brown);
-  padding: 0.25rem 0;
+  padding: 0.4rem 0;
 }
-.pc-flip-back:hover {
+.pc-guide-back:hover {
   color: var(--pc-olive);
   text-decoration: underline;
 }
+
+/* step 3: the last look */
+.pc-sum {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 30rem;
+  margin: 0.7rem auto 1rem;
+}
+.pc-sum dt {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #6b5238;
+}
+.pc-sum dd {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--pc-ink);
+  overflow-wrap: anywhere;
+}
+.pc-consent {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  max-width: 30rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--pc-ink);
+}
+.pc-consent span { font-family: 'Cormorant Garamond', serif !important; }
+.pc-consent input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0.15rem 0 0;
+  accent-color: var(--pc-olive);
+}
+.pc-consent-flag span { color: #a0473f; }
+.pc-guide .pc-fine { margin-top: 0.9rem; }
 
 /* ---------- Send-off: into the envelope, sealed, and away ---------- */
 .pc-inner {
@@ -592,7 +713,12 @@
 
 
 @media (prefers-reduced-motion: reduce) {
-  .pc-inner { transition: none; }
+  .pc-inner, .pc-stage, .pc-stage.pc-stage-zoom {
+  /* soft edges where the zoomed card runs out of the window */
+  -webkit-mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(transparent, #000 9%, #000 91%, transparent);
+}
+.pc-stage > .pc-form { transition: none; }
   .pc-write, .pc-hint { animation: none; }
   .pc-scene { display: none; }
 }
@@ -618,7 +744,9 @@
 }
 
 @media (max-width: 760px) {
-  .pc-back-paper { padding: 1.9rem 1.4rem 4.2rem; }
+  .pc-back-paper { padding: 1.9rem 1.4rem 1.8rem; }
+  .pc-guide-title { font-size: 1.85rem; }
+  .pc-guide-text { font-size: 1.08rem; }
   .pc-form { grid-template-columns: 1fr; gap: 1.5rem 0; }
   .pc-divider { height: 1px; width: 100%; background: repeating-linear-gradient(to right, rgba(139, 115, 85, 0.4) 0 6px, transparent 6px 12px); }
   .pc-right { display: flex; flex-direction: column; }
