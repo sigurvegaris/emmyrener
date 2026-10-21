@@ -94,8 +94,8 @@ function RetreatsPage() {
         {/* Full-width photo with the rosé line over it */}
         <section className="rt-banner2" aria-label="A toast">
           <picture>
-            <source media="(min-width: 900px)" srcSet="/videos/retreat-toast-1800.webp" />
-            <img src="/videos/retreat-toast-1000.webp" width="1800" height="900" loading="lazy" alt="Friends raising glasses of wine over dinner" />
+            <source media="(min-width: 900px)" srcSet="/videos/retreat-rose-banner-1800.webp" />
+            <img src="/videos/retreat-rose-banner-1000.webp" width="1800" height="900" loading="lazy" alt="Friends clinking glasses of rosé in the sunshine" />
           </picture>
           <p className="rt-banner2-text">
             The South of France is more than rosé all day.
@@ -129,17 +129,6 @@ function RetreatsPage() {
             An intimate group of 8 to 10 women ready for good food, new friends, and a week that feels like summer
             camp for grown-ups. Come with a friend or come solo.
           </p>
-          <figure className="rt-who-photo">
-            <img
-              src="/videos/retreat-rose-toast.webp"
-              srcSet="/videos/retreat-rose-toast-640.webp 640w, /videos/retreat-rose-toast.webp 1108w"
-              sizes="(min-width: 700px) 640px, 92vw"
-              width="1108"
-              height="774"
-              loading="lazy"
-              alt="Friends clinking glasses of rosé in the sunshine"
-            />
-          </figure>
         </section>
 
         {/* Stay and hosts as two cards */}

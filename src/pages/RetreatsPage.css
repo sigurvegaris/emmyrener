@@ -108,6 +108,7 @@
   text-transform: uppercase;
 }
 .rt-banner2-text br { display: block; }
+.rt-banner2-text { text-shadow: 0 1px 14px rgba(20, 16, 12, 0.55); }
 
 /* ---------- Week ---------- */
 .rt-week { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
@@ -126,8 +127,6 @@
 
 /* ---------- Who ---------- */
 .rt-who { padding: 6rem 1.5rem 0; text-align: center; }
-.rt-who-photo { max-width: 640px; margin: 3rem auto 0; padding: 10px; background: #fff; box-shadow: 0 24px 50px -24px rgba(60, 40, 30, 0.45); }
-.rt-who-photo img { display: block; width: 100%; height: auto; }
 .rt-big { max-width: 760px; margin: 0 auto; font-weight: 300; font-size: clamp(1.15rem, 2vw, 1.45rem) !important; line-height: 1.8; color: #555; }
 
 /* ---------- Stay ---------- */
@@ -204,6 +203,6 @@
 
 /* index.css pads every <section> on phones with !important; the postcard needs the full width */
 @media (max-width: 768px) {
-  .rt section.rt-join { padding-left: 0 !important; padding-right: 0 !important; }
+  .rt section.rt-join, .rt section.rt-banner2 { padding-left: 0 !important; padding-right: 0 !important; }
 }
 
