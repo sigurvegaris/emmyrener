@@ -5,6 +5,8 @@ import PageTransition from '../components/PageTransition';
 import './RetreatsPage.css';
 import './RetreatThanksPage.css';
 
+const SITE_TITLE = 'Emmy Rener - Paris Travel Guides';
+
 // Where the postcard lands after it is mailed off (/retreats/merci?name=Victor).
 // A page of its own also gives Emmy a URL to count sign-ups from Instagram ads.
 function RetreatThanksPage() {
@@ -13,6 +15,7 @@ function RetreatThanksPage() {
 
   useEffect(() => {
     document.title = 'Merci | Bon Vivant Summer';
+    return () => { document.title = SITE_TITLE; };
   }, []);
 
   return (

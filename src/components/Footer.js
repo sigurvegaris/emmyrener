@@ -58,7 +58,7 @@ function Footer() {
             </div>
           ))}
         </div>
-        <p className="pf-copy">© 2025 Emmy Rener. Made with ♡ in Paris.</p>
+        <p className="pf-copy">© {new Date().getFullYear()} Emmy Rener. Made with ♡ in Paris.</p>
       </div>
     </footer>
   );

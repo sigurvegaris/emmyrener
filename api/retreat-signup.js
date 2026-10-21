@@ -6,6 +6,11 @@
 //   RETREAT_FROM_EMAIL          e.g. "Emmy Rener <retreats@yourdomain.com>" (domain verified in Resend)
 //   RETREAT_NOTIFY_EMAIL        defaults to emmy@sophisticatedsocial.net
 //   RETREAT_QUESTIONNAIRE_URL   link to the questionnaire (optional until Emmy has one)
+//   RESEND_SEGMENT_ID           optional Resend segment to file each sign-up under
+//
+// Each sign-up is also saved as a Resend contact so Emmy can email the whole list
+// when booking opens. That needs a Full access API key; with a sending-only key the
+// contact step fails quietly and the sign-up still goes through.
 
 const { confirmationHtml, confirmationText, notificationHtml, notificationText } = require('./_retreat-emails');
 
@@ -22,6 +27,26 @@ async function sendEmail(apiKey, payload) {
   if (!res.ok) {
     const detail = await res.text();
     throw new Error(`Resend ${res.status}: ${detail}`);
+  }
+}
+
+// Never blocks the sign-up: a duplicate or a key without contact access is only logged.
+async function saveContact(apiKey, { name, email, room }) {
+  const segment = process.env.RESEND_SEGMENT_ID;
+  try {
+    const res = await fetch('https://api.resend.com/contacts', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        first_name: name,
+        unsubscribed: false,
+        ...(segment ? { segments: [{ id: segment }] } : {}),
+      }),
+    });
+    if (!res.ok) console.warn(`retreat-signup: contact not saved (${res.status}, room: ${room})`, await res.text());
+  } catch (err) {
+    console.warn('retreat-signup: contact not saved', err);
   }
 }
 
@@ -87,6 +112,9 @@ module.exports = async function handler(req, res) {
     console.error('retreat-signup failed', err);
     return res.status(502).json({ error: 'Something went wrong. Please try again in a moment.' });
   }
+
+  // Test sign-ups from preview deployments stay off Emmy's list.
+  if (!tag) await saveContact(apiKey, data);
 
   return res.status(200).json({ ok: true });
 };

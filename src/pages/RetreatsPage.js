@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../components/Footer';
 import PageTransition from '../components/PageTransition';
 import RetreatSignupForm from '../components/RetreatSignupForm';
 import './RetreatsPage.css';
+
+const SITE_TITLE = 'Emmy Rener - Paris Travel Guides';
 
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
 const WEEK = [
@@ -13,6 +15,11 @@ const WEEK = [
 ];
 
 function RetreatsPage() {
+  useEffect(() => {
+    document.title = 'Bon Vivant Summer in Provence | Emmy Rener';
+    return () => { document.title = SITE_TITLE; };
+  }, []);
+
   const scrollToForm = (e) => {
     e.preventDefault();
     const el = document.getElementById('interest-list');
