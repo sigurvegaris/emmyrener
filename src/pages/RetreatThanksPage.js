@@ -20,16 +20,17 @@ function RetreatThanksPage() {
       <div className="rt mc">
         <section className="mc-hero">
           <div className="mc-text">
-            <img className="mc-postage" src="/email/postage.png" width="220" height="72" alt="" />
             <p className="mc-script">Merci{name ? `, ${name}` : ''}!</p>
             <h1 className="mc-title">Your seat at our table is being saved</h1>
             <p className="mc-lede">
-              You’ll be the very first to know when booking opens for Bon Vivant Summer, along with all the details.
+              We’re already picturing you there: market mornings, long lunches in the garden, and a glass of rosé
+              while the sun goes down. We can’t wait to share it all with you.
             </p>
             <img className="mc-roses" src="/email/roses-divider.png" width="200" height="34" alt="" />
             <p className="mc-body">
-              A little letter from us is already on its way to your inbox. If you don’t see it in a few minutes, peek
-              in Promotions or spam and drag it to your inbox, so you never miss a note from us.
+              You’ll be the very first to know when booking opens, along with all the details. A little letter from us
+              is already on its way to your inbox; if you don’t see it in a few minutes, peek in Promotions or spam and
+              drag it to your inbox, so you never miss a note from us.
             </p>
             <p className="mc-kicker">Next step</p>
             <p className="mc-body">
@@ -45,17 +46,24 @@ function RetreatThanksPage() {
               </Link>
             </div>
             <p className="mc-sign">
-              À très bientôt,
+              À très bientôt (see you very soon),
               <span>Emmy &amp; Hannah</span>
             </p>
           </div>
-          <figure className="mc-photo">
+          {/* A postcard from the hosts: photo on the front, a quick note scrawled along the bottom */}
+          <figure className="mc-card">
             <img
+              className="mc-card-photo"
               src="/videos/retreat-hosts.webp"
               width="900"
               height="1200"
               alt="Emmy and Hannah in a blue doorway covered in red roses"
             />
+            <img className="mc-card-postage" src="/email/postage.png" width="220" height="72" alt="" />
+            <figcaption className="mc-card-note">
+              Wish you were here! Can’t wait to see you in Provence.
+              <span>xx Emmy &amp; Hannah</span>
+            </figcaption>
           </figure>
         </section>
         <Footer />
