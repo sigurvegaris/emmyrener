@@ -124,7 +124,7 @@ function confirmationHtml({ name, room, questionnaire }) {
         ${kicker('Bon Vivant Summer &middot; Provence &middot; May 2027')}
         <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(name)}!</h1>
         ${para(`Thank you for joining the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>, our week in Provence this May. Your letter made our day.`)}
-        ${para("We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.")}
+        ${para("Your seat isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.")}
         ${para('Until then, picture yourself wandering the morning markets, lingering over a three-hour lunch in the garden, and raising a glass of rosé with new friends as the sun goes down. We can\'t wait to share it with you.')}
       </td></tr>
 
@@ -223,7 +223,7 @@ function confirmationText({ name, room, questionnaire }) {
     '',
     'Thank you for joining the list for Bon Vivant Summer, our week in Provence this May. Your letter made our day.',
     '',
-    "We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.",
+    "Your seat isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.",
     '',
     "Until then, picture yourself wandering the morning markets, lingering over a three-hour lunch in the garden, and raising a glass of rosé with new friends as the sun goes down. We can't wait to share it with you.",
     '',
