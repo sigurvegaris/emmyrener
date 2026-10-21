@@ -1,251 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import './Footer.css';
+
+const COLUMNS = [
+  { title: 'Explore', links: [['/', 'Home'], ['/about', 'About Me'], ['/contact', 'Contact']] },
+  { title: 'Paris', links: [['/guides', 'Guides'], ['/recommendations', 'Recommendations']] },
+  { title: 'Retreats', links: [['/retreats', 'Bon Vivant Summer'], ['/retreats', 'Join the Interest List']] },
+  { title: 'Connect', links: [['/collabs', 'Collabs'], ['mailto:emmy@sophisticatedsocial.net', 'Email Emmy']] },
+];
+
+// Emmy's toile, washed light so the name stays easy to read.
+// Set inline because CRA would try to bundle a url() written in the CSS file.
+const toile = {
+  backgroundImage:
+    'linear-gradient(rgba(250, 249, 246, 0.6), rgba(250, 249, 246, 0.6)), url(/videos/footer-toile.webp)',
+};
+
+function FooterLink({ to, children }) {
+  if (to.startsWith('mailto:')) return <a href={to}>{children}</a>;
+  return <Link to={to}>{children}</Link>;
+}
 
 function Footer() {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1200
-  );
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <footer style={{
-      ...styles.footer,
-      backgroundImage: windowWidth <= 768 
-        ? 'url(/videos/footer-image-mobile.jpg)'
-        : 'url(/videos/footer-image.jpg)'
-    }}>
-      {/* Dark overlay for better text readability */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 1,
-      }} />
-      
-      <div style={styles.container}>
-        {/* Top section - Logo and tagline */}
-        <div style={styles.topSection}>
-          <h3 style={styles.logo}>EMMY RENER</h3>
-          <p style={styles.tagline}>
-            Your Paris, made with love
-          </p>
+    <footer className="pf">
+      <div className="pf-top" style={toile}>
+        <div className="pf-icons">
+          <a href="https://instagram.com/emmyrener" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4.2" />
+              <circle cx="17.4" cy="6.6" r="1" className="pf-dot" />
+            </svg>
+          </a>
+          <a href="mailto:emmy@sophisticatedsocial.net" aria-label="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5.5" width="18" height="13" rx="1.5" />
+              <path d="M3.5 6.5 12 13l8.5-6.5" />
+            </svg>
+          </a>
         </div>
+        <Link to="/" className="pf-name">Emmy Rener</Link>
+        <p className="pf-tag">Your Paris, made with love</p>
+        <p className="pf-place">Paris, France</p>
+      </div>
 
-        {/* Middle section - Links */}
-        <div style={styles.linksSection}>
-          <div style={styles.linkColumn}>
-            <h4 style={styles.columnTitle}>Explore</h4>
-            <Link 
-              to="/" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/about" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              About Me
-            </Link>
-            <Link 
-              to="/guides" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Guides
-            </Link>
-            <Link 
-              to="/recommendations" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Recommendations
-            </Link>
-            <Link 
-              to="/contact" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Contact
-            </Link>
-          </div>
-
-          <div style={styles.linkColumn}>
-            <h4 style={styles.columnTitle}>Connect</h4>
-            <a 
-              href="https://instagram.com/emmyrener" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Instagram
-            </a>
-            <a 
-              href="mailto:emmy@sophisticatedspreads.net" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Email
-            </a>
-          </div>
-
-          <div style={styles.linkColumn}>
-            <h4 style={styles.columnTitle}>Resources</h4>
-            <Link 
-              to="/guides" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Paris Guides
-            </Link>
-            <Link 
-              to="/recommendations" 
-              style={styles.link}
-              onMouseEnter={(e) => e.target.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.target.style.color = '#E5E0D8'}
-            >
-              Trusted Partners
-            </Link>
-          </div>
+      <div className="pf-bottom">
+        <div className="pf-cols">
+          {COLUMNS.map((col) => (
+            <div key={col.title} className="pf-col">
+              <h4>{col.title}</h4>
+              <ul>
+                {col.links.map(([to, label]) => (
+                  <li key={label}><FooterLink to={to}>{label}</FooterLink></li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-
-        {/* Decorative divider */}
-        <div style={styles.divider}>
-          <svg width="60" height="2">
-            <line x1="0" y1="1" x2="20" y2="1" stroke="#B7A99A" strokeWidth="1" opacity="0.5"/>
-            <circle cx="30" cy="1" r="2" fill="#B7A99A" opacity="0.5"/>
-            <line x1="40" y1="1" x2="60" y2="1" stroke="#B7A99A" strokeWidth="1" opacity="0.5"/>
-          </svg>
-        </div>
-
-        {/* Bottom section - Copyright */}
-        <div style={styles.bottomSection}>
-          <p style={styles.seoLine}>
-            Digital Paris Guides by Emmy Rener
-          </p>
-          <p style={styles.copyright}>
-            © 2025 Emmy Rener. Made with ♡ in Paris.
-          </p>
-          <p style={styles.subtext}>
-            All recommendations are genuine and personally vetted
-          </p>
-        </div>
+        <p className="pf-copy">© {new Date().getFullYear()} Emmy Rener. Made with ♡ in Paris.</p>
       </div>
     </footer>
   );
 }
-
-const styles = {
-  footer: {
-    backgroundColor: '#F7F4EF',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    padding: '2.5rem 2rem',
-    borderTop: '1px solid #E5E0D8',
-    position: 'relative',
-  },
-  container: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    position: 'relative',
-    zIndex: 2,
-  },
-  topSection: {
-    textAlign: 'center',
-    marginBottom: '2rem',
-  },
-  logo: {
-    fontSize: '1.25rem',
-    fontWeight: 700,
-    letterSpacing: '0.35em',
-    textTransform: 'uppercase',
-    marginBottom: '1rem',
-    color: '#FFFFFF',
-  },
-  tagline: {
-    fontSize: '1rem',
-    fontWeight: 300,
-    letterSpacing: '0.05em',
-    color: '#FFFFFF',
-    fontStyle: 'italic',
-    fontFamily: 'Lora, serif',
-  },
-  linksSection: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '2rem',
-    marginBottom: '2rem',
-    textAlign: 'center',
-  },
-  linkColumn: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.75rem',
-  },
-  columnTitle: {
-    fontSize: '0.875rem',
-    fontWeight: 600,
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
-    color: '#FFFFFF',
-    marginBottom: '0.5rem',
-  },
-  link: {
-    color: '#E5E0D8',
-    fontSize: '0.9375rem',
-    fontWeight: 300,
-    textDecoration: 'none',
-    transition: 'color 0.3s ease',
-    cursor: 'pointer',
-    letterSpacing: '0.02em',
-  },
-  divider: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: '1.5rem',
-  },
-  bottomSection: {
-    textAlign: 'center',
-    paddingTop: '1.5rem',
-    borderTop: '1px solid rgba(183, 169, 154, 0.2)',
-  },
-  copyright: {
-    fontSize: '0.875rem',
-    fontWeight: 300,
-    color: '#FFFFFF',
-    marginBottom: '0.5rem',
-  },
-  subtext: {
-    fontSize: '0.8125rem',
-    fontWeight: 300,
-    color: '#E5E0D8',
-    opacity: 0.9,
-    fontStyle: 'italic',
-  },
-  seoLine: {
-    fontSize: '0.9375rem',
-    fontWeight: 500,
-    color: '#FFFFFF',
-    marginBottom: '1rem',
-    letterSpacing: '0.05em',
-  },
-};
 
 export default Footer;
