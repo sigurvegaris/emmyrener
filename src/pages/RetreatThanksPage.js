@@ -50,21 +50,32 @@ function RetreatThanksPage() {
               <span>Emmy &amp; Hannah</span>
             </p>
           </div>
-          {/* A postcard from the hosts: photo on the front, a quick note scrawled along the bottom */}
-          <figure className="mc-card">
-            <img
-              className="mc-card-photo"
-              src="/videos/retreat-hosts.webp"
-              width="900"
-              height="1200"
-              alt="Emmy and Hannah in a blue doorway covered in red roses"
-            />
-            <img className="mc-card-postage" src="/email/postage.png" width="220" height="72" alt="" />
-            <figcaption className="mc-card-note">
-              Wish you were here! Can’t wait to see you in Provence.
-              <span>xx Emmy &amp; Hannah</span>
-            </figcaption>
-          </figure>
+          {/* A postcard from the hosts: the photo front, with its written back laid over the corner */}
+          <div className="mc-post">
+            <figure className="mc-card">
+              <img
+                className="mc-card-photo"
+                src="/videos/retreat-hosts.webp"
+                width="900"
+                height="1200"
+                alt="Emmy and Hannah in a blue doorway covered in red roses"
+              />
+            </figure>
+            <div className="mc-pb" aria-label="A postcard from Emmy and Hannah">
+              <div className="mc-pb-msg">
+                <p>Chère {name || 'amie'},</p>
+                <p>Wish you were here! Can’t wait to see you in Provence.</p>
+                <p className="mc-pb-sig">xx Emmy &amp; Hannah</p>
+              </div>
+              <div className="mc-pb-addr" aria-hidden="true">
+                <img className="mc-pb-stamp" src="/videos/mc-stamp.png" width="98" height="116" alt="" />
+                <img className="mc-pb-postmark" src="/videos/mc-postmark.png" width="228" height="118" alt="" />
+                <p className="mc-pb-line">{name || 'You'}</p>
+                <p className="mc-pb-line">A seat at our table</p>
+                <p className="mc-pb-line">Provence, France</p>
+              </div>
+            </div>
+          </div>
         </section>
         <Footer />
       </div>
