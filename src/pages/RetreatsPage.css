@@ -16,6 +16,8 @@
 
 /* ---------- Opening ---------- */
 .rt-banner { margin-top: 72px; /* clears the fixed nav */ background: #f2ece2; }
+/* the phone/tablet nav is taller (85px) and was covering the top of the collage */
+@media (max-width: 899.98px) { .rt-banner { margin-top: 86px; } }
 .rt-banner-frame { position: relative; max-width: 1600px; margin: 0 auto; container-type: inline-size; }
 .rt-banner-frame img { display: block; width: 100%; height: auto; }
 .rt-banner-copy { padding: 2.2rem 1.5rem 2.6rem; text-align: center; background: #f2ece2; }
