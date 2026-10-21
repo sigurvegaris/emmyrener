@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RetreatSignupForm.css';
 
 const ROOM_OPTIONS = ['Private room', 'Shared room', 'Not sure yet'];
@@ -6,21 +7,21 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAIL_MS = 3600; // length of the envelope animation in RetreatSignupForm.css
 
 // Interest-list sign-up as a postcard: a "Greetings from Provence" front that flips over to
-// a writable back. On send it is tucked into an airmail envelope, sealed and flown off, then a
-// thank-you note takes its place. Posts to /api/retreat-signup.
+// a writable back. On send it is tucked into an airmail envelope, sealed and flown off, then the
+// visitor lands on the thank-you page (/retreats/merci). Posts to /api/retreat-signup.
 function RetreatSignupForm() {
+  const navigate = useNavigate();
   const [flipped, setFlipped] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [room, setRoom] = useState('Not sure yet');
   const [website, setWebsite] = useState(''); // honeypot, left empty by real visitors
-  const [status, setStatus] = useState('idle'); // idle | sending | mailing | done | error
+  const [status, setStatus] = useState('idle'); // idle | sending | mailing | error
   const [error, setError] = useState('');
   const [hints, setHints] = useState({});
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const flipBtnRef = useRef(null);
-  const noteRef = useRef(null);
   const cardRef = useRef(null);
 
   const flip = (to) => {
@@ -32,22 +33,18 @@ function RetreatSignupForm() {
     }, 450);
   };
 
-  // Once the envelope has flown off, show the thank-you note.
+  // Once the envelope has flown off, go to the thank-you page.
   useEffect(() => {
     if (status !== 'mailing') return undefined;
     // Centre the card so the envelope is on screen, even when the tall phone layout was scrolled to Send.
     if (cardRef.current) cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const t = window.setTimeout(() => setStatus('done'), reduce ? 0 : MAIL_MS);
+    const t = window.setTimeout(() => {
+      const firstName = name.trim().split(/\s+/)[0];
+      navigate(`/retreats/merci${firstName ? `?name=${encodeURIComponent(firstName)}` : ''}`);
+    }, reduce ? 0 : MAIL_MS);
     return () => window.clearTimeout(t);
-  }, [status]);
-
-  useEffect(() => {
-    if (status === 'done' && noteRef.current) {
-      noteRef.current.focus({ preventScroll: true });
-      noteRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, [status]);
+  }, [status, name, navigate]);
 
   const validate = () => {
     const next = {};
@@ -85,38 +82,6 @@ function RetreatSignupForm() {
   const clearHint = (field) => hints[field] && setHints((h) => ({ ...h, [field]: undefined }));
 
   const first = name.trim();
-
-  if (status === 'done') {
-    return (
-      <div className="pc">
-        <div className="pc-note" role="status" tabIndex={-1} ref={noteRef}>
-          <svg className="pc-note-tower" viewBox="0 0 60 120" aria-hidden="true">
-            <g fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round">
-              <path d="M30 4 L30 14 M27 14 H33 L35 34 H25 Z" />
-              <path d="M25 34 L21 62 H39 L35 34" />
-              <path d="M18 62 H42 M21 62 L12 112 M39 62 L48 112" />
-              <path d="M16 90 H44 M18 90 Q30 74 42 90" />
-              <path d="M12 112 H22 Q30 96 38 112 H48" />
-              <path d="M23 46 L37 46 M26 40 L34 52 M34 40 L26 52" strokeWidth="0.8" />
-            </g>
-          </svg>
-          <p className="pc-note-kicker">Your letter is on its way to Provence</p>
-          <p className="pc-note-title">Merci{first ? `, ${first}` : ''}</p>
-          <p className="pc-note-body">
-            We are so happy you wrote. We will be saving a seat at our long table for you. It is not official until
-            booking opens, but you are one step closer to seeing your name on it, and you will be among the very first
-            to hear about the dates, the villa, and everything we have planned for Bon Vivant Summer.
-          </p>
-          <p className="pc-note-body">A little note from us is already waiting in your inbox (do peek in spam, just in case).</p>
-          <p className="pc-note-sign">
-            À très bientôt,
-            <span>Emmy &amp; Hannah</span>
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   const mailing = status === 'mailing';
 
   return (

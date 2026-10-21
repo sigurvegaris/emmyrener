@@ -105,11 +105,27 @@ function confirmationHtml({ name, room, questionnaire }) {
         </tr></table>
       </td></tr>
 
-      <tr><td class="pad" style="padding:18px 40px 4px;">
+      <tr><td class="pad" style="padding:20px 40px 0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+          ${[
+            ['strip-lavender.jpg', 'Lavender fields in Provence'],
+            ['strip-rose.jpg', 'Friends clinking glasses of rosé'],
+            ['strip-lunch.jpg', 'A table set for lunch in the garden'],
+          ]
+            .map(
+              ([file, alt], i) =>
+                `${i ? '<td width="8" style="width:8px;font-size:0;line-height:0;">&nbsp;</td>' : ''}<td width="168" valign="top" style="width:32%;"><img src="${img}/email/${file}" width="168" height="168" alt="${alt}" style="display:block;width:100%;height:auto;border:0;"></td>`
+            )
+            .join('')}
+        </tr></table>
+      </td></tr>
+
+      <tr><td class="pad" style="padding:26px 40px 4px;">
         ${kicker('Bon Vivant Summer &middot; Provence &middot; May 2027')}
-        <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(name)}</h1>
-        ${para(`Your letter arrived, and it made our day. You're on the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>: a week of long lunches, morning markets, lavender fields, and rosé at sunset in Provence with the two of us.`)}
-        ${para("We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be among the very first to hear when the dates are set.")}
+        <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(name)}!</h1>
+        ${para(`Thank you for joining the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>, our week in Provence this May. Your letter made our day.`)}
+        ${para("We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.")}
+        ${para('Until then, picture yourself wandering the morning markets, lingering over a three-hour lunch in the garden, and raising a glass of rosé with new friends as the sun goes down. We can\'t wait to share it with you.')}
       </td></tr>
 
       <tr><td class="pad" style="padding:6px 60px 0;">
@@ -139,7 +155,15 @@ function confirmationHtml({ name, room, questionnaire }) {
                ${button(questionnaire, 'Tell us about you')}`
             : ''
         }
-        ${para('Joining the list is free and doesn\'t commit you to booking. Have a question? Simply reply to this email.')}
+        <div style="padding:6px 0 4px;">${divider(img)}</div>
+        <p style="margin:18px 0 4px;font-family:${SERIF};font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${C.rose};text-align:center;">Next step</p>
+        <p style="margin:0 0 4px;text-align:center;font-family:${SERIF};font-style:italic;font-size:19px;color:${C.ink};">Come along for the ride on Instagram</p>
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:10px auto 24px;">
+          <tr><td bgcolor="${C.navy}" style="border-radius:999px;background:${C.navy};">
+            <a href="https://instagram.com/emmyrener" style="display:inline-block;padding:12px 28px;font-family:${SERIF};font-size:15px;letter-spacing:2px;color:#fbf6ee;text-decoration:none;border-radius:999px;">@EMMYRENER</a>
+          </td></tr>
+        </table>
+        ${para('A little favor: if this note landed in Promotions or spam, drag it to your inbox so you never miss a letter from us. Joining the list is free and doesn\'t commit you to booking, and if you have a question, simply reply.')}
       </td></tr>
 
       <tr><td class="pad" style="padding:4px 40px 30px;">
@@ -197,9 +221,11 @@ function confirmationText({ name, room, questionnaire }) {
   return [
     `Merci, ${name}!`,
     '',
-    "Your letter arrived, and it made our day. You're on the list for Bon Vivant Summer: a week of long lunches, morning markets, lavender fields, and rosé at sunset in Provence with the two of us.",
+    'Thank you for joining the list for Bon Vivant Summer, our week in Provence this May. Your letter made our day.',
     '',
-    "We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be among the very first to hear when the dates are set.",
+    "We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.",
+    '',
+    "Until then, picture yourself wandering the morning markets, lingering over a three-hour lunch in the garden, and raising a glass of rosé with new friends as the sun goes down. We can't wait to share it with you.",
     '',
     'The details so far',
     'Where: just outside Aix-en-Provence',
@@ -211,7 +237,9 @@ function confirmationText({ name, room, questionnaire }) {
       ? ['', `If you're seriously dreaming of joining, this short questionnaire helps us plan: ${questionnaire}`]
       : []),
     '',
-    "Joining the list is free and doesn't commit you to booking. Have a question? Simply reply to this email.",
+    'Next step: come along for the ride on Instagram, https://instagram.com/emmyrener',
+    '',
+    "A little favor: if this note landed in Promotions or spam, drag it to your inbox so you never miss a letter from us. Joining the list is free and doesn't commit you to booking, and if you have a question, simply reply.",
     '',
     'À très bientôt,',
     'Emmy & Hannah',

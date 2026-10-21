@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import GuidesPage from './pages/GuidesPage';
 import RetreatsPage from './pages/RetreatsPage';
+import RetreatThanksPage from './pages/RetreatThanksPage';
 import RecommendationsPage from './pages/RecommendationsPage';
 import CollabsPage from './pages/CollabsPage';
 import ContactPage from './pages/ContactPage';
@@ -32,6 +33,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/guides" element={<GuidesPage />} />
           <Route path="/retreats" element={<RetreatsPage />} />
+          <Route path="/retreats/merci" element={<RetreatThanksPage />} />
           <Route path="/recommendations" element={<RecommendationsPage />} />
           <Route path="/collabs" element={<CollabsPage />} />
           <Route path="/contact" element={<ContactPage />} />
