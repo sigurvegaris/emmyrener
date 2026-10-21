@@ -135,7 +135,7 @@ function RetreatSignupForm() {
           <div className="pc-paper pc-front-paper">
             <p className="pc-greetings">Greetings from</p>
             <p className="pc-photo-title">PROVENCE</p>
-            <p className="pc-front-sub">Bon Vivant Summer &middot; [Month] 2027</p>
+            <p className="pc-front-sub">Bon Vivant Summer &middot; May 2027</p>
             <p className="pc-front-note">Summer camp for grown-ups. Rosé included.</p>
             <button type="button" className="pc-write" ref={flipBtnRef} onClick={() => flip(true)}>
               Write your note
@@ -195,7 +195,7 @@ function RetreatSignupForm() {
                     </g>
                     <g fill="#3e4a6a" opacity="0.6" fontFamily="Cormorant Garamond, serif" textAnchor="middle">
                       <text x="160" y="48" fontSize="13" letterSpacing="3">PARIS</text>
-                      <text x="160" y="62" fontSize="8" letterSpacing="1.5">14 · VII · 27</text>
+                      <text x="160" y="62" fontSize="8" letterSpacing="1.5">14 · V · 27</text>
                       <text x="160" y="74" fontSize="7" letterSpacing="1.5">R.F.</text>
                     </g>
                   </svg>

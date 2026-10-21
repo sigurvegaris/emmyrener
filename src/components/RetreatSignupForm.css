@@ -676,7 +676,9 @@
     min-height: 420px;
     padding: 2rem 1rem 2.4rem;
     /* soften the tower so the text stays readable over it */
-    background: linear-gradient(rgba(240, 228, 205, 0.35), rgba(240, 228, 205, 0.55));
+    background:
+      radial-gradient(ellipse 78% 30% at 50% 50%, rgba(247, 240, 226, 0.94), rgba(247, 240, 226, 0.7) 55%, rgba(247, 240, 226, 0) 100%),
+      linear-gradient(rgba(240, 228, 205, 0.35), rgba(240, 228, 205, 0.55));
   }
 
   .pc-greetings { font-size: min(11cqw, 3.4rem); }

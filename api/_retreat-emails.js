@@ -106,7 +106,7 @@ function confirmationHtml({ name, room, questionnaire }) {
       </td></tr>
 
       <tr><td class="pad" style="padding:18px 40px 4px;">
-        ${kicker('Bon Vivant Summer &middot; Provence 2027')}
+        ${kicker('Bon Vivant Summer &middot; Provence &middot; May 2027')}
         <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(name)}</h1>
         ${para(`Your letter arrived, and it made our day. You're on the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>: a week of long lunches, morning markets, lavender fields, and rosé at sunset in Provence with the two of us.`)}
         ${para("We'll be saving a seat at our long table for you. It isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be among the very first to hear when the dates are set.")}
@@ -127,7 +127,7 @@ function confirmationHtml({ name, room, questionnaire }) {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 22px;">
           ${detailRows([
             ['Where', 'Just outside Aix-en-Provence'],
-            ['When', '2027, dates coming soon'],
+            ['When', 'May 2027, exact dates coming soon'],
             ['Length', '5 nights, 6 days'],
             ['The group', '8 to 10 women, under one roof'],
             ['Your room', esc(room)],
@@ -203,7 +203,7 @@ function confirmationText({ name, room, questionnaire }) {
     '',
     'The details so far',
     'Where: just outside Aix-en-Provence',
-    'When: 2027, dates coming soon',
+    'When: May 2027, exact dates coming soon',
     'Length: 5 nights, 6 days',
     'The group: 8 to 10 women, under one roof',
     `Your room: ${room}`,

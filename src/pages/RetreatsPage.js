@@ -47,7 +47,7 @@ function RetreatsPage() {
                 <em>bon vivant</em> /bɔ̃ viˈvɑ̃/ noun: a person who loves luxury, fine food, good wine, and an active
                 social life
               </p>
-              <p className="rt-meta">Provence · [Month] 2027 · 5 nights / 6 days</p>
+              <p className="rt-meta">Provence · May 2027 · 5 nights / 6 days</p>
               <p className="rt-lede">
                 A lively, food-filled week in the South of France for women who want to explore, eat well, meet new
                 people, and soak up the Provençal way of life.
@@ -61,12 +61,13 @@ function RetreatsPage() {
 
         {/* Concept: a centered statement, then two tall photos side by side */}
         <section id="concept" className="retreat-section rt-sec">
-          <h2 className="rt-cap">A seat at the table in Provence</h2>
+          <h2 className="rt-cap">A seat at our table in Provence</h2>
           <div className="rt-prose">
+            <p>The more time I spend exploring France, the more I fall in love with it.</p>
             <p>
-              The more time I spend exploring the South of France, the more I fall in love with it. Living in France
-              has given me a seat at tables I never imagined my American self would be welcomed to: sharing wine,
-              lingering over dinner, and learning to enjoy the moment.
+              Living in France has given me a seat at tables I never imagined my American self would be welcomed to:
+              sharing wine from fifth-generation winemakers, lingering over three-hour lunches in the garden, and
+              learning to enjoy the moment.
             </p>
             <p>
               I want to bring that feeling to this community. Bon Vivant Summer is a chance to experience Provence
@@ -74,7 +75,7 @@ function RetreatsPage() {
             </p>
             <p>
               I'm bringing in local French makers, chefs, and shop owners I've gotten to know, so you leave with more
-              than a great trip. You leave knowing the people and places that make Provence what it is.
+              than just a great trip. You leave knowing the people and places that make Provence what it is.
             </p>
           </div>
           <div className="rt-pair">
@@ -121,6 +122,17 @@ function RetreatsPage() {
             An intimate group of 8 to 10 women ready for good food, new friends, and a week that feels like summer
             camp for grown-ups. Come with a friend or come solo.
           </p>
+          <figure className="rt-who-photo">
+            <img
+              src="/videos/retreat-rose-toast.webp"
+              srcSet="/videos/retreat-rose-toast-640.webp 640w, /videos/retreat-rose-toast.webp 1108w"
+              sizes="(min-width: 700px) 640px, 92vw"
+              width="1108"
+              height="774"
+              loading="lazy"
+              alt="Friends clinking glasses of rosé in the sunshine"
+            />
+          </figure>
         </section>
 
         {/* Stay and hosts as two cards */}
@@ -147,11 +159,11 @@ function RetreatsPage() {
               <p className="rt-kicker">Your hosts</p>
               <h2 className="rt-hosts-name">Emmy <span>&amp;</span> Hannah</h2>
               <p className="rt-hosts-last">Rener</p>
+              <p className="rt-hosts-lead">Sisters, co-hosts, and the people you'll want at your dinner table.</p>
               <p>
-                Sisters, co-hosts, and the people you'll want at your dinner table. Emmy brings the Provence she's come
-                to know since moving to France: the producers, the markets, and the long lunches. Hannah brings years of
-                creating experiences for luxury and hospitality brands, so every detail is handled and all you have to
-                do is say yes to another glass.
+                Emmy brings the joie de vivre she has come to know since moving to France. Hannah brings years of
+                experience creating memorable moments for luxury and hospitality brands, ensuring every detail is taken
+                care of so all you have to do is say yes to another glass.
               </p>
               <a className="rt-outline" href="#interest-list" onClick={scrollToForm}>Get on the interest list</a>
             </div>
@@ -162,7 +174,7 @@ function RetreatsPage() {
         <section id="interest-list" className="retreat-section rt-join">
           <h2 className="rt-cap rt-join-h">Get the first details</h2>
           <p className="rt-join-p">
-            We're planning for [Month] 2027 and the details are coming together. Join the list to be the first to hear
+            We're planning for May 2027 and the details are coming together. Join the list to be the first to hear
             about dates, location, and booking.
           </p>
           <RetreatSignupForm />
