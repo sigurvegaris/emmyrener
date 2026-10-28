@@ -185,7 +185,7 @@ function confirmationHtml({ name, room, questionnaire }) {
   return frame({ preheader: "You're on the list, and we're saving a seat at the long table for you.", inner, img });
 }
 
-function notificationHtml({ name, email, room, receivedAt }) {
+function notificationHtml({ name, email, room, message, receivedAt }) {
   const img = assetBase();
   const mailto = `mailto:${email}?subject=${encodeURIComponent('Bon Vivant Summer')}`;
   const inner = `
@@ -202,6 +202,7 @@ function notificationHtml({ name, email, room, receivedAt }) {
             ['Name', esc(name)],
             ['Email', `<a href="${esc(mailto)}" style="color:${C.navy};text-decoration:underline;">${esc(email)}</a>`],
             ['Dreaming of', esc(room)],
+            ...(message ? [['Their note', esc(message).replace(/\n/g, '<br>')]] : []),
             ['Received', esc(receivedAt)],
           ])}
         </table>
@@ -249,13 +250,14 @@ function confirmationText({ name, room, questionnaire }) {
   ].join('\n');
 }
 
-function notificationText({ name, email, room, receivedAt }) {
+function notificationText({ name, email, room, message, receivedAt }) {
   return [
     `${name} wants a seat at the long table.`,
     '',
     `Name: ${name}`,
     `Email: ${email}`,
     `Dreaming of: ${room}`,
+    ...(message ? [`Their note: ${message}`] : []),
     `Received: ${receivedAt}`,
     '',
     `Hit Reply to write straight to ${name}.`,

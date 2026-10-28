@@ -64,6 +64,7 @@ module.exports = async function handler(req, res) {
   const name = String(body.name || '').trim().slice(0, 80);
   const email = String(body.email || '').trim().slice(0, 200);
   const room = ROOM_OPTIONS.includes(body.room) ? body.room : 'Not sure yet';
+  const message = String(body.message || '').trim().slice(0, 1000);
 
   if (!name || !EMAIL_RE.test(email)) {
     return res.status(400).json({ error: 'Please enter your first name and a valid email.' });
@@ -89,7 +90,7 @@ module.exports = async function handler(req, res) {
     hour: '2-digit',
     minute: '2-digit',
   }) + ' (Paris)';
-  const data = { name, email, room, questionnaire, receivedAt };
+  const data = { name, email, room, message, questionnaire, receivedAt };
 
   try {
     await sendEmail(apiKey, {

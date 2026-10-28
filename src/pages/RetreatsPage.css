@@ -202,8 +202,8 @@
 .rt-outline:hover { background: var(--rt-rose); color: #fff !important; }
 
 /* ---------- Join ---------- */
-.rt-join .pc { width: calc(100% - 3rem); }
-@media (max-width: 640px) { .rt-join .pc { width: 100%; } }
+.rt-join .sf { width: calc(100% - 3rem); }
+@media (max-width: 640px) { .rt-join .sf { width: calc(100% - 2rem); } }
 .rt-join { background: #f3eee6; padding: 5.5rem 0 4.5rem; text-align: center; }
 .rt-join-p { max-width: 560px; margin: 0 auto 2.8rem; padding: 0 1.5rem; font-weight: 300; line-height: 1.9; font-size: 1.05rem; color: #555; }
 .rt-fine { margin: 2rem 0 0; padding: 0 1.5rem; font-style: italic; font-weight: 300; font-size: 0.85rem; color: #777; }
