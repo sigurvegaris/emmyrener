@@ -72,7 +72,7 @@ function RetreatsPage() {
           </div>
         </header>
 
-        {/* Concept: the statement beside two tall photos (stacked on smaller screens) */}
+        {/* Concept: a centered statement, then two photos side by side */}
         <section id="concept" className="retreat-section rt-sec">
           <h2 className="rt-cap">A seat at our table in Provence</h2>
           <div className="rt-concept">

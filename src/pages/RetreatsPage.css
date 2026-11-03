@@ -110,12 +110,12 @@
 .rt-prose p, .rt-prose-one { margin: 0 0 1.2rem; font-weight: 300; font-size: 1.08rem; line-height: 1.95; color: #555; }
 .rt-prose-one { max-width: 680px; margin: 0 auto 3.5rem; text-align: center; }
 
-/* desktop: statement on the left, photo pair on the right, so the section fits one screen */
+/* desktop: tighter statement, then a wide photo pair sized to the screen height so the section fits one view */
 @media (min-width: 1000px) {
-  .rt-concept { display: grid; grid-template-columns: 5fr 6fr; gap: 3.5rem; align-items: center; max-width: 1080px; margin: 0 auto; }
-  .rt-concept .rt-prose { text-align: left; }
-  .rt-concept .rt-prose p { font-size: 1.02rem; line-height: 1.8; }
-  .rt-concept .rt-pair { margin: 0; gap: 1rem; }
+  .rt-concept .rt-prose { max-width: 720px; }
+  .rt-concept .rt-prose p { font-size: 1rem; line-height: 1.7; margin-bottom: 0.7rem; }
+  .rt-concept .rt-pair { max-width: 1080px; gap: 1.25rem; margin-top: 2.4rem; }
+  .rt-concept .rt-pair img { aspect-ratio: auto; height: clamp(300px, calc(100vh - 520px), 540px); object-position: 50% 35%; }
 }
 .rt-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 760px; margin: 4rem auto 0; }
 .rt-pair img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
