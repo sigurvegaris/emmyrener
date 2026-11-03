@@ -160,7 +160,7 @@
 
 /* ---------- Who ---------- */
 .rt-who { padding: 6rem 1.5rem 0; text-align: center; }
-.rt-big { max-width: 760px; margin: 0 auto; font-weight: 300; font-size: clamp(1.15rem, 2vw, 1.45rem) !important; line-height: 1.8; color: #555; }
+.rt-big { max-width: 860px; margin: 0 auto; font-weight: 300; font-size: clamp(1rem, 1.4vw, 1.15rem) !important; line-height: 1.8; color: #555; text-wrap: balance; }
 
 /* ---------- Stay ---------- */
 .rt-stay { display: grid; grid-template-columns: 5fr 6fr; gap: 4.5rem; align-items: center; max-width: 1080px; padding-bottom: 6rem; }
