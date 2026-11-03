@@ -148,14 +148,12 @@
 .rt-fig { margin: 0; text-align: center; }
 .rt-fig img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
 .rt-fig figcaption {
-  display: inline-block;
-  margin-top: 1.4rem;
-  padding: 0.7rem 1.6rem;
-  border: 1px solid #b98a7d;
+  /* plain italic caption, no box, so it doesn't read as a button */
+  margin-top: 1rem;
   color: var(--rt-rose);
-  font-size: 1.05rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-style: italic;
+  font-size: 1.45rem;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- Who ---------- */
@@ -234,7 +232,7 @@
   .rt-pair { gap: 0.8rem; margin-top: 2.5rem; max-width: 520px; }
   .rt-banner2 { margin-top: 4rem; }
   .rt-week { gap: 1rem; }
-  .rt-fig figcaption { font-size: 0.85rem; padding: 0.55rem 0.9rem; letter-spacing: 0.1em; }
+  .rt-fig figcaption { font-size: 1.2rem; margin-top: 0.6rem; }
   .rt-stay { padding-bottom: 4rem; }
   .rt-hosts { padding: 4.5rem 1.5rem; }
   .rt-outline { font-size: 0.9rem; letter-spacing: 0.1em; padding: 0.85rem 1.3rem; white-space: nowrap; }
