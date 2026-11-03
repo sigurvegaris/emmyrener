@@ -163,11 +163,17 @@ function RetreatsPage() {
               <p className="rt-kicker">Your hosts</p>
               <h2 className="rt-hosts-name">Emmy <span>&amp;</span> Hannah</h2>
               <p className="rt-hosts-last">Rener</p>
-              <p className="rt-hosts-lead">Sisters, co-hosts, and the people you'll want at your dinner table.</p>
+              <p className="rt-hosts-lead">California girls at heart, with a soft spot for the South of France.</p>
               <p>
-                Emmy brings the joie de vivre she has come to know since moving to France. Hannah brings years of
-                experience creating memorable moments for luxury and hospitality brands, ensuring every detail is taken
-                care of so all you have to do is say yes to another glass.
+                Emmy brings her love of French food, culture, and the <em>joie de vivre</em> she's embraced since moving
+                to Paris, sharing the places, flavors, and experiences that have made her fall in love with life in
+                France. Hannah brings years of experience creating memorable moments for luxury and hospitality brands,
+                with an eye for the thoughtful details that make every experience feel effortless.
+              </p>
+              <p>
+                Together, these two California-born sisters have combined their love of travel, good food, and bringing
+                people together to create a retreat that celebrates the art of French living, where every detail is
+                taken care of so all you have to do is say yes to another glass.
               </p>
               <a className="rt-outline" href="#interest-list" onClick={scrollToForm}>Get on the interest list</a>
             </div>

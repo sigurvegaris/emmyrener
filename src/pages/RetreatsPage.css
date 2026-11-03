@@ -177,6 +177,10 @@
 }
 
 /* ---------- Hosts spotlight ---------- */
+.rt-hosts-text p:not(.rt-kicker):not(.rt-hosts-last):not(.rt-hosts-lead) + p { margin-top: 1rem; }
+.rt-hosts-text em { font-family: 'Jost', sans-serif !important; font-style: italic; }
+.rt-hosts-text p:not(.rt-kicker):not(.rt-hosts-last):not(.rt-hosts-lead) { line-height: 1.8; }
+.rt-hosts-text p.rt-hosts-lead { text-wrap: balance; }
 .rt-hosts { background: #efe4dc; padding: 7rem 1.5rem; }
 .rt-hosts-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5.5rem; align-items: center; max-width: 1120px; margin: 0 auto; }
 .rt-hosts-photo { position: relative; }
