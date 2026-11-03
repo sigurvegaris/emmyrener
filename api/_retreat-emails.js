@@ -78,8 +78,8 @@ function detailRows(rows) {
     .map(
       ([label, value], i) => `
       <tr>
-        <td width="34%" valign="top" style="padding:11px 0;${i ? `border-top:1px dotted ${C.rule};` : ''}font-family:${SERIF};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:${C.rose};">${label}</td>
-        <td valign="top" style="padding:9px 0;${i ? `border-top:1px dotted ${C.rule};` : ''}font-family:${SERIF};font-size:16px;font-style:italic;color:${C.ink};">${value}</td>
+        <td width="34%" valign="top" style="padding:11px 0;${i ? `border-top:1px solid #e6d9c6;` : ''}font-family:${SERIF};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:${C.rose};">${label}</td>
+        <td valign="top" style="padding:9px 0;${i ? `border-top:1px solid #e6d9c6;` : ''}font-family:${SERIF};font-size:16px;font-style:italic;color:${C.ink};">${value}</td>
       </tr>`
     )
     .join('');
@@ -144,7 +144,6 @@ function confirmationHtml({ name, room, questionnaire }) {
       </td></tr>
 
       <tr><td class="pad" style="padding:22px 40px 6px;">
-        <div style="padding-bottom:18px;">${divider()}</div>
         ${kicker('The details so far')}
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 22px;">
           ${detailRows([
@@ -161,9 +160,9 @@ function confirmationHtml({ name, room, questionnaire }) {
                ${button(questionnaire, 'Tell us about you')}`
             : ''
         }
-        <div style="padding:6px 0 4px;">${divider()}</div>
-        <div style="height:18px;line-height:18px;font-size:0;">&nbsp;</div>
-        ${para(`In the meantime, come along for the ride on Instagram, where we share the markets, the long tables, and everything we're planning: <a href="https://instagram.com/emmyrener" style="color:${C.rose};font-style:italic;text-decoration:underline;">@emmyrener</a>`)}
+        <p style="margin:26px 0 6px;font-family:${SERIF};font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${C.rose};text-align:center;">More to come</p>
+        <p style="margin:0 0 4px;text-align:center;font-family:${SERIF};font-style:italic;font-size:18px;color:${C.ink};">Stay tuned, there's so much more on the way.</p>
+        <p style="margin:0 0 26px;text-align:center;font-family:${SERIF};font-style:italic;font-size:14px;color:${C.soft};">In the meantime, follow along on Instagram at <a href="https://instagram.com/emmyrener" style="color:${C.ink};text-decoration:underline;">@emmyrener</a></p>
         ${note('A little favor: if this note landed in Promotions or spam, drag it to your inbox so you never miss a letter from us. Joining the list is free and doesn\'t commit you to booking, and if you have a question, simply reply.')}
       </td></tr>
 
@@ -176,7 +175,7 @@ function confirmationHtml({ name, room, questionnaire }) {
 
       <tr><td class="pad" style="padding:0 40px 22px;">
         <p style="margin:0;padding-top:14px;border-top:1px solid ${C.rule};font-family:${SANS};font-size:11px;line-height:1.6;color:#9a8a78;text-align:center;">
-          You're receiving this because you joined the Bon Vivant Summer interest list on emmyrener.com.
+          You're receiving this because you joined the Bon Vivant Summer interest list on <a href="https://emmyrener.com" style="color:#9a8a78;text-decoration:underline;">emmyrener.com</a>.
         </p>
       </td></tr>`;
   return frame({ preheader: "You're on the list, and we're saving a seat at the long table for you.", inner, img });
@@ -238,7 +237,7 @@ function confirmationText({ name, room, questionnaire }) {
       ? ['', `If you're seriously dreaming of joining, this short questionnaire helps us plan: ${questionnaire}`]
       : []),
     '',
-    'Next step: come along for the ride on Instagram, https://instagram.com/emmyrener',
+    "More to come: stay tuned, there's so much more on the way. In the meantime, follow along on Instagram at @emmyrener, https://instagram.com/emmyrener",
     '',
     "A little favor: if this note landed in Promotions or spam, drag it to your inbox so you never miss a letter from us. Joining the list is free and doesn't commit you to booking, and if you have a question, simply reply.",
     '',
