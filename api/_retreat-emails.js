@@ -41,7 +41,7 @@ function frame({ preheader, inner, img }) {
   @media (max-width: 620px) {
     .card { width: 100% !important; }
     .pad { padding-left: 24px !important; padding-right: 24px !important; }
-    .title { font-size: 34px !important; }
+    .title { font-size: 26px !important; }
     .postage { width: 120px !important; height: auto !important; }
     .kick { letter-spacing: 2px !important; font-size: 11px !important; }
     .pad-top { padding-top: 16px !important; }
@@ -54,9 +54,7 @@ function frame({ preheader, inner, img }) {
   <tr><td align="center" style="padding:28px 12px;">
     <table role="presentation" class="card" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="${C.paper}" style="width:600px;max-width:600px;background:${C.paper};border:1px solid #e3d5c0;">
       <tr><td style="line-height:0;font-size:0;"><img src="${img}/email/airmail.png" width="600" height="7" alt="" style="display:block;width:100%;height:7px;border:0;"></td></tr>
-      <tr><td style="line-height:0;font-size:0;padding:6px 0 0;"><img src="${img}/email/roses-garland.png" width="600" height="72" alt="" style="display:block;width:100%;height:auto;border:0;"></td></tr>
       ${inner}
-      <tr><td style="line-height:0;font-size:0;padding:0 0 6px;"><img src="${img}/email/roses-garland-bottom.png" width="600" height="72" alt="" style="display:block;width:100%;height:auto;border:0;"></td></tr>
       <tr><td style="line-height:0;font-size:0;"><img src="${img}/email/airmail.png" width="600" height="7" alt="" style="display:block;width:100%;height:7px;border:0;"></td></tr>
     </table>
   </td></tr>
@@ -69,7 +67,11 @@ const kicker = (text) =>
   `<p class="kick" style="margin:0 0 6px;font-family:${SERIF};font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${C.rose};">${text}</p>`;
 
 const para = (html) =>
-  `<p style="margin:0 0 16px;font-family:${SERIF};font-size:18px;line-height:1.6;color:${C.soft};">${html}</p>`;
+  `<p style="margin:0 0 14px;font-family:${SERIF};font-size:16px;line-height:1.65;color:${C.soft};">${html}</p>`;
+
+// A quiet footnote: small grey italic
+const note = (html) =>
+  `<p style="margin:0 0 14px;font-family:${SERIF};font-style:italic;font-size:13px;line-height:1.6;color:#9a8a78;">${html}</p>`;
 
 function detailRows(rows) {
   return rows
@@ -77,14 +79,15 @@ function detailRows(rows) {
       ([label, value], i) => `
       <tr>
         <td width="34%" valign="top" style="padding:11px 0;${i ? `border-top:1px dotted ${C.rule};` : ''}font-family:${SERIF};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:${C.rose};">${label}</td>
-        <td valign="top" style="padding:9px 0;${i ? `border-top:1px dotted ${C.rule};` : ''}font-family:${SERIF};font-size:18px;font-style:italic;color:${C.ink};">${value}</td>
+        <td valign="top" style="padding:9px 0;${i ? `border-top:1px dotted ${C.rule};` : ''}font-family:${SERIF};font-size:16px;font-style:italic;color:${C.ink};">${value}</td>
       </tr>`
     )
     .join('');
 }
 
-const divider = (img) =>
-  `<img src="${img}/email/roses-divider.png" width="200" height="34" alt="" style="display:block;margin:0 auto;border:0;width:200px;height:34px;">`;
+// A short hairline between sections
+const divider = () =>
+  `<table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;"><tr><td width="60" height="1" style="width:60px;height:1px;font-size:0;line-height:0;background:${C.rule};">&nbsp;</td></tr></table>`;
 
 function button(href, label) {
   return `
@@ -125,7 +128,7 @@ function confirmationHtml({ name, room, questionnaire }) {
 
       <tr><td class="pad" style="padding:26px 40px 4px;">
         ${kicker('Bon Vivant Summer &middot; Provence &middot; May 2027')}
-        <h1 class="title" style="margin:0 0 18px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:42px;line-height:1.15;color:${C.ink};">Merci, ${esc(firstName(name))}!</h1>
+        <h1 class="title" style="margin:0 0 14px;font-family:${SERIF};font-weight:400;font-style:italic;font-size:28px;line-height:1.2;color:${C.ink};">Merci, ${esc(firstName(name))}!</h1>
         ${para(`Thank you for joining the list for <strong style="color:${C.ink};font-weight:600;">Bon Vivant Summer</strong>, our week in Provence this May. Your letter made our day.`)}
         ${para("Your seat isn't official until booking opens, but you're one step closer to seeing your name on it, and you'll be the very first to know when it does, along with all the details.")}
         ${para('Until then, picture yourself wandering the morning markets, lingering over a three-hour lunch in the garden, and raising a glass of rosé with new friends as the sun goes down. We can\'t wait to share it with you.')}
@@ -141,7 +144,7 @@ function confirmationHtml({ name, room, questionnaire }) {
       </td></tr>
 
       <tr><td class="pad" style="padding:22px 40px 6px;">
-        <div style="padding-bottom:18px;">${divider(img)}</div>
+        <div style="padding-bottom:18px;">${divider()}</div>
         ${kicker('The details so far')}
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:6px 0 22px;">
           ${detailRows([
@@ -158,22 +161,16 @@ function confirmationHtml({ name, room, questionnaire }) {
                ${button(questionnaire, 'Tell us about you')}`
             : ''
         }
-        <div style="padding:6px 0 4px;">${divider(img)}</div>
-        <p style="margin:18px 0 4px;font-family:${SERIF};font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${C.rose};text-align:center;">Next step</p>
-        <p style="margin:0 0 4px;text-align:center;font-family:${SERIF};font-style:italic;font-size:19px;color:${C.ink};">Come along for the ride on Instagram</p>
-        <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:10px auto 24px;">
-          <tr><td bgcolor="${C.navy}" style="border-radius:999px;background:${C.navy};">
-            <a href="https://instagram.com/emmyrener" style="display:inline-block;padding:12px 28px;font-family:${SERIF};font-size:15px;letter-spacing:2px;color:#fbf6ee;text-decoration:none;border-radius:999px;">@EMMYRENER</a>
-          </td></tr>
-        </table>
-        ${para('A little favor: if this note landed in Promotions or spam, drag it to your inbox so you never miss a letter from us. Joining the list is free and doesn\'t commit you to booking, and if you have a question, simply reply.')}
+        <div style="padding:6px 0 4px;">${divider()}</div>
+        <div style="height:18px;line-height:18px;font-size:0;">&nbsp;</div>
+        ${para(`In the meantime, come along for the ride on Instagram, where we share the markets, the long tables, and everything we're planning: <a href="https://instagram.com/emmyrener" style="color:${C.rose};font-style:italic;text-decoration:underline;">@emmyrener</a>`)}
+        ${note('A little favor: if this note landed in Promotions or spam, drag it to your inbox so you never miss a letter from us. Joining the list is free and doesn\'t commit you to booking, and if you have a question, simply reply.')}
       </td></tr>
 
       <tr><td class="pad" style="padding:4px 40px 30px;">
-        <p style="margin:0;font-family:${SERIF};font-style:italic;font-size:18px;color:${C.soft};">À très bientôt,</p>
+        <p style="margin:0;font-family:${SERIF};font-style:italic;font-size:16px;color:${C.soft};">À très bientôt,</p>
         <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
           <td valign="bottom"><img src="${img}/email/signature.png" width="230" height="51" alt="Emmy &amp; Hannah" style="display:block;border:0;width:230px;height:51px;margin-top:4px;"></td>
-          <td valign="bottom" style="padding-left:4px;"><img src="${img}/email/roses-sprig.png" width="64" height="44" alt="" style="display:block;border:0;width:64px;height:44px;"></td>
         </tr></table>
       </td></tr>
 
@@ -209,7 +206,7 @@ function notificationHtml({ name, email, room, message, receivedAt }) {
       </td></tr>
 
       <tr><td align="center" class="pad" style="padding:0 40px 8px;">
-        <div style="padding-bottom:16px;">${divider(img)}</div>
+        <div style="padding-bottom:16px;">${divider()}</div>
         ${button(mailto, `Write back to ${esc(name)}`)}
       </td></tr>
 
