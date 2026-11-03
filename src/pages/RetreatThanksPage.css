@@ -14,39 +14,48 @@
 .mc-text { position: relative; max-width: 520px; justify-self: end; }
 
 .mc .mc-script {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.6rem;
   font-family: 'Pinyon Script', cursive !important;
-  font-size: clamp(2.8rem, 5.4vw, 4.2rem);
-  line-height: 1.15;
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  line-height: 1.2;
   color: var(--rt-rose-dark);
-  transform: rotate(-4deg);
-  transform-origin: left bottom;
 }
 .mc .mc-title {
-  margin: 0 0 1.1rem;
+  margin: 0 0 1rem;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-weight: 500;
-  font-size: clamp(2.3rem, 4.2vw, 3.4rem);
-  line-height: 1.08;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+  line-height: 1.15;
   color: var(--rt-ink);
+  text-wrap: balance;
 }
 .mc .mc-lede {
-  margin: 0 0 1.4rem;
+  margin: 0 0 1.2rem;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-style: italic;
-  font-size: clamp(1.3rem, 2vw, 1.55rem);
-  line-height: 1.45;
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
   color: #4a3f36;
 }
-.mc-roses { display: block; width: 170px; height: auto; margin: 0 0 1.4rem -6px; }
 .mc .mc-body {
-  margin: 0 0 1.4rem;
+  margin: 0 0 1.1rem;
   font-family: 'Jost', sans-serif !important;
   font-weight: 300;
-  font-size: 1.04rem;
-  line-height: 1.85;
+  font-size: 0.96rem;
+  line-height: 1.75;
   color: var(--rt-body);
 }
+.mc .mc-body-tight { margin-bottom: 0.2rem; }
+.mc .mc-ig {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--rt-rose-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+.mc-back-wrap { margin: 0.4rem 0 1.8rem; }
 .mc .mc-kicker {
   margin: 0.4rem 0 0.3rem;
   font-family: 'Jost', sans-serif !important;
@@ -57,24 +66,10 @@
   color: var(--rt-rose-dark);
 }
 
-.mc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; margin: 0.4rem 0 2.2rem; }
-.mc .mc-btn {
-  display: inline-block;
-  padding: 0.95rem 2rem;
-  background: var(--rt-rose-dark);
-  color: #fbf3ea;
-  text-decoration: none;
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
-  font-size: 1.05rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: background 0.2s ease;
-}
-.mc .mc-btn:hover { background: #74493f; }
 .mc .mc-back {
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--rt-rose-dark);
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -84,14 +79,14 @@
   margin: 0;
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   color: #4a3f36;
 }
 .mc .mc-sign span {
   display: block;
   font-family: 'Pinyon Script', cursive !important;
   font-style: normal;
-  font-size: 2.4rem;
+  font-size: 1.9rem;
   line-height: 1.3;
   color: var(--rt-rose-dark);
 }
@@ -175,7 +170,4 @@
   .mc-hero { grid-template-columns: 1fr; gap: 2.6rem; padding: 7rem 1.25rem 4rem; }
   .mc-post { order: -1; justify-self: center; width: 86%; max-width: 400px; margin: 0.4rem 0 8.5rem -10%; }
   .mc-text { justify-self: stretch; max-width: 560px; margin: 0 auto; text-align: center; }
-  .mc-roses { margin-left: auto; margin-right: auto; }
-  .mc .mc-script { transform-origin: center bottom; }
-  .mc-actions { justify-content: center; flex-direction: column; }
 }

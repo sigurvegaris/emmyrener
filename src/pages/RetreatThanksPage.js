@@ -24,30 +24,28 @@ function RetreatThanksPage() {
         <section className="mc-hero">
           <div className="mc-text">
             <p className="mc-script">Merci{name ? `, ${name}` : ''}!</p>
-            <h1 className="mc-title">Your seat at our table is being saved</h1>
+            <h1 className="mc-title">Your seat at our table is being saved.</h1>
             <p className="mc-lede">
-              We’re already picturing you there: market mornings, long lunches in the garden, and a glass of rosé
-              while the sun goes down. We can’t wait to share it all with you.
+              We’re dreaming of market mornings, long lunches, and rosé in the Provençal sunshine. We can’t wait to
+              share it with you!
             </p>
-            <img className="mc-roses" src="/email/roses-divider.png" width="200" height="34" alt="" />
             <p className="mc-body">
-              You’ll be the very first to know when booking opens, along with all the details. A little letter from us
-              is already on its way to your inbox; if you don’t see it in a few minutes, peek in Promotions or spam and
-              drag it to your inbox, so you never miss a note from us.
+              You’ll be the first to know when bookings open. Keep an eye on your inbox (and check your spam folder!)
+              for a little note from us.
             </p>
-            <p className="mc-kicker">Next step</p>
+            <p className="mc-kicker">In the meantime</p>
+            <p className="mc-body mc-body-tight">More from Provence is coming soon.</p>
             <p className="mc-body">
-              Come along for the ride on Instagram, where we share the markets, the long tables, and everything we’re
-              planning for May.
-            </p>
-            <div className="mc-actions">
-              <a className="mc-btn" href="https://instagram.com/emmyrener" target="_blank" rel="noopener noreferrer">
-                Follow @emmyrener
+              Follow along on Instagram for a sneak peek at what’s to come.{' '}
+              <a className="mc-ig" href="https://instagram.com/emmyrener" target="_blank" rel="noopener noreferrer">
+                @emmyrener
               </a>
+            </p>
+            <p className="mc-back-wrap">
               <Link className="mc-back" to="/retreats">
                 Back to Bon Vivant Summer
               </Link>
-            </div>
+            </p>
             <p className="mc-sign">
               À très bientôt (see you very soon),
               <span>Emmy &amp; Hannah</span>
