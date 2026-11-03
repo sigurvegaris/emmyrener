@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RetreatSignupForm.css';
 
 const ROOM_OPTIONS = ['Private room', 'Shared room', 'Not sure yet'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAIL_MS = 3600; // length of the envelope animation in RetreatSignupForm.css
 
-// Interest-list sign-up: a simple, classic form. Posts to /api/retreat-signup, then the visitor
-// lands on the thank-you page (/retreats/merci).
+// Interest-list sign-up: a simple, classic form. Posts to /api/retreat-signup; on success the note is
+// tucked into an airmail envelope and flown off, then the visitor lands on /retreats/merci.
 function RetreatSignupForm() {
   const navigate = useNavigate();
   const [first, setFirst] = useState('');
@@ -16,10 +17,22 @@ function RetreatSignupForm() {
   const [message, setMessage] = useState('');
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState(''); // honeypot, left empty by real visitors
-  const [status, setStatus] = useState('idle'); // idle | sending | error
+  const [status, setStatus] = useState('idle'); // idle | sending | mailing | error
   const [error, setError] = useState('');
   const [hints, setHints] = useState({});
   const refs = { first: useRef(null), last: useRef(null), email: useRef(null), consent: useRef(null) };
+  const wrapRef = useRef(null);
+
+  // Once the envelope has flown off, go to the thank-you page.
+  useEffect(() => {
+    if (status !== 'mailing') return undefined;
+    if (wrapRef.current) wrapRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const t = window.setTimeout(() => {
+      navigate(`/retreats/merci?name=${encodeURIComponent(first.trim())}`);
+    }, reduce ? 0 : MAIL_MS);
+    return () => window.clearTimeout(t);
+  }, [status, first, navigate]);
 
   const validate = () => {
     const next = {};
@@ -55,7 +68,7 @@ function RetreatSignupForm() {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || 'Something went wrong. Please try again.');
       }
-      navigate(`/retreats/merci?name=${encodeURIComponent(first.trim())}`);
+      setStatus('mailing');
     } catch (err) {
       setError(err.message);
       setStatus('error');
@@ -84,74 +97,104 @@ function RetreatSignupForm() {
     </div>
   );
 
+  const mailing = status === 'mailing';
+
   return (
-    <form className="sf" onSubmit={submit} noValidate>
-      <div className="sf-row">
-        {field('first', 'First name', first, setFirst, { type: 'text', autoComplete: 'given-name', maxLength: 40 })}
-        {field('last', 'Last name', last, setLast, { type: 'text', autoComplete: 'family-name', maxLength: 40 })}
-      </div>
-      {field('email', 'Email', email, setEmail, { type: 'email', autoComplete: 'email', inputMode: 'email' })}
-
-      <fieldset className="sf-field sf-rooms">
-        <legend className="sf-label">Which room are you dreaming of?</legend>
-        <div className="sf-chips">
-          {ROOM_OPTIONS.map((o) => (
-            <label key={o} className={`sf-chip${room === o ? ' sf-chip-on' : ''}`}>
-              <input type="radio" name="room" value={o} checked={room === o} onChange={() => setRoom(o)} />
-              {o}
-            </label>
-          ))}
+    <div className={`sf-wrap${mailing ? ' sf-mailing' : ''}`} ref={wrapRef}>
+      <form className="sf" onSubmit={submit} noValidate aria-hidden={mailing ? 'true' : undefined}>
+        <div className="sf-row">
+          {field('first', 'First name', first, setFirst, { type: 'text', autoComplete: 'given-name', maxLength: 40 })}
+          {field('last', 'Last name', last, setLast, { type: 'text', autoComplete: 'family-name', maxLength: 40 })}
         </div>
-      </fieldset>
+        {field('email', 'Email', email, setEmail, { type: 'email', autoComplete: 'email', inputMode: 'email' })}
 
-      <div className="sf-field">
-        <label className="sf-label" htmlFor="retreat-message">
-          Anything you’d like us to know? <span className="sf-optional">(optional)</span>
+        <fieldset className="sf-field sf-rooms">
+          <legend className="sf-label">Which room are you dreaming of?</legend>
+          <div className="sf-chips">
+            {ROOM_OPTIONS.map((o) => (
+              <label key={o} className={`sf-chip${room === o ? ' sf-chip-on' : ''}`}>
+                <input type="radio" name="room" value={o} checked={room === o} onChange={() => setRoom(o)} />
+                {o}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div className="sf-field">
+          <label className="sf-label" htmlFor="retreat-message">
+            Anything you’d like us to know? <span className="sf-optional">(optional)</span>
+          </label>
+          <textarea
+            id="retreat-message"
+            className="sf-input sf-textarea"
+            rows={3}
+            maxLength={1000}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Travelling with a friend, a dietary need, what you’re most excited for…"
+          />
+        </div>
+
+        <label className={`sf-consent${hints.consent ? ' sf-consent-flag' : ''}`}>
+          <input
+            ref={refs.consent}
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => {
+              setConsent(e.target.checked);
+              clearHint('consent');
+            }}
+            aria-describedby={hints.consent ? 'retreat-consent-hint' : undefined}
+          />
+          <span>Yes, Emmy &amp; Hannah may email me about Bon Vivant Summer.</span>
         </label>
-        <textarea
-          id="retreat-message"
-          className="sf-input sf-textarea"
-          rows={3}
-          maxLength={1000}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Travelling with a friend, a dietary need, what you’re most excited for…"
-        />
-      </div>
+        {hints.consent && <p className="sf-hint" id="retreat-consent-hint">{hints.consent}</p>}
 
-      <label className={`sf-consent${hints.consent ? ' sf-consent-flag' : ''}`}>
+        {/* Honeypot: hidden from people, tempting to bots */}
         <input
-          ref={refs.consent}
-          type="checkbox"
-          checked={consent}
-          onChange={(e) => {
-            setConsent(e.target.checked);
-            clearHint('consent');
-          }}
-          aria-describedby={hints.consent ? 'retreat-consent-hint' : undefined}
+          type="text"
+          name="website"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="sf-honey"
         />
-        <span>Yes, Emmy &amp; Hannah may email me about Bon Vivant Summer.</span>
-      </label>
-      {hints.consent && <p className="sf-hint" id="retreat-consent-hint">{hints.consent}</p>}
 
-      {/* Honeypot: hidden from people, tempting to bots */}
-      <input
-        type="text"
-        name="website"
-        value={website}
-        onChange={(e) => setWebsite(e.target.value)}
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-        className="sf-honey"
-      />
+        {status === 'error' && <p className="sf-hint sf-error" role="alert">{error}</p>}
 
-      {status === 'error' && <p className="sf-hint sf-error" role="alert">{error}</p>}
+        <button type="submit" className="sf-submit" disabled={status === 'sending' || mailing}>
+          {status === 'sending' || mailing ? 'Sending…' : 'Join the interest list'}
+        </button>
+      </form>
 
-      <button type="submit" className="sf-submit" disabled={status === 'sending'}>
-        {status === 'sending' ? 'Sending…' : 'Join the interest list'}
-      </button>
-    </form>
+      {/* The send-off: the note is tucked into an airmail envelope, sealed, and flown away */}
+      {mailing && (
+        <div className="sf-scene" aria-hidden="true">
+          <div className="env">
+            <div className="env-back" />
+            <div className="env-letter">
+              <span className="env-script">Chères Emmy &amp; Hannah,</span>
+              <i />
+              <i />
+              <i />
+              <span className="env-script env-letter-sig">{first.trim()}</span>
+            </div>
+            <div className="env-front" />
+            <div className="env-flap" />
+            <div className="env-seal">
+              <span>E&amp;H</span>
+            </div>
+          </div>
+        </div>
+      )}
+      {mailing && (
+        <p className="sf-honey" role="status">
+          Sent! Your note is on its way.
+        </p>
+      )}
+    </div>
   );
 }
 
