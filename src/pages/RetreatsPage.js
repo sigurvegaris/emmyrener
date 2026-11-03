@@ -11,7 +11,7 @@ const WEEK = [
   { src: '/videos/retreat-market.webp', label: 'Au marché', alt: 'A cheese stall at a French market' },
   { src: '/videos/retreat-wk-lunch.webp', label: 'À table', alt: 'A table laid for lunch on the grass outside a stone cottage' },
   { src: '/videos/retreat-lavender.webp', label: 'Sur la route', alt: 'Rows of lavender in a Provence field' },
-  { src: '/videos/retreat-wk-orange.webp', label: 'Au soleil', alt: 'Oranges ripening on a tree in the sun' },
+  { src: '/videos/retreat-wk-apero.webp', label: 'À l’apéro', alt: 'Cheese and charcuterie boards with spritzes on a garden table' },
 ];
 
 function RetreatsPage() {
