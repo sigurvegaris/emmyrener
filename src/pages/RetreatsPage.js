@@ -72,28 +72,30 @@ function RetreatsPage() {
           </div>
         </header>
 
-        {/* Concept: a centered statement, then two tall photos side by side */}
+        {/* Concept: the statement beside two tall photos (stacked on smaller screens) */}
         <section id="concept" className="retreat-section rt-sec">
           <h2 className="rt-cap">A seat at our table in Provence</h2>
-          <div className="rt-prose">
-            <p>The more time I spend exploring France, the more I fall in love with it.</p>
-            <p>
-              Living in France has given me a seat at tables I never imagined my American self would be welcomed to:
-              sharing wine from fifth-generation winemakers, lingering over three-hour lunches in the garden, and
-              learning to enjoy the moment.
-            </p>
-            <p>
-              I want to bring that feeling to this community. Bon Vivant Summer is a chance to experience Provence
-              together through the food, the people, the little discoveries, and the long, laughter-filled meals.
-            </p>
-            <p>
-              I'm bringing in local French makers, chefs, and shop owners I've gotten to know, so you leave with more
-              than just a great trip. You leave knowing the people and places that make Provence what it is.
-            </p>
-          </div>
-          <div className="rt-pair">
-            <img src="/videos/retreat-pair-garden.webp" width="1000" height="1333" loading="lazy" alt="A garden lunch table under string lights with flowers, tarts and wine" />
-            <img src="/videos/retreat-pair-blossom.webp" width="1000" height="1333" loading="lazy" alt="A table set for dinner on the lawn under a blossoming tree" />
+          <div className="rt-concept">
+            <div className="rt-prose">
+              <p>The more time I spend exploring France, the more I fall in love with it.</p>
+              <p>
+                Living in France has given me a seat at tables I never imagined my American self would be welcomed to:
+                sharing wine from fifth-generation winemakers, lingering over three-hour lunches in the garden, and
+                learning to enjoy the moment.
+              </p>
+              <p>
+                I want to bring that feeling to this community. Bon Vivant Summer is a chance to experience Provence
+                together through the food, the people, the little discoveries, and the long, laughter-filled meals.
+              </p>
+              <p>
+                I'm bringing in local French makers, chefs, and shop owners I've gotten to know, so you leave with more
+                than just a great trip. You leave knowing the people and places that make Provence what it is.
+              </p>
+            </div>
+            <div className="rt-pair">
+              <img src="/videos/retreat-pair-garden.webp" width="1000" height="1333" loading="lazy" alt="A garden lunch table under string lights with flowers, tarts and wine" />
+              <img src="/videos/retreat-pair-blossom.webp" width="1000" height="1333" loading="lazy" alt="A table set for dinner on the lawn under a blossoming tree" />
+            </div>
           </div>
         </section>
 
