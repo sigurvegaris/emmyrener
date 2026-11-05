@@ -9,8 +9,8 @@ const SITE_TITLE = 'Emmy Rener - Paris Travel Guides';
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
 const WEEK = [
   { src: '/videos/retreat-market.webp', label: 'Au marché', alt: 'A cheese stall at a French market' },
-  { src: '/videos/retreat-wk-lunch.webp', label: 'À table', alt: 'A table laid for lunch on the grass outside a stone cottage' },
-  { src: '/videos/retreat-lavender.webp', label: 'Sur la route', alt: 'Rows of lavender in a Provence field' },
+  { src: '/videos/retreat-wk-vines.webp', label: 'À pied', alt: 'A woman in a straw hat strolling through the vines with a glass of white wine' },
+  { src: '/videos/retreat-wk-cards.webp', label: 'Flâner', alt: 'A glass of white wine and a game of cards in the afternoon sun' },
   { src: '/videos/retreat-wk-apero.webp', label: 'À l’apéro', alt: 'Cheese and charcuterie boards with spritzes on a garden table' },
 ];
 
@@ -137,6 +137,10 @@ function RetreatsPage() {
             An intimate group of 8 to 10 women ready for good food, new friends, and a week that feels like summer
             camp for grown-ups. Come with a friend or come solo.
           </p>
+          <div className="rt-pair rt-who-pair">
+            <img src="/videos/retreat-who-friends.webp" width="780" height="1040" loading="lazy" alt="Three friends hugging above a turquoise cove" />
+            <img src="/videos/retreat-who-toast.webp" width="780" height="1040" loading="lazy" alt="The shadows of two women raising their glasses on a sunlit stone wall" />
+          </div>
         </section>
 
         {/* Stay and hosts as two cards */}
