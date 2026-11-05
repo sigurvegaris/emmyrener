@@ -137,14 +137,10 @@ function RetreatsPage() {
             An intimate group of 8 to 10 women ready for good food, new friends, and a week that feels like summer
             camp for grown-ups. Come with a friend or come solo.
           </p>
-          <img
-            className="rt-who-wide"
-            src="/videos/retreat-who-horses-1440.webp"
-            srcSet="/videos/retreat-who-horses-960.webp 960w, /videos/retreat-who-horses-1440.webp 1440w"
-            sizes="(max-width: 900px) 100vw, 860px"
-            width="1440" height="960" loading="lazy"
-            alt="Three friends laughing with two horses in a meadow at sunset"
-          />
+          <div className="rt-pair rt-who-pair">
+            <img src="/videos/retreat-who-friends.webp" width="780" height="1040" loading="lazy" alt="Three friends hugging above a turquoise cove" />
+            <img src="/videos/retreat-who-toast.webp" width="780" height="1040" loading="lazy" alt="The shadows of two women raising their glasses on a sunlit stone wall" />
+          </div>
         </section>
 
         {/* Stay and hosts as two cards */}
