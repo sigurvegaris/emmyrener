@@ -1,0 +1,297 @@
+/* Interest-list sign-up: a classic form on a cream card, in the retreat page's type and colours.
+   index.css forces Lora on most elements with !important, so font families here need it too. */
+.sf {
+  --sf-ink: #3a2e22;
+  --sf-rose: #8c5c50;
+  --sf-rule: #d9c7b0;
+  --sf-flag: #a0473f;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.6rem 2.6rem 2.4rem;
+  box-sizing: border-box;
+  background: #fbf6ee;
+  border: 1px solid #eadfcf;
+  box-shadow: 0 24px 50px -30px rgba(60, 40, 30, 0.35);
+  text-align: left;
+}
+
+.sf-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.2rem;
+}
+
+.sf-field {
+  margin: 0 0 1.4rem;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.sf-label {
+  display: block;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sf-rose);
+}
+.sf-optional {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-style: italic;
+  color: #8a7a6a;
+}
+
+.sf-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--sf-rule);
+  border-radius: 2px;
+  background: #fffdf9;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 1rem; /* 16px keeps iOS from zooming in on focus */
+  font-weight: 300;
+  color: var(--sf-ink);
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.sf-input::placeholder { color: #a99a8a; }
+.sf .sf-input:focus,
+.sf .sf-input:focus-visible {
+  outline: none !important;
+  border-color: var(--sf-rose);
+  box-shadow: 0 0 0 3px rgba(140, 92, 80, 0.14);
+}
+.sf-textarea { resize: vertical; min-height: 6rem; line-height: 1.6; }
+.sf-input.sf-input-flag { border-color: var(--sf-flag); }
+
+/* gentle notes instead of the browser's validation pop-ups */
+.sf-hint {
+  margin: 0.45rem 0 0;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--sf-flag);
+}
+.sf-consent + .sf-hint { margin: -0.6rem 0 1.2rem; }
+.sf-error { margin-bottom: 1rem; }
+
+.sf-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.sf-chip {
+  position: relative;
+  cursor: pointer;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--sf-rule);
+  border-radius: 999px;
+  background: #fffdf9;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--sf-ink);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.sf-chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+.sf-chip:hover { border-color: var(--sf-rose); }
+.sf-chip-on { background: var(--sf-rose); border-color: var(--sf-rose); color: #fff; }
+.sf-chip:focus-within { box-shadow: 0 0 0 3px rgba(140, 92, 80, 0.2); }
+
+.sf-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin: 0.2rem 0 1.6rem;
+  cursor: pointer;
+}
+.sf-consent span {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--sf-ink);
+}
+.sf-consent input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0.15rem 0 0;
+  accent-color: var(--sf-rose);
+}
+.sf-consent-flag span { color: var(--sf-flag); }
+
+.sf-submit {
+  display: block;
+  width: 100%;
+  padding: 1.05rem 1.5rem;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  background: #a87264;
+  color: #fff;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+.sf-submit:hover:not(:disabled) { background: var(--sf-rose); }
+.sf-submit:disabled { cursor: progress; opacity: 0.8; }
+.sf .sf-submit:focus-visible { outline: 2px solid rgba(140, 92, 80, 0.6) !important; outline-offset: 3px; }
+
+.sf-honey { position: absolute; left: -9999px; width: 0; height: 0; opacity: 0; }
+
+
+/* ---------- Send-off: the note goes into an airmail envelope, is sealed, and flies away ---------- */
+.sf-wrap { position: relative; }
+.sf { transition: opacity 0.5s ease; }
+.sf-mailing .sf { opacity: 0; pointer-events: none; }
+.sf-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: sf-fade-in 0.4s ease 0.2s both;
+}
+.env-script { font-family: 'Pinyon Script', cursive !important; font-weight: 400; }
+.env {
+  position: relative;
+  width: min(420px, 72%);
+  aspect-ratio: 1.6;
+  perspective: 1000px;
+  animation: env-fly 0.95s cubic-bezier(0.55, 0, 0.75, 0.2) 2.65s forwards;
+}
+.env-back,
+.env-front,
+.env-flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.env-back {
+  bottom: 0;
+  border-radius: 3px;
+  background: linear-gradient(#e2d2b9, #eadcc6);
+  box-shadow: 0 22px 40px -18px rgba(60, 40, 25, 0.45);
+}
+.env-letter {
+  position: absolute;
+  z-index: 2;
+  left: 7%;
+  right: 7%;
+  top: 7%;
+  height: 84%;
+  box-sizing: border-box;
+  padding: 7% 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 9%;
+  background: #fbf6ec;
+  box-shadow: 0 2px 6px rgba(60, 40, 25, 0.18);
+  color: #8c5c50;
+  font-size: clamp(1rem, 3.4vw, 1.45rem);
+  animation: env-letter-in 1s cubic-bezier(0.45, 0, 0.25, 1) 0.45s both;
+}
+.env-letter i {
+  display: block;
+  height: 1px;
+  background: rgba(122, 90, 58, 0.25);
+}
+.env-letter-sig {
+  align-self: flex-end;
+  margin-right: 8%;
+}
+.env-front {
+  z-index: 3;
+  bottom: 0;
+  border-radius: 3px;
+  background: linear-gradient(160deg, #f8f1e6, #efe3cf);
+  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
+  border: 7px solid transparent;
+  border-image: repeating-linear-gradient(-45deg, #b5776a 0 9px, #f8f1e6 9px 16px, #3e4a6a 16px 25px, #f8f1e6 25px 32px) 7;
+}
+.env-front::after {
+  /* the bottom flap's fold */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#f3e9da, #ecdfc9);
+  clip-path: polygon(0 100%, 50% 46%, 100% 100%);
+  filter: drop-shadow(0 -1px 0 rgba(120, 90, 60, 0.25));
+}
+.env-flap {
+  z-index: 1;
+  height: 58%;
+  transform-origin: top center;
+  transform: rotateX(180deg);
+  background: linear-gradient(#efe4d2, #e6d6bd);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  animation: env-flap-close 0.6s ease-in-out 1.5s forwards;
+}
+.env-seal {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: 56%;
+  width: 17%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 35% 30%, #b0564e, #8c3a35 58%, #5e2224);
+  box-shadow: 0 3px 6px rgba(94, 34, 36, 0.45), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+  border: 2px double rgba(255, 235, 225, 0.5);
+  transform: translate(-50%, -50%) scale(0);
+  animation: env-seal-in 0.45s cubic-bezier(0.2, 1.5, 0.4, 1) 2.05s forwards;
+}
+.env-seal span {
+  font-family: 'Pinyon Script', cursive !important;
+  color: #fbe9e2;
+  font-size: clamp(0.9rem, 2.6vw, 1.25rem);
+  line-height: 1;
+}
+
+@keyframes sf-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes env-letter-in {
+  from { transform: translateY(-82%); }
+  to { transform: translateY(4%); }
+}
+@keyframes env-flap-close {
+  0% { transform: rotateX(180deg); z-index: 1; }
+  50% { z-index: 4; }
+  100% { transform: rotateX(0deg); z-index: 4; }
+}
+@keyframes env-seal-in {
+  to { transform: translate(-50%, -50%) scale(1) rotate(-8deg); }
+}
+@keyframes env-fly {
+  0% { transform: none; opacity: 1; }
+  25% { transform: translate(-4%, 6%) rotate(3deg); opacity: 1; }
+  100% { transform: translate(130%, -120%) rotate(-14deg) scale(0.45); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-scene, .env, .env-letter, .env-flap, .env-seal { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .sf { padding: 1.8rem 1.25rem 1.6rem; }
+  .sf-row { grid-template-columns: 1fr; }
+  .sf-submit { letter-spacing: 0.14em; font-size: 1rem; padding: 1rem; }
+  .env { width: 82%; }
+}
