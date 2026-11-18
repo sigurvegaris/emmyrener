@@ -13,7 +13,7 @@ function RetreatSignupForm() {
   const [first, setFirst] = useState('');
   const [last, setLast] = useState('');
   const [email, setEmail] = useState('');
-  const [room, setRoom] = useState('Not sure yet');
+  const [room, setRoom] = useState('');
   const [message, setMessage] = useState('');
   const [consent, setConsent] = useState(false);
   const [website, setWebsite] = useState(''); // honeypot, left empty by real visitors
@@ -131,7 +131,7 @@ function RetreatSignupForm() {
             maxLength={1000}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Travelling with a friend, a dietary need, what you’re most excited for…"
+            placeholder="Traveling with a friend, a dietary need, what you’re most excited for…"
           />
         </div>
 
