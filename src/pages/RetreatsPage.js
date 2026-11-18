@@ -9,8 +9,8 @@ const SITE_TITLE = 'Emmy Rener - Paris Travel Guides';
 // TODO(Emmy): Aix-en-Provence map image goes in the stay section once she sends it.
 const WEEK = [
   { src: '/videos/retreat-market.webp', label: 'Au marché', alt: 'A cheese stall at a French market' },
-  { src: '/videos/retreat-wk-vines.webp', label: 'À pied', alt: 'A woman in a straw hat strolling through the vines with a glass of white wine' },
-  { src: '/videos/retreat-wk-cards.webp', label: 'Flâner', alt: 'A glass of white wine and a game of cards in the afternoon sun' },
+  { src: '/videos/retreat-wk-lunch.webp', label: 'À table', alt: 'A table laid for lunch on the grass outside a stone cottage' },
+  { src: '/videos/retreat-lavender.webp', label: 'Sur la route', alt: 'Rows of lavender in a Provence field' },
   { src: '/videos/retreat-wk-apero.webp', label: 'À l’apéro', alt: 'Cheese and charcuterie boards with spritzes on a garden table' },
 ];
 
