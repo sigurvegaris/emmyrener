@@ -12,12 +12,12 @@ function CollabsPage() {
           <p style={styles.text}>
             Want to work with Emmy? Contact me at{' '}
             <a 
-              href="mailto:emmy@sophisticatedspreads.net" 
+              href="mailto:emmy@sophisticatedsocial.net" 
               style={styles.emailLink}
               onMouseEnter={(e) => e.target.style.color = '#6d5940'}
               onMouseLeave={(e) => e.target.style.color = '#8B7355'}
             >
-              emmy@sophisticatedspreads.net
+              emmy@sophisticatedsocial.net
             </a>
             {' '}for all social media needs including content creation, brand partnerships, user generated content and more!
           </p>

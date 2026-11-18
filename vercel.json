@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/retreats", "destination": "/retreats.html" },
+    { "source": "/retreats/merci", "destination": "/retreats.html" },
+    { "source": "/((?!api/|_vercel/).*)", "destination": "/index.html" }
+  ]
+}
