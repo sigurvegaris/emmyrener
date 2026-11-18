@@ -295,3 +295,12 @@
   .sf-submit { letter-spacing: 0.14em; font-size: 1rem; padding: 1rem; }
   .env { width: 82%; }
 }
+
+/* Phones: sizes matched to Emmy's "Mobile Resize" mockup (2026-11-17). Inputs stay 16px so iOS doesn't zoom. */
+@media (max-width: 600px) {
+  .sf-label { font-size: 12px; }
+  .sf-chip { font-size: 12.5px; padding: 0.5rem 0.95rem; }
+  .sf textarea::placeholder { font-size: 12.5px; }
+  .sf-consent span { font-size: 12.5px; }
+  .sf-submit { font-size: 14px; }
+}

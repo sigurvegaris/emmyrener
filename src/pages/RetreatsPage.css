@@ -229,10 +229,6 @@
 }
 @media (max-width: 600px) {
   .rt-meta { font-size: 0.66rem; letter-spacing: 0.14em; }
-  /* Emmy 2026-11-17: smaller body copy on phones */
-  .rt-lede { font-size: 0.9rem; line-height: 1.7; }
-  .rt-prose p, .rt-prose-one { font-size: 0.92rem; line-height: 1.75; margin-bottom: 0.9rem; }
-  .rt-big { font-size: 0.92rem; line-height: 1.75; }
   .rt-sec, .rt-who { padding-top: 4rem; }
   .rt-pair { gap: 0.8rem; margin-top: 2.5rem; max-width: 520px; }
   .rt-banner2 { margin-top: 4rem; }
@@ -248,3 +244,44 @@
   .rt section.rt-join, .rt section.rt-banner2 { padding-left: 0 !important; padding-right: 0 !important; }
 }
 
+
+/* ---------- Phones: sizes matched to Emmy's "Mobile Resize" mockup (2026-11-17) ---------- */
+@media (max-width: 600px) {
+  /* hero: taller collage crop with the title in a bigger cream card */
+  .rt-banner-pic { height: 70vw; overflow: hidden; }
+  .rt-banner-pic img { height: 100%; object-fit: cover; object-position: 50% 50%; }
+  .rt-banner-mark { left: 15.5%; right: 15.5%; top: 23%; bottom: 23%; background: #f2ece2; }
+  .rt-banner-mark .rt-mark-welcome { font-size: 22px; }
+  .rt-banner-mark .rt-mark-title { margin-top: 2px; font-size: 36px; line-height: 1.02; letter-spacing: 0.05em; }
+  .rt-banner-copy { padding: 1.6rem 1.5rem 2.6rem; }
+  .rt-def { font-size: 11px; line-height: 1.6; max-width: 340px; }
+  .rt-meta { font-size: 10.5px; letter-spacing: 0.16em; margin-bottom: 0.8rem; }
+  .rt-lede { font-size: 13px; line-height: 1.6; max-width: 340px; margin-bottom: 1.5rem; }
+  .rt-btn { font-size: 14px; padding: 0.75rem 1.1rem; width: 280px; max-width: 100%; box-sizing: border-box; }
+
+  /* section headings and reading text */
+  .rt-cap { font-size: 26px; line-height: 1.15; margin-bottom: 1rem; }
+  .rt-prose p, .rt-prose-one { font-size: 13px; line-height: 1.6; margin-bottom: 0.7rem; }
+  .rt-prose-one { margin-bottom: 2.2rem; }
+  .rt-big { font-size: 13px !important; line-height: 1.6; }
+  .rt-sec, .rt-who { padding-top: 3.2rem; }
+  .rt-pair { margin-top: 1.6rem; }
+
+  .rt-banner2 { margin-top: 3rem; }
+  .rt-banner2 img { min-height: 250px; height: 250px; }
+  .rt-banner2-text { font-size: 19px; line-height: 1.3; }
+  .rt-fig figcaption { font-size: 17px; margin-top: 0.4rem; }
+
+  .rt-sub { font-size: 19px; margin-bottom: 0.9rem; }
+  .rt-stay-text p:not(.rt-sub), .rt-hosts-text p:not(.rt-kicker):not(.rt-hosts-last):not(.rt-hosts-lead) { font-size: 13px; line-height: 1.6; }
+  .rt-hosts-text p:not(.rt-kicker):not(.rt-hosts-last):not(.rt-hosts-lead) + p { margin-top: 0.7rem; }
+  .rt-kicker { font-size: 11px; margin-bottom: 0.4rem; }
+  .rt-hosts-name { font-size: 40px; line-height: 1.1; }
+  .rt-hosts-name br { display: none; }
+  .rt-hosts-last { font-size: 24px; margin-bottom: 1.2rem; }
+  .rt-hosts-text p.rt-hosts-lead { font-size: 19px; margin-bottom: 0.8rem; }
+  .rt-outline { font-size: 14px; }
+
+  .rt-join-p { font-size: 13px; line-height: 1.6; margin-bottom: 2rem; }
+  .rt-fine { font-size: 11px; }
+}
