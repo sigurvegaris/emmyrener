@@ -114,8 +114,9 @@
 @media (min-width: 1000px) {
   .rt-concept .rt-prose { max-width: 720px; }
   .rt-concept .rt-prose p { font-size: 1rem; line-height: 1.7; margin-bottom: 0.7rem; }
-  .rt-concept .rt-pair { max-width: 1080px; gap: 1.25rem; margin-top: 2.4rem; }
-  .rt-concept .rt-pair img { aspect-ratio: auto; height: clamp(300px, calc(100vh - 520px), 540px); object-position: 50% 35%; }
+  /* Emmy 2026-11-18: the short wide crop cut off the tables; keep the photos' portrait shape */
+  .rt-concept .rt-pair { max-width: 680px; gap: 1.25rem; margin-top: 2.4rem; }
+  .rt-concept .rt-pair img { aspect-ratio: 4 / 5; height: auto; object-position: 50% 60%; }
 }
 .rt-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 760px; margin: 4rem auto 0; }
 .rt-pair img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
