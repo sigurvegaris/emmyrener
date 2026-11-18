@@ -265,6 +265,7 @@
   .rt-prose-one { margin-bottom: 2.2rem; }
   .rt-big { font-size: 13px !important; line-height: 1.6; }
   .rt-sec, .rt-who { padding-top: 3.2rem; }
+  .rt-who-pair { display: none; } /* Victor 2026-11-17: no cove/toast photos on phones */
   .rt-pair { margin-top: 1.6rem; }
 
   .rt-banner2 { margin-top: 3rem; }
