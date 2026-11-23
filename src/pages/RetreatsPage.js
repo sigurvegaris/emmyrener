@@ -14,6 +14,16 @@ const WEEK = [
   { src: '/videos/retreat-wk-apero.webp', label: 'À l’apéro', alt: 'Cheese and charcuterie boards with spritzes on a garden table' },
 ];
 
+const FAQ = [
+  ['How much will it cost?', 'We expect it to land between $4,000 and $5,000 per person, with final pricing going to the interest list first. Flights and trains aren’t included.'],
+  ['Where will we stay?', 'We’ll stay together in a beautiful private villa in the heart of Provence. The exact location will be shared once our accommodations are finalized.'],
+  ['When is it, and for how long?', 'Summer 2027 (ideally the end of May or early June), for 5 nights and 6 days.'],
+  ['What’s included?', 'Your stay, most meals, tastings, and the experiences we’ve planned for the week. Depending on the villa’s location, we may also coordinate group transportation from a nearby train station. You’ll receive a full breakdown of what’s included alongside the booking details!'],
+  ['Who’s coming?', 'A group of 8 to 10 women who love good food, good wine, and meeting new people. We’re keeping it small on purpose, so spots are limited.'],
+  ['Can I come solo?', 'Absolutely! Plenty of women will come on their own, and by the first dinner you won’t feel like it!'],
+  ['Does joining the interest list commit me to anything?', 'Not at all. You’ll just hear about dates, pricing, and booking before anyone else.'],
+];
+
 function RetreatsPage() {
   useEffect(() => {
     document.title = 'Bon Vivant Summer in Provence | Emmy Rener';
@@ -181,6 +191,20 @@ function RetreatsPage() {
               </p>
               <a className="rt-outline" href="#interest-list" onClick={scrollToForm}>Get on the interest list</a>
             </div>
+          </div>
+        </section>
+
+        {/* FAQ (Emmy & Hannah, 2026-11-23) */}
+        <section id="faq" className="retreat-section rt-sec rt-faq">
+          <p className="rt-faq-kicker">FAQ</p>
+          <h2 className="rt-cap">Good to know</h2>
+          <div className="rt-faq-list">
+            {FAQ.map(([q, a]) => (
+              <details key={q} className="rt-faq-item">
+                <summary>{q}</summary>
+                <p>{a}</p>
+              </details>
+            ))}
           </div>
         </section>
 
